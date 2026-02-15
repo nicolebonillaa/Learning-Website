@@ -1,0 +1,48 @@
+/*Styling of learning webiste homepage*/
+.nav__logo {/*logo styling*/
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo {/*sixe of logo*/
+    width: 50px;
+    height: auto;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+  }
+
+  .root{/*how we want the website to look like on different screen sizes*/
+    --container-width-lg: 80%;
+    --container-width-md: 90%;
+    --container-width-sm: 94%;
+  }
+
+  body{
+    font-family: indie flower, cursive;
+    line-height: 1.7;
+    background: #d1c5c4;
+  }
+    .container{
+        width: var(--container-width-lg);
+        margin: 0 auto;
+    }
+
+    section{
+        padding: 6rem 0;
+    }
+
+    section h2{
+        text-align: center;
+        margin-bottom: 4rem;
+    }
