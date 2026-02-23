@@ -11,7 +11,6 @@
     height: auto;
 }
 
-
 *{
     margin: 0;
     padding: 0;
@@ -22,8 +21,9 @@
     box-sizing: border-box;
   }
 
-  .root{/*how we want the website to look like on different screen sizes*/
-    --container-width-lg: 80%;
+/*how we want the website to look like on different screen sizes 38:11*/
+  :root{
+    --container-width-lg: 92%;
     --container-width-md: 90%;
     --container-width-sm: 94%;
   }
@@ -46,3 +46,92 @@
         text-align: center;
         margin-bottom: 4rem;
     }
+
+    h1, h2, h3, h4, h5, h6{
+      line-height: 1.2;
+    }
+
+    h1{
+      font-size: 2.4rem;
+    }
+
+    h2{
+      font-size: 2rem;
+    }
+
+    h3{
+      font-size: 1.6rem;
+    }
+
+    h4{
+      font-size: 1.3rem;
+    }
+
+    img{
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+
+
+    /*How we want the navigation bar to look like*/
+    nav{
+      background: transparent; /*#DED2D1;*/
+      width: 100vw;
+      height: 5rem;
+      position: fixed;
+      top: 0;
+      z-index: 11;
+    }
+
+    .nav__container{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__menu{
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .nav__menu a{
+      font-size: 0.9rem;
+      transition: all 400ms ease;
+    }
+
+    .nav__menu a:hover{
+      color: #000; /*or maybe white?*/
+    }
+/*navigation bar styling ends here*/
+
+/*header section styling*/
+  header{
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    padding-top: 5rem;
+  }
+
+  .header__container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 5rem;
+    height: 100%;
+  }
+
+  .header__left p{
+    margin: 1rem 0 2.4rem; 
+   }
+
+   .header__right img{
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+   }
+
+   
