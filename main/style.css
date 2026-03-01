@@ -85,6 +85,12 @@
       z-index: 11;
     }
 
+    /*change navbar styles on scroll using js*/
+    .window-scroll{
+      background: #DED2D1;
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+    }
+
     .nav__container{
       height: 100%;
       display: flex;
@@ -134,4 +140,44 @@
     margin: 0 auto;
    }
 
-   
+   /*Courses section styling*/
+   .courses{
+    background: #d1c5c4;
+   }
+
+   .courses h1{
+    line-height: 1;
+    margin-bottom: 3rem;
+   }
+
+   .courses__container{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+   }
+
+   .courses__left{
+    margin-bottom: 4rem;
+   }
+
+   .courses__left p{
+    margin: 1rem 0 3rem; 
+   }
+
+   .courses__right{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+   }
+
+   .course{
+    background: #DED2D1;
+    padding: 2rem;
+    border-radius: 2rem;
+    transition: all 400ms ease;
+   }
+
+   .course:hover{
+    box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+    z-index: 1;
+   }
