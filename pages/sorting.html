@@ -27,13 +27,12 @@
                 </ul>
             </div>    
         </nav>
-        <header>
+        <header class="lessons__header">
             <div class="container header__container">
                 <div class="header__left">
                 <h1>Sorting Algorithms</h1>
                 <p>Explore various sorting algorithms such as bubble sort, selection sort, insertion sort, merge sort, and quicksort. Learn how they work and when to use each one.</p>
                 </div>
-
                 <div class="header__right">
                     <div class="header__right-image">
                         <img src="/main/images/sorting.png" >
@@ -41,8 +40,36 @@
                 </div>
             </div>
     </header>
+    <section class="lesson__courses">
+        <div class="lessoncourses__container">
+            <article class="lesson__course">
+                <h2>Merge Sort</h2>
+                <p>Merge sort is a divide-and-conquer algorithm that breaks down a list into smaller sublists until each sublist contains a single element. Then, it merges those sublists back together in a sorted order. The merge sort algorithm has a time complexity of O(n log n) and is efficient for sorting large datasets.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Radix Sort</h2>
+                <p>Radix sort is a non-comparative integer sorting algorithm that sorts numbers by processing individual digits. It works by grouping numbers based on their digits and sorting them in a specific order. Radix sort has a time complexity of O(n * k), where n is the number of elements and k is the number of digits in the largest number.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Selection Sort</h2>
+                <p>Selection sort is an in-place comparison sorting algorithm. It divides the input list into two parts: a sorted sublist of items which is built up from left to right at the front (left) of the list and a sublist of the remaining unsorted items that occupy the rest of the list. Initially, the sorted sublist is empty and the unsorted sublist is the entire input list. The algorithm proceeds by finding the smallest (or largest, depending on sorting order) element from the unsorted sublist, swapping it with the leftmost unsorted element (putting it in sorted order), and moving the sublist boundaries one element to the right.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Bucket Sort</h2>
+                <p>Bucket sort is a sorting algorithm that works by distributing the elements of an array into a number of buckets. Each bucket is then sorted individually, either using a different sorting algorithm or by recursively applying the bucket sort algorithm. Finally, the sorted buckets are combined to form a single sorted array. Bucket sort is efficient for sorting uniformly distributed data and has an average time complexity of O(n + k), where n is the number of elements and k is the number of buckets.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Heap Sort</h2>
+                <p>Heap sort is a comparison-based sorting algorithm that uses a binary heap data structure to sort elements. The algorithm first builds a max heap from the input data, then repeatedly swaps the root of the heap with the last element and reduces the size of the heap by one. This process continues until the heap is empty, resulting in a sorted array. Heap sort has a time complexity of O(n log n) and is an efficient sorting algorithm for large datasets.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Insertion Sort</h2>
+                <p>Insertion sort is a simple sorting algorithm that builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort. However, insertion sort provides several advantages: it is simple to implement, efficient for small data sets, and stable (does not change the relative order of equal elements).</p>
+            </article>
+        </div>
+    </section>
     <script src="/main/main.js"></script>
-     </body>
+    </body>
 </html>
 
 <!-- need buttons for mobile accesss -->

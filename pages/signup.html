@@ -1,10 +1,10 @@
- <!--Login page for learning website-->
+<!--Sign up page for learning website-->
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Log in to the learning website</title>
+        <title>Sign up to the learning website</title>
         <link rel="icon" type="image/png" href="/main/images/redpanda.png">
 
         <!-- Google fonts for website using indie flower -->
@@ -17,31 +17,32 @@
     <body>
         <section class="login">
             <article class="login__details">
-                <h1>Login</h1>
-                <p>Welcome back! Please enter your login details to access your account and continue your learning journey.</p>
+                <h1>Sign up</h1>
+                <p>Fill the form below to create your account.</p>
                 <form class="login__form">
                     <div class ="form__control">
-                        <label for="username">Username</label>
-                        <input type="username" id="username" placeholder="Enter your username">
+                        <label for="fullname">Full Name</label>
+                        <input type="fullname" id="fullname" placeholder="Enter your full name">
+                    </div>
+                    <div class ="form__control">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email">
                     </div>
                     <div class ="form__control">
                         <label for="password">Password</label>
                         <input type="password" id="password" placeholder="Enter your password">
                     </div>
-                    <div class="login__extras">
-                        <div>
-                            <input type="checkbox" id="remember">
-                            <label for="remember">Remember me</label>
-                        </div>
-                        <a href="">Forgot password</a>
+                    <div class ="form__control">
+                        <label for="cpassword">Confirm Password</label>
+                        <input type="password" id="cpassword" placeholder="Confirm your password">
                     </div>
-                    <button class="btn primary" type="submit">Login</button>
+                    <button class="btn primary" type="submit">Sign up</button>
                     <!--<button class="btn">
                         <img src="/main/images/google.png" alt="Google logo">
                         <p>Sign in with Google</p>
                     </button> if i want google sign in-->
                 </form>
-                <small class="next__page">Don't have an account? <a href="/pages/signup.html">Sign up</a></small>
+                <small class="next__page">Already have an account? <a href="/pages/login.html">Login</a></small>
             </article>
             <article class="login__logo">
                 <img src="/main/images/pandasmart.png" alt="Website logo">
@@ -50,5 +51,3 @@
     <script src="/main/main.js"></script>
      </body>
 </html>
-
-<!-- need buttons for mobile accesss -->

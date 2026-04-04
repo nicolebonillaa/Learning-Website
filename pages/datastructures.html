@@ -27,7 +27,7 @@
                 </ul>
             </div>    
         </nav>
-        <header>
+        <header class="lessons__header">
             <div class="container header__container">
                 <div class="header__left">
                 <h1>Data Structures</h1>
@@ -41,8 +41,40 @@
                 </div>
             </div>
     </header>
+    <section class="lesson__courses">
+        <div class="lessoncourses__container">
+            <article class="lesson__course">
+                <h2>Binary Search Tree</h2>
+                <p>A binary search tree (BST) is a data structure that maintains a sorted order of elements. Each node in a BST has at most two children, where the left child contains values less than the parent node and the right child contains values greater than the parent node. This property allows for efficient searching, insertion, and deletion operations with an average time complexity of O(log n).</p>
+            </article>
+            <article class="lesson__course">
+                <h2>AVL Tree</h2>
+                <p>An AVL tree is a self-balancing binary search tree that maintains a balance factor for each node. The balance factor is the difference in height between the left and right subtrees. If the balance factor of any node becomes greater than 1 or less than -1, the tree performs rotations to restore balance. This ensures that the height of the AVL tree remains logarithmic, providing efficient search, insertion, and deletion operations.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Abstract Data Types (ADT)</h2>
+                <p>An abstract data type (ADT) is a theoretical concept that defines a data structure in terms of its behavior and operations rather than its implementation. ADTs provide a high-level interface for working with data, allowing programmers to focus on the functionality rather than the underlying details. Examples of ADTs include lists, stacks, queues, and sets.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Heap</h2>
+                <p>A heap is a specialized tree-based data structure that satisfies the heap property. In a max heap, for example, each parent node is greater than or equal to its children, while in a min heap, each parent node is less than or equal to its children. Heaps are commonly used to implement priority queues and are efficient for finding the maximum or minimum element in constant time.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Hashmap</h2>
+                <p>A hashmap, also known as a hash table, is a data structure that stores key-value pairs. It uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found. Hashmaps provide average-case O(1) time complexity for search, insertion, and deletion operations, making them efficient for storing and retrieving data based on keys.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Depth-First Search (DFS)</h2>
+                <p>Depth-first search (DFS) is a graph traversal algorithm that explores as far as possible along each branch before backtracking. It uses a stack data structure, either implicitly through recursion or explicitly, to keep track of the vertices to be explored. DFS is useful for tasks such as finding connected components, topological sorting, and solving puzzles.</p>
+            </article>
+            <article class="lesson__course">
+                <h2>Breadth-First Search (BFS)</h2>
+                <p>Breadth-first search (BFS) is a graph traversal algorithm that explores all the vertices at the present depth level before moving on to the vertices at the next depth level. It uses a queue data structure to keep track of the vertices to be explored. BFS is useful for finding the shortest path in an unweighted graph and for level-order traversal of trees.</p>
+            </article>
+        </div>
+    </section>
     <script src="/main/main.js"></script>
-     </body>
+    </body>
 </html>
 
 <!-- need buttons for mobile accesss -->
