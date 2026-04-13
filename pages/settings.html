@@ -27,8 +27,90 @@
                 </ul>
             </div>    
         </nav>
-        <header>
-    </header>
+        <div class="settings__container">
+           <aside class="settings__sidebar">
+                <ul class="settings__menu">
+                    <li><a href="#account">Account</a></li>
+                    <li><a href="#notifications">Notification Preferences</a></li>
+                    <li><a href="#learning">Learning Preferences</a></li>
+                    <li><a href="#accessibility">Accessibility</a></li>
+                    <li><a href="#" id="signoutbtn">Sign out</a></li>
+                </ul>
+           </aside>
+           <div class="settings__content">
+                <section id="account">
+                    <h1>Account</h1>
+                    <div class="settings__card">
+                        <h3>Email</h3>
+                        <p class="settings__label">Email associated with your account:<span class="settings__currentvalue"></span></p>
+                        <form class="account__form">
+                            <div class="form__control">
+                                <label for="newemail">New email:</label>
+                                <input type="email" id="newemail" placeholder="Enter your new email">
+                            </div>
+                            <button type="submit" class="account__btn">Update Email</button>
+                        </form>
+                    </div>
+                    <div class="settings__card">
+                        <h3>Password</h3>
+                        <p class="settings__label">Current password associated with your account:<span class="settings__currentvalue"></span></p>
+                        <form class="account__form">
+                            <div class="form__control">
+                                <label for="currentpassword">Current password:</label>
+                                <input type="password" id="currentpassword" placeholder="Enter your current password">
+                            </div>
+                            <div class="form__control">
+                                <label for="newpassword">New password:</label>
+                                <input type="password" id="newpassword" placeholder="Enter your new password">
+                            </div>
+                            <div class="form__control">
+                                <label for="confirmnewpassword">Confirm new password:</label>
+                                <input type="password" id="confirmnewpassword" placeholder="Confirm your new password">
+                            </div>
+                            <button type="submit" class="account__btn">Update Password</button>
+                        </form>
+                </section>
+                <section id="notifications">
+                    <h2>Notification Preferences</h2>
+                    <p>Choose how you want to receive notifications about new lessons, progress updates, and more.</p>
+                </section>
+                <section id="learning">
+                    <h2>Learning Preferences</h2>
+                    <p>Customize your learning experience by selecting your preferred subjects, difficulty level, and learning style.</p>
+                </section>
+                <section id="accessibility">
+                    <h2>Accessibility</h2>
+                    <p>Adjust accessibility settings such as font size, color contrast, and screen reader support to enhance your learning experience.</p>
+                </section>
+            </div>
+        </div>
+        <footer>
+        <div class="container footer__container">
+            <div class="footer__1">
+                <a href="/main/index.html" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>
+                <p>Our mission is to provide educational resources to help individuals learn and grow in the field of computer science. We are committed to creating engaging and interactive lessons that make learning enjoyable and accessible to everyone.</p>
+            </div>
+            <div class="footer__2">
+                <h4>Pages</h4>
+                <ul class="permalinks">
+                    <li><a href="/main/index.html">Home</a></li>
+                    <li><a href="/pages/lessons.html">Lessons</a></li>
+                    <li><a href="/pages/progress.html">Progress/habit tracker</a></li>
+                    <li><a href="/pages/profile.html">Profile</a></li>
+                    <li><a href="/pages/settings.html">Settings</a></li>
+                </ul>
+            </div>
+            <div class="footer__3">
+                <h4>Subjects</h4>
+                <ul class="permalinks">
+                    <li><a href="/pages/datastructures.html">Data Structures</a></li>
+                    <li><a href="/pages/java.html">Java Programming</a></li>
+                    <li><a href="/pages/sorting.html">Sorting Algorithms</a></li>
+                    <li><a href="/pages/formallogic.html">Formal Logic</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
     <script src="/main/main.js"></script>
     </body>
 </html>
