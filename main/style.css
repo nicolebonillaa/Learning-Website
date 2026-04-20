@@ -543,11 +543,12 @@ footer ul li a:hover{
 .settings__card h3{
   margin-bottom: 0.2rem;
   font-size: 1.3rem;
+  color: #2C2C2A;
 }
 
 .settings__label{
   font-size: 0.9rem;
-  color: #555;
+  color: #5F5E5A;
 }
 
 .settings__currentvalue{
@@ -583,6 +584,88 @@ footer ul li a:hover{
   margin-bottom: 1.5rem;
 }
 
+.account__form .form__control{
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.account__form .form__control label{
+  font-size: 0.9rem;
+  color: #2C2C2A;
+  font-weight: 500;
+}
+
+.input:not([type="checkbox"]){
+  width: 100%;
+  background: #DED2D1;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.95rem;
+  color: #2C2C2A;
+  transition: border-color 200ms;
+}
+
+.input:not([type="checkbox"]):focus{
+  border-color: #cf6730;
+  outline: none;
+}
+
+input::placeholder{
+  color: #aaa;
+}
+.notifications__form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notifications__form .form__control{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.75rem;
+}
+
+.notifications__form .form__control label{
+  font-size: 0.95rem;
+  color: #2C2C2A;
+  cursor: pointer;
+  order: 2;
+}
+
+.notifications__form .form__control input[type="checkbox"]{
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #cf6730;
+  cursor: pointer;
+  order: 1;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0.3rem;
+}
+
+.notifications__btn{
+  align-self:flex-start;
+  background: #cf6730;
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.5rem;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  border: none;
+}
+
+.notifications__btn:hover{
+  background: black;
+  color: white;
+}
 /*Lesson course card styling*/
 .lesson__course{
   justify-content: space-between;

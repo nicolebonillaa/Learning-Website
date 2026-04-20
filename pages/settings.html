@@ -70,8 +70,22 @@
                         </form>
                 </section>
                 <section id="notifications">
-                    <h2>Notification Preferences</h2>
-                    <p>Choose how you want to receive notifications about new lessons, progress updates, and more.</p>
+                    <h1>Notification Preferences</h1>
+                    <div class="settings__card">
+                        <h3>Email Notifications</h3>
+                        <p>Manage your email notification preferences for updates, reminders, and announcements.</p>
+                        <form class="notifications__form">
+                            <div class="form__control">
+                                <label for="emailupdates">Receive updates about new lessons and features</label>
+                                <input type="checkbox" id="emailupdates">
+                            </div>
+                            <div class="form__control">
+                                <label for="emailreminders">Receive reminders about upcoming lessons and deadlines</label>
+                                <input type="checkbox" id="emailreminders">
+                            </div>
+                            <button type="submit" class="notifications__btn">Save Preferences</button>
+                        </form>
+                    </div>
                 </section>
                 <section id="accessibility">
                     <h2>Accessibility</h2>

@@ -4,7 +4,7 @@
 window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
 })
-/*
+
 // Settings tab bar toggle
 const settingsLinks = document.querySelectorAll('.settings__menu a');
 const settingsContents = document.querySelectorAll('.settings__content section');
@@ -38,7 +38,7 @@ if (signOutBtn) {
     window.location.href = '/pages/login.html';
   });
 }
-
+/*
 //Login functionality
 const loginForm = document.getElementById('.login__form');
 if (loginForm) {
