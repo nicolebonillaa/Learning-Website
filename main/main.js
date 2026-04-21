@@ -5,4 +5,685 @@ window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
 })
 
-//lessons questions for each lesson
+// Settings tab bar toggle
+const settingsLinks = document.querySelectorAll('.settings__menu a');
+const settingsContents = document.querySelectorAll('.settings__content section');
+
+if (settingsLinks.length > 0) {
+    settingsContents.forEach((s, i) => {
+        s.style.display = i === 0 ? 'block' : 'none';
+    });
+
+    settingsLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const target = e.target.getAttribute('href');
+            if (!target.startsWith('#')) return;
+            e.preventDefault();
+
+            settingsContents.forEach(s => {
+                s.style.display = s.id === target.slice(1) ? 'block' : 'none';
+            });
+
+            settingsLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+}
+
+//Signout functionality
+const signOutBtn = document.getElementById('signoutbtn');
+if (signOutBtn) {
+  signOutBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/pages/login.html';
+  });
+}
+/*
+//Login functionality
+const loginForm = document.getElementById('.login__form');
+if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+       const username = document.getElementById('username').value.trim();
+       const password = document.getElementById('password').value.trim();
+
+         if (!username || !password) {
+            e.preventDefault();
+            showError('Please enter both username and password.');
+         }
+    });
+}
+
+//Sign up functionality
+const signupForm = document.getElementById('.signup__form');
+if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+        const fullName = document.getElementById('fullname').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const cpassword = document.getElementById('cpassword').value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!fullName || !username || !email || !password || !cpassword) {
+            e.preventDefault();
+            showError('Please fill in all fields.');
+        } else if (!emailRegex.test(email)) {
+            e.preventDefault();
+            showError('Please enter a valid email address.');
+        } else if (password !== cpassword) {
+            e.preventDefault();
+            showError('Passwords do not match.');
+        } else if (password.length < 8) {
+            e.preventDefault();
+            showError('Password must be at least 8 characters long.');
+        }
+    });
+}
+*/
+//Lesson data
+const lessonData = {
+    //Data Structures course
+    //tree questions lesson, there are 3
+    trees:{
+        topic: 'Trees',
+        questions: [
+            {
+                question: 'What is the root of a tree?',
+                options: ['The last node', 'The middle node', 'The top node','The leaf node'],
+                answer: 'The top node'
+            },
+
+            {
+                question: 'A node with no children is called?',
+                options: ['Root', 'Leaf', 'Parent','Branch'],
+                answer: 'Leaf'
+            }
+        ]
+    },
+    binaryTrees:{
+        topic: 'Binary Trees',
+        questions: [
+            {
+                question: 'A binary tree node cann have at most how many children?',
+                options: ['1', '2', '3','unlimited'],
+                answer: '2'
+            },
+
+            {
+                question: 'In a full binary tree: ',
+                options: ['Every node has 1 child', 'Every node has 0 or 2 children', 'Only root has children', 'Nodes have unlimited children'],
+                answer: 'Every node has 0 or 2 children'
+            }
+        ]
+    },
+    avlTrees:{
+        topic: 'AVL Trees',
+        questions: [
+            {
+                question: 'AVL trees are: ',
+                options: ['Unbalanced trees', 'Self-balancing binary search trees', 'Graphs', 'Hash tables'],
+                answer: 'Self-balancing binary search trees'
+            },
+
+            {
+                question: 'What is the balance factor of a node in an AVL tree?',
+                options: ['Height difference between left and right subtrees', 'Number of nodes', 'Depth of the tree', 'Number of children'],
+                answer: 'Height difference between left and right subtrees'
+            },
+        ]
+    },
+    //Hash tables question lesson, there are 2
+    hashTables:{
+        topic: 'Hash Tables',
+        questions: [
+            {
+                question: 'What is the purpose of a hash function?',
+                options: ['To sort data', 'To map keys to indices', 'To delete data', 'To traverse data'],
+                answer: 'To map keys to indices'
+            },
+
+            {
+                question: 'A collision in a hash table occurs when:',
+                options: ['Two keys map to the same index', 'Table is empty','Keys are sorted', 'Data is deleted'],
+                answer: 'Two keys map to the same index'
+            }
+        ]
+    },
+    //Stack question lesson (ADTs), there are 2
+    abstractDataTypes:{
+        topic: 'Abstract Data Types (ADTs)',
+        questions: [
+            //stack questions fit here
+            {
+                question: 'What principle does a stack follow?',
+                options: ['First In First Out (FIFO)', 'Last In First Out (LIFO)', 'Random Access', 'Priority-based'],
+                answer: 'Last In First Out (LIFO)'
+            },
+
+            {
+                question: 'Which operation removes an elment from a stack?',
+                options: ['Push', 'Pop', 'Peek', 'Insert'],
+                answer: 'Pop'
+            }
+        ]
+    },
+    //Java course
+    //variables question lesson, there are 2
+    variables:{
+        topic: 'Variables',
+        questions: [
+            {
+                question: 'Which keyword is used to declare a constant variable in Java?',
+                options: ['var', 'final', 'static', 'const'],
+                answer: 'final'
+            },
+
+            {
+                question: 'What is a valid variable name in Java?',
+                options: ['1value', 'value_1', 'value-1', 'value 1'],
+                answer: 'value_1'
+            }
+        ]
+    },
+
+    operators:{
+        topic: 'Operators',
+        questions: [
+            {
+                question: 'What does the "==" operator check in Java?',
+                options: ['Assignment', 'Equality', 'Inequality', 'Addition'],
+                answer: 'Equality'
+            },
+
+            {
+                question: 'Which is logical operator in Java?',
+                options: ['+', '&&', '=', '%'],
+                answer: '&&'
+            }
+        ]
+    },
+    //Variables and assignments question lesson, there are 2
+    strings:{
+        topic: 'Strings',
+        questions: [
+            {
+                question: 'Strings in Java are:',
+                options: ['Mutable', 'Immutable', 'Integers', 'Arrays only'],
+                answer: 'Immutable'
+            },
+
+            {
+                question: 'Which method gets string length in Java?',
+                options: ['size()', 'length()', 'count()', 'getLength()'],
+                answer: 'length()'
+            }
+
+        ]
+    },
+    //Variables and assignments question lesson, there are 2
+    booleans:{
+        topic: 'Booleans',
+        questions: [
+            {
+                question: 'Boolean values are:',
+                options: ['0 and 1', 'true and false', 'yes and no', 'on and off'],
+                answer: 'true and false'
+            },
+
+            {
+                question: 'Which operator neagtes a boolean value in Java?',
+                options: ['&&', '||', '!', '=='],
+                answer: '!'
+            }
+
+        ]
+    },
+    //Loops question lesson, there are 2
+    loops:{
+        topic: 'Loops',
+        questions: [
+            {
+                question: 'Which loop is guaranteed to execute at least once?',
+                options: ['for', 'while', 'do-while', 'foreach'],
+                answer: 'do-while'
+            },
+            
+            {  
+                question: 'Which loop is best when the number of iterations is known?',
+                options: ['while', 'for', 'do-while', 'if'],
+                answer: 'for'
+            }
+        ]
+    },
+
+    //Sorting Algorithms course
+    //Merge sort question lesson, there are 2
+    mergeSort:{
+        topic: 'Merge Sort',
+        questions: [
+            {
+                question: 'Merge sort uses which strategy?',
+                options: ['Greedy', 'Divide and Conquer', 'Dynamic Programming', 'Brute Force'],
+                answer: 'Divide and Conquer'    
+            },
+
+            {
+                question: 'What is the time complexity of merge sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n log n)'
+            }
+        ]
+    },
+    //radix sort question lesson, there are 2
+    radixsort:{
+        topic: 'Radix Sort',
+        questions: [
+            {
+                question: 'Radix sort processes numbers by:',
+                options: ['Comparing elements', 'Digits', 'Swapping randomly', 'Trees'],
+                answer: 'Digits'
+            },      
+
+            {
+                question :'Radix sort is',
+                options: ['Comparison-based', 'Non-comparison-based', 'Recursive only', 'Graph-based'],
+                answer: 'Non-comparison-based'
+            }
+        ]
+    },
+    //Selection sort question lesson, there are 2
+    selectionSort:{
+        topic: 'Selection Sort',
+        questions: [
+            {
+                question: 'Selection sort repeatedly selects the:',
+                options: ['Largest element', 'Smallest element', 'Middle element', 'Random element'],
+                answer: 'Smallest element'
+            },
+
+            {
+                question: 'What is the time complexity of selection sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n^2)'
+            }
+        ]
+    },
+    //Bubble sort question lesson, there are 2
+    bubbleSort:{
+        topic: 'Bubble Sort',
+        questions: [
+            {
+                question: 'Bubble sort distributes elements into:',
+                options: ['Arrays', 'Buckets', 'Trees', 'Stacks'],
+                answer: 'Arrays'
+            },
+
+            {
+                question: 'What is the best case complexity of bubble sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n)'
+            }
+        ]
+    },
+    //Heap sort question lesson, there are 2
+    heapSort:{
+        topic: 'Heap Sort',
+        questions: [
+
+            {
+                question: 'Heap sort uses:',
+                options: ['Stack', 'Heap', 'Queue', 'Graph'],
+                answer: 'Heap'
+            },
+
+            {
+                question: 'What is the time complexity of heap sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n log n)'
+            }
+        ]
+    },
+    //Insertion sort question lesson, there are 2
+    insertionSort:{
+        topic: 'Insertion Sort',
+        questions: [
+            {
+                question: 'Insertion sort builds the sorted array by:',
+                options: ['Swapping elements', 'Inserting elements into correct position', 'Dividing the array', 'Using a heap'],
+                answer: 'Inserting elements into correct position'
+            },
+
+            {
+                question: 'What is the worst case time complexity of insertion sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n^2)'
+            }
+        ]
+    },
+
+    //Formal Logic course
+    //Propositional logic question lesson, there are 2
+    propositions:{
+        topic: 'Propositions',
+        questions: [
+            {
+                question: 'A proposition is:',
+                options: ['A question', 'A statement with  a truth value', 'A varibale', 'A number'],
+                answer: 'A statement with  a truth value'       
+            },
+
+            {
+                question: 'Example of a proposition is:',
+                options: ['Close the door', 'Is it raining?', 'It is raining', 'Please sit'],
+                answer: 'It is raining'
+            }
+        ]
+    },
+    //Negation question lesson, there are 2
+    negation:{
+        topic: 'Negation',
+        questions: [
+            {
+                question: 'The negation of P is written as:',
+                options:['p ∧ q', '¬P', 'P → Q', 'P ∨ Q'],
+                answer: '¬P'
+            },
+
+            {
+                question: 'If p is true, then ¬P is:',
+                options: ['True', 'False', 'Undefined', 'Both'],
+                answer: 'False'
+            }
+        ]
+    },
+    //Conjunction question lesson, there are 2
+    conjunction:{
+        topic: 'Conjunction',
+        questions: [
+            {
+                question: 'What is the symbol for conjunction?',
+                options: ['∧', '∨', '→', '↔'],
+                answer: '∧'
+            },
+
+            {
+                question: 'The conjunction P ∧ Q is true when:',
+                options: ['One is true', 'Both are true', 'Both are false', 'One is false'],
+                answer: 'Both are true'
+            }
+        ]
+    },
+    //Disjunction question lesson, there are 2
+    disjunction:{
+        topic: 'Disjunction',
+        questions: [
+            {
+                question: 'What is the symbol for disjunction?',
+                options: ['∧', '∨', '→', '↔'],
+                answer: '∨'
+            },
+
+            {
+                question: 'The disjunction P ∨ Q is false when:',
+                options: ['One is true', 'Both are true', 'Both are false', 'One is false'],
+                answer: 'Both are false'
+            }
+        ]
+    },
+    //Truth tables question lesson, there are 2
+    truthTables:{
+        topic: 'Truth Tables',
+        questions: [
+            {
+                question: 'Truth tables show:',
+                options: ['Code', 'All possible truth values', 'Numbers', 'Variables'],
+                answer: 'All possible truth values'
+            },
+
+            {
+                question: 'Rows in a truth table depend on:',
+                options: ['Operators', 'Variables', 'Constants', 'Functions'],
+                answer: 'Variables'
+            }
+        ]
+    },
+    //XOR question lesson, there are 2
+    xor:{
+        topic: 'Exclusive Or (XOR)',
+        questions: [
+            {
+                question: 'XOR is true when:',
+                options: ['Both are true', 'Both are false', 'Exactly one is true', 'At least one is true'],
+                answer: 'Exactly one is true'
+            },
+
+            {
+                question: 'XOR is represented by which symbol?',
+                options: ['∧', '∨', '⊕', '→'],
+                answer: '⊕'
+            }
+        ]
+    },
+    //Biconditional question lesson, there are 2
+    biconditional:{
+        topic: 'Biconditional',
+        questions: [
+            {
+                question: 'Biconditional P ↔ Q is true when:',
+                options: ['Both are true', 'Both are false', 'Both are the same', 'At least one is true'],
+                answer: 'Both are the same'
+            },
+
+            {
+                question: 'Biconditional is represented by which symbol?',
+                options: ['∧', '∨', '↔', '→'],
+                answer: '↔'
+            }
+        ]
+    }
+};
+
+const courseTopics = {
+    datastructures: ['trees', 'binaryTrees', 'avlTrees', 'hashTables', 'abstractDataTypes'],
+    java:           ['variables', 'operators', 'strings', 'booleans', 'loops'],
+    sorting:        ['mergeSort', 'radixsort', 'selectionSort', 'bubbleSort', 'heapSort', 'insertionSort'],
+    formallogic:    ['propositions', 'negation', 'conjunction', 'disjunction', 'truthTables', 'xor', 'biconditional']
+};
+
+//Variables to track quiz state
+let course = null;
+let topic = null;
+let currentQuestionIndex = 0;
+let score = 0;
+let userAnswered = false;
+
+//Function to intialize quiz based on selected course and lesson
+function initCoursePage(courseKey){
+    course = courseKey;
+
+    document.getElementById('lesson__cards__grid').addEventListener('click', (e) => {
+        const btn = e.target.closest('.quiz__open__btn');
+        if (btn) {
+            openQuiz(btn.dataset.course, btn.dataset.topic);
+        }   
+    });
+
+    document.getElementById('quiz__close').addEventListener('click', closeQuiz);
+    document.getElementById('question__next').addEventListener('click', nextQuestion);
+    document.getElementById('question__retry').addEventListener('click', retryQuiz);
+    document.getElementById('quiz__submit').addEventListener('click', closeQuiz);
+
+    renderCard(courseKey);
+}
+
+function renderCard(courseKey) {
+    const grid     = document.getElementById('lesson__cards__grid');
+    const template = document.getElementById('lesson__card__template');
+    const keys     = courseTopics[courseKey];
+
+    if (!grid || !template || !keys) return;
+
+    grid.innerHTML = '';
+
+    keys.forEach(key => {
+        const topicData = lessonData[key];
+        const card = template.content.cloneNode(true);
+
+        card.querySelector('.card__topic').textContent        = topicData.topic;
+        card.querySelector('.lesson__course__description').textContent  = getTopicDescription(key);
+        card.querySelector('.card__questionCount').textContent = topicData.questions.length + ' questions';
+
+        const btn = card.querySelector('.quiz__open__btn');
+        btn.dataset.course = courseKey;
+        btn.dataset.topic  = key;
+
+        grid.appendChild(card);
+    });
+}
+
+function getTopicDescription(topicKey) {
+    const descriptions = {
+        trees: 'Learn about tree data structures, including binary trees and AVL trees.',
+        binaryTrees: 'Explore the properties and types of binary trees.',
+        avlTrees: 'Understand self-balancing binary search trees and their operations.',
+        hashTables: 'Discover how hash tables work and how to handle collisions.',
+        abstractDataTypes: 'Learn about stacks, queues, and other abstract data types.',
+        variables: 'Understand variable declaration, types, and scope in Java.',
+        operators: 'Learn about different operators and their usage in Java.',
+        strings: 'Explore string manipulation and methods in Java.',
+        booleans: 'Understand boolean values and logical operators in Java.',
+        loops: 'Learn about different types of loops and their use cases in Java.',
+        mergeSort: 'Understand the merge sort algorithm and its time complexity.',
+        radixsort: 'Learn about radix sort and how it differs from comparison-based sorting.',
+        selectionSort: 'Discover how selection sort works and its efficiency.',
+        bubbleSort: 'Understand the bubble sort algorithm and its best case scenario.',
+        heapSort: 'Learn about heap sort and its time complexity.', 
+        insertionSort: 'Discover how insertion sort builds a sorted array and its worst case scenario.',
+        propositions: 'Learn about propositions and their truth values in formal logic.',
+        negation: 'Understand negation and how it affects truth values.',
+        conjunction: 'Learn about conjunction and when it is true.',
+        disjunction: 'Understand disjunction and when it is false.',    
+        truthTables: 'Learn how to construct and interpret truth tables.',
+        xor: 'Understand exclusive or (XOR) and its truth conditions.',
+        biconditional: 'Learn about biconditional statements and their truth values.'
+    };
+
+    return descriptions[topicKey] || '';
+}
+
+//Open lesson quiz
+function openQuiz(courseKey, topicKey) {
+    course = courseKey;
+    topic  = lessonData[topicKey]; 
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswered = false;
+
+    document.getElementById('quiz__question__screen').style.display = 'block';
+    document.getElementById('quiz__result__screen').style.display = 'none';
+    document.querySelector('.lesson__courses').style.display = 'none';
+    document.querySelector('header.lessons__header').style.display = 'none';
+    document.getElementById('quiz__fullpage').classList.add('quiz__overlay__active');
+
+    renderQuestion();
+}
+
+//Rendering questions in quiz lesson
+function renderQuestion() {
+    userAnswered = false;
+    const question = topic.questions[currentQuestionIndex];
+    const totalQuestions = topic.questions.length;
+    const labels = ['A', 'B', 'C', 'D'];
+
+    document.getElementById('question__topic').textContent = topic.topic;
+    document.getElementById('question__title').textContent = 'Question ' + (currentQuestionIndex + 1);
+    document.getElementById('question__step').textContent = (currentQuestionIndex + 1) + ' / ' + totalQuestions;
+    document.getElementById('question__progress').style.width = Math.round(((currentQuestionIndex + 1) / totalQuestions) * 100) + '%';
+    document.getElementById('question__question').textContent = question.question;
+    document.getElementById('question__next').disabled = true;
+    document.getElementById('question__feedback').className = 'quiz__feedback';
+    document.getElementById('question__feedback').textContent = '';
+
+    const optionsContainer = document.getElementById('question__options');
+    const template = document.getElementById('option__template');
+    optionsContainer.innerHTML = '';
+
+    question.options.forEach((option, i) => {
+        const optionElement = template.content.cloneNode(true);
+        optionElement.querySelector('.quiz__option__label').textContent = labels[i];
+        optionElement.querySelector('.quiz__option__text').textContent = option;
+
+        const btn = optionElement.querySelector('.quiz__option');
+        btn.dataset.index = i;
+        btn.addEventListener('click', () => pickAnswer(i, question.answer, btn));
+        
+        optionsContainer.appendChild(optionElement);
+    });
+}
+
+//Handling answer selection for lesson quiz
+function pickAnswer(selected, correct, element) {
+    if (userAnswered) return;
+    userAnswered = true;
+
+    const selectedText = topic.questions[currentQuestionIndex].options[selected];
+    const correctIndex = topic.questions[currentQuestionIndex].options.indexOf(correct);
+    const allOptions   = document.querySelectorAll('.quiz__option');
+    const feedback     = document.getElementById('question__feedback');
+
+    if (selectedText === correct) {
+        element.classList.add('quiz__option__correct');
+        feedback.textContent = 'Correct!';
+        feedback.className   = 'quiz__feedback quiz__feedback__correct';
+        score++;
+    } else {
+        element.classList.add('quiz__option__incorrect');
+        allOptions[correctIndex].classList.add('quiz__option__correct');
+        feedback.textContent = 'Incorrect! The correct answer is: ' + correct;
+        feedback.className   = 'quiz__feedback quiz__feedback__incorrect';
+    }
+
+    document.getElementById('question__next').disabled = false;
+}
+
+//Next question for lesson quiz
+function nextQuestion() {
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex >= topic.questions.length) {
+        showResult();
+    } else {
+        renderQuestion();
+    }
+}
+
+//Show result screen for lesson quiz
+function showResult() {
+   const totalQuestions = topic.questions.length;
+   const percentage = Math.round((score / totalQuestions) * 100);
+
+   document.getElementById('quiz__question__screen').style.display = 'none';
+   document.getElementById('quiz__result__screen').style.display = 'block';
+   document.getElementById('result__score').textContent = score + ' / ' + totalQuestions;
+   document.getElementById('result__percentage').textContent = percentage == 100 ? 'Perfect score!' : percentage >= 50 ? 'Good job!' : 'Keep practicing!';
+}
+
+//Retry quiz for lesson
+function retryQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswered = false;
+
+    document.getElementById('quiz__question__screen').style.display = 'block';
+    document.getElementById('quiz__result__screen').style.display = 'none';
+    
+    renderQuestion();
+}
+
+//Close quiz overlay
+function closeQuiz() {
+    document.getElementById('quiz__fullpage').classList.remove('quiz__overlay__active');
+    document.querySelector('.lesson__courses').style.display = 'block';
+    document.querySelector('header.lessons__header').style.display = 'flex';
+}

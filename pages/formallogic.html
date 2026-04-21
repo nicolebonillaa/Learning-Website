@@ -42,37 +42,91 @@
             </div>
     </header>
     <section class="lesson__courses">
-        <div class="lessoncourses__container">
-            <article class="lesson__course">
-                <h2>Propositional Logic</h2>
-                <p>Propositional logic, also known as sentential logic, is a branch of formal logic that deals with propositions and their relationships. It focuses on the logical connectives (such as AND, OR, NOT) and the rules of inference that govern how propositions can be combined and manipulated to form valid arguments.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Negation</h2>
-                <p>Negation is a fundamental operation in formal logic that takes a proposition and produces its opposite. It is denoted by the symbol "¬" or "!" and is used to express the denial or contradiction of a statement. For example, if the proposition "P" is true, then its negation "¬P" would be false.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Conjunction</h2>
-                <p>Conjunction is a logical operation that combines two propositions and produces a new proposition that is true only if both of the original propositions are true. It is denoted by the symbol "∧" or "&&". For example, if we have two propositions "P" and "Q", the conjunction "P ∧ Q" would be true only if both "P" and "Q" are true.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Disjunction</h2>
-                <p>Disjunction is a logical operation that combines two propositions and produces a new proposition that is true if at least one of the original propositions is true. It is denoted by the symbol "∨" or "||". For example, if we have two propositions "P" and "Q", the disjunction "P ∨ Q" would be true if either "P" or "Q" (or both) are true.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Truth Tables</h2>
-                <p>Truth tables are a tool used in formal logic to analyze the truth values of logical expressions. They list all possible combinations of truth values for the propositions involved and show the resulting truth value of the expression for each combination. Truth tables are particularly useful for understanding the behavior of logical connectives and determining the validity of arguments.</p>  
-            </article>
-            <article class="lesson__course">
-                <h2>XOR</h2>
-                <p>XOR, or exclusive OR, is a logical operation that combines two propositions and produces a new proposition that is true if exactly one of the original propositions is true. It is denoted by the symbol "⊕" or "^". For example, if we have two propositions "P" and "Q", the XOR "P ⊕ Q" would be true if either "P" or "Q" is true, but not both.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Biconditionals</h2>
-                <p>Biconditionals, also known as logical equivalence, is a logical operation that combines two propositions and produces a new proposition that is true if both of the original propositions have the same truth value (both true or both false). It is denoted by the symbol "↔" or "<->". For example, if we have two propositions "P" and "Q", the biconditional "P ↔ Q" would be true if both "P" and "Q" are true or if both "P" and "Q" are false.</p>
-            </article>
+        <div class = "lessoncourses__container" id="lesson__cards__grid"></div>         
+    </section>
+    <!--Fullpage-->
+    <section class="quiz__fullpage" id="quiz__fullpage">
+        <div class="quiz__fullpage__topbar">
+            <div class="quiz__topbar__row">
+                <span class="quiz__modal__topic" id="question__topic"></span>
+                <span class="quiz__step" id="question__step"></span>
+                <button class="quiz__back__btn" id="quiz__close">Back to lessons</button>
+            </div>
+            <div class="quiz__progress__wrap">
+                <div class="quiz__progress__fill" id="question__progress"></div>
+            </div>
         </div>
+        <div id="quiz__question__screen">
+            <div class="quiz__fullpage__body">
+                <div class="quiz__modal__title" id="question__title"></div>
+                <p class="quiz__question" id="question__question"></p>
+                <div id="question__options"></div>
+                <div class="quiz__feedback" id="question__feedback"></div>
+            </div>
+            <div class="quiz__fullpage__footer">
+                <button class="quiz__next__btn" id="question__next" disabled>Next</button>
+            </div>
+        </div>
+        <div id="quiz__result__screen" style="display:none">
+            <div class="quiz__fullpage__result">
+                <div class="quiz__score__num" id="result__score"></div>
+                <div class="quiz__score__msg" id="result__percentage"></div>
+                <div class="quiz__score__actions">
+                    <button class="quiz__retry__btn" id="question__retry">Retry</button>
+                    <button class="quiz__next__btn" id="quiz__submit">Done</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container footer__container">
+            <div class="footer__1">
+                <a href="/main/index.html" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>
+                <p>Our mission is to provide educational resources to help individuals learn and grow in the field of computer science. We are committed to creating engaging and interactive lessons that make learning enjoyable and accessible to everyone.</p>
+            </div>
+            <div class="footer__2">
+                <h4>Pages</h4>
+                <ul class="permalinks">
+                    <li><a href="/main/index.html">Home</a></li>
+                    <li><a href="/pages/lessons.html">Lessons</a></li>
+                    <li><a href="/pages/progress.html">Progress/habit tracker</a></li>
+                    <li><a href="/pages/profile.html">Profile</a></li>
+                    <li><a href="/pages/settings.html">Settings</a></li>
+                </ul>
+            </div>
+            <div class="footer__3">
+                <h4>Subjects</h4>
+                <ul class="permalinks">
+                    <li><a href="/pages/datastructures.html">Data Structures</a></li>
+                    <li><a href="/pages/java.html">Java Programming</a></li>
+                    <li><a href="/pages/sorting.html">Sorting Algorithms</a></li>
+                    <li><a href="/pages/formallogic.html">Formal Logic</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!--Card template-->
+    <template id="lesson__card__template">
+        <article class="lesson__course">
+            <div class="lesson__course__top">
+                <h2 class="card__topic"></h2>
+            </div>
+            <p class="lesson__course__description"></p>
+            <div class="lesson__course__footer">
+                <span class="question__count card__questionCount"></span>
+                <button class="quiz__open__btn">Take Quiz</button>
+            </div>
+        </article>
+    </template>
+    <!--Option template-->
+    <template id="option__template">
+        <button class="quiz__option">
+            <span class="quiz__option__label"></span>
+            <span class="quiz__option__text"></span>
+        </button>
+    </template>
     <script src="/main/main.js"></script>
+    <script>initCoursePage('formallogic');</script>
     </body>
 </html>
 

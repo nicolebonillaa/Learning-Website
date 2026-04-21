@@ -41,39 +41,92 @@
                 </div>
             </div>
     </header>
-    <section class="lesson__courses">
-        <div class="lessoncourses__container">
-            <article class="lesson__course">
-                <h2>Binary Search Tree</h2>
-                <p>A binary search tree (BST) is a data structure that maintains a sorted order of elements. Each node in a BST has at most two children, where the left child contains values less than the parent node and the right child contains values greater than the parent node. This property allows for efficient searching, insertion, and deletion operations with an average time complexity of O(log n).</p>
-            </article>
-            <article class="lesson__course">
-                <h2>AVL Tree</h2>
-                <p>An AVL tree is a self-balancing binary search tree that maintains a balance factor for each node. The balance factor is the difference in height between the left and right subtrees. If the balance factor of any node becomes greater than 1 or less than -1, the tree performs rotations to restore balance. This ensures that the height of the AVL tree remains logarithmic, providing efficient search, insertion, and deletion operations.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Abstract Data Types (ADT)</h2>
-                <p>An abstract data type (ADT) is a theoretical concept that defines a data structure in terms of its behavior and operations rather than its implementation. ADTs provide a high-level interface for working with data, allowing programmers to focus on the functionality rather than the underlying details. Examples of ADTs include lists, stacks, queues, and sets.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Heap</h2>
-                <p>A heap is a specialized tree-based data structure that satisfies the heap property. In a max heap, for example, each parent node is greater than or equal to its children, while in a min heap, each parent node is less than or equal to its children. Heaps are commonly used to implement priority queues and are efficient for finding the maximum or minimum element in constant time.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Hashmap</h2>
-                <p>A hashmap, also known as a hash table, is a data structure that stores key-value pairs. It uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found. Hashmaps provide average-case O(1) time complexity for search, insertion, and deletion operations, making them efficient for storing and retrieving data based on keys.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Depth-First Search (DFS)</h2>
-                <p>Depth-first search (DFS) is a graph traversal algorithm that explores as far as possible along each branch before backtracking. It uses a stack data structure, either implicitly through recursion or explicitly, to keep track of the vertices to be explored. DFS is useful for tasks such as finding connected components, topological sorting, and solving puzzles.</p>
-            </article>
-            <article class="lesson__course">
-                <h2>Breadth-First Search (BFS)</h2>
-                <p>Breadth-first search (BFS) is a graph traversal algorithm that explores all the vertices at the present depth level before moving on to the vertices at the next depth level. It uses a queue data structure to keep track of the vertices to be explored. BFS is useful for finding the shortest path in an unweighted graph and for level-order traversal of trees.</p>
-            </article>
+   <section class="lesson__courses">
+        <div class = "lessoncourses__container" id="lesson__cards__grid"></div>         
+    </section>
+    <!--Fullpage-->
+    <section class="quiz__fullpage" id="quiz__fullpage">
+        <div class="quiz__fullpage__topbar">
+            <div class="quiz__topbar__row">
+                <span class="quiz__modal__topic" id="question__topic"></span>
+                <span class="quiz__step" id="question__step"></span>
+                <button class="quiz__back__btn" id="quiz__close">Back to lessons</button>
+            </div>
+            <div class="quiz__progress__wrap">
+                <div class="quiz__progress__fill" id="question__progress"></div>
+            </div>
+        </div>
+        <div id="quiz__question__screen">
+            <div class="quiz__fullpage__body">
+                <div class="quiz__modal__title" id="question__title"></div>
+                <p class="quiz__question" id="question__question"></p>
+                <div id="question__options"></div>
+                <div class="quiz__feedback" id="question__feedback"></div>
+            </div>
+            <div class="quiz__fullpage__footer">
+                <button class="quiz__next__btn" id="question__next" disabled>Next</button>
+            </div>
+        </div>
+        <div id="quiz__result__screen" style="display:none">
+            <div class="quiz__fullpage__result">
+                <div class="quiz__score__num" id="result__score"></div>
+                <div class="quiz__score__msg" id="result__percentage"></div>
+                <div class="quiz__score__actions">
+                    <button class="quiz__retry__btn" id="question__retry">Retry</button>
+                    <button class="quiz__next__btn" id="quiz__submit">Done</button>
+                </div>
+            </div>
         </div>
     </section>
+    <footer>
+        <div class="container footer__container">
+            <div class="footer__1">
+                <a href="/main/index.html" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>
+                <p>Our mission is to provide educational resources to help individuals learn and grow in the field of computer science. We are committed to creating engaging and interactive lessons that make learning enjoyable and accessible to everyone.</p>
+            </div>
+            <div class="footer__2">
+                <h4>Pages</h4>
+                <ul class="permalinks">
+                    <li><a href="/main/index.html">Home</a></li>
+                    <li><a href="/pages/lessons.html">Lessons</a></li>
+                    <li><a href="/pages/progress.html">Progress/habit tracker</a></li>
+                    <li><a href="/pages/profile.html">Profile</a></li>
+                    <li><a href="/pages/settings.html">Settings</a></li>
+                </ul>
+            </div>
+            <div class="footer__3">
+                <h4>Subjects</h4>
+                <ul class="permalinks">
+                    <li><a href="/pages/datastructures.html">Data Structures</a></li>
+                    <li><a href="/pages/java.html">Java Programming</a></li>
+                    <li><a href="/pages/sorting.html">Sorting Algorithms</a></li>
+                    <li><a href="/pages/formallogic.html">Formal Logic</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!--Card template-->
+    <template id="lesson__card__template">
+        <article class="lesson__course">
+            <div class="lesson__course__top">
+                <h2 class="card__topic"></h2>
+            </div>
+            <p class="lesson__course__description"></p>
+            <div class="lesson__course__footer">
+                <span class="question__count card__questionCount"></span>
+                <button class="quiz__open__btn">Take Quiz</button>
+            </div>
+        </article>
+    </template>
+    <!--Option template-->
+    <template id="option__template">
+        <button class="quiz__option">
+            <span class="quiz__option__label"></span>
+            <span class="quiz__option__text"></span>
+        </button>
+    </template>
     <script src="/main/main.js"></script>
+    <script>initCoursePage('datastructures');</script>
     </body>
 </html>
 
