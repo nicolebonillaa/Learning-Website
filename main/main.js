@@ -38,6 +38,16 @@ if (signOutBtn) {
     window.location.href = '/pages/login.html';
   });
 }
+
+//Profile Select Accessory Functionability
+const elements = document.getElementsByClassName('card');
+
+Array.from(elements).forEach(element => {
+    element.addEventListener('click', () => {
+        console.log('Element clicked!');
+    });
+});
+
 /*
 //Login functionality
 const loginForm = document.getElementById('.login__form');
