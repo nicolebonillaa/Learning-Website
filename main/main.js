@@ -5,6 +5,31 @@ window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
 })
 
+//Hamburger menu toggle
+const hamburger = document.querySelector('.nav__hamburger');
+const navMenu = document.querySelector('.nav__menu');
+
+if(hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navMenu.classList.toggle('nav__menu__open');
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            navMenu.classList.remove('nav__menu__open');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if(!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('open');
+            navMenu.classList.remove('nav__menu__open');
+        }
+    });
+}
+
 // Settings tab bar toggle
 const settingsLinks = document.querySelectorAll('.settings__menu a');
 const settingsContents = document.querySelectorAll('.settings__content section');

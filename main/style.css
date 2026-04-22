@@ -1117,3 +1117,233 @@ input::placeholder{
   padding: min(50px, 7%);
 }
 
+/*Adding mobile responsiveness to the website*/
+/*Hambuger menu styling for mobile*/
+.nav__hamburger{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 20;
+}
+
+.nav__hamburger span{
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background-color: #2C2C2A;
+  border-radius: 2px;
+  transition: all 300ms ease;
+}
+
+.nav__hamburger.open span:nth-child(1){ 
+  transform: translateY(7.5px) rotate(45deg); 
+}
+
+.nav__hamburger.open span:nth-child(2){ 
+  opacity: 0; 
+}
+
+.nav__hamburger.open span:nth-child(3){ 
+  transform: translateY(-7.5px) rotate(-45deg); 
+}
+
+/*Mobile compatibility*/
+@media screen and (max-width: 768px){
+  .container{
+    width: var(--container-width-sm);
+  }
+
+  .nav__hamburger{
+    display: flex;
+  }
+
+  .nav__menu{
+    display: none;
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    background: #DED2D1;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 1rem 0 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+  }
+
+  .nav__menu.nav__menu__open{
+    display: flex;
+  }
+
+  .nav__menu li{
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__menu li a{
+    display: block;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1 px solid rgba(0,0,0,0.06);
+  }
+
+  /*Stacking header section on mobile*/
+  .header__container{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+    text-align: center;
+  }
+
+  .header__right{
+    display: flex;
+    justify-content: center;
+  }
+
+  .header__right img{
+    max-width: 220px;
+    width: 60%;
+    max-width: 220px;
+  }
+
+  .header__left p{
+    margin: 1rem auto 2rem;
+    max-width: 90%;
+  }
+
+  /*Pages appear in one column on mobile*/
+  .courses__container, .lessons__container{
+    grid-template-columns: 1fr;
+  }
+
+  .lesson{
+    min-height: auto;
+  }
+
+  .lessoncourses__container{
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+
+  .header.lessons__header{
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  header.lessons__header .header__container{
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header.lessons__header .header__left p {
+    margin: 0 auto;
+  }
+
+  .header__right-image img{
+    max-width: 200px;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .login{
+    grid-template-columns: 1fr;
+    width: 95%;
+    min-height: auto;
+    margin: 2rem auto;
+  }
+
+  .login__details{
+    padding: 2rem 1.5rem; 
+  }
+
+  .quiz__fullpage__body{
+    padding: 2rem 1.2rem;
+  }
+
+  .quiz__topbar__row{
+    padding: 0.25rem 1rem;
+  }
+
+  .quiz__question{
+    font-size: 1.15rem;
+  }
+
+  .quiz_fullpage__footer{
+    padding: 0.75rem 1rem;
+  }
+
+  .footer__container{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .settings__container{
+    grid-template-columns: 1fr;
+    margin-top: 6rem;
+  }
+
+  .settings__sidebar{
+    position: static;
+  }
+
+  .settings__menu{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .settings__menu li a{
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /*Reducing font sizes on mobile for better readability*/
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.3rem; }
+ 
+  section {
+    padding: 3rem 0;
+  }
+}
+
+/*Additional media query for very small screens*/
+@media screen and (max-width: 480px){
+  h1{
+    font-size: 1.7rem;
+  }
+
+  .logo__header span{
+    font-size: 1.3rem;
+  }
+
+  .login__details{
+    padding: 1.5rem 1.2rem;
+  }
+
+  .quiz__question{
+    font-size: 1rem;
+  }
+
+  .quiz__option{
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .quiz__option__label {
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 0.75rem;
+  }
+ 
+  .lessoncourses__container {
+    padding: 0;
+  }
+}
