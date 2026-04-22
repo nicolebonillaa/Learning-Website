@@ -1000,3 +1000,350 @@ input::placeholder{
 .btn-quiz-retry:hover{ 
   background: rgba(0,0,0,0.06); 
 }
+
+/*Progress&HabitTracker*/
+
+.progress-title{
+  font-size: 425%;
+  padding: 35px;
+  border: 10px;
+  margin: 50px;
+  text-align: center;
+}
+
+.progress-board-upper{
+  margin: 25px;
+  padding: 5px;
+  border: 5px;
+}
+
+.progress-sections-lower{
+  margin: 25px;
+  padding: 5px;
+  border: 5px;
+}
+
+.board-upper img{
+    width: 40%;
+    height: auto;
+    padding: 2rem;
+    border: 30px;
+    margin: 0 auto;
+    }
+
+.board-upper {
+  background-color: #DED2D1; 
+  width: var(--container-width-lg);
+  height: max-content;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  margin: 25px auto;
+  display: flex;
+  align-items: center;     
+  justify-content: center;
+}
+
+.progress-topic{
+  background: #DED2D1;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  width: var(--container-width-lg);
+}
+
+/* --Profile Start -- */
+
+.profile-title{
+  margin: 25px;
+  padding: 5px;
+  border: 5px;
+}
+
+.page-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 10px;
+}
+
+.card-board {
+  margin: 15px;
+  border: 2px solid #694c4c;
+  padding: min(50px, 7%);
+  background-color: #DED2D1;
+  
+}
+
+.card {
+  padding: 1rem;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  background-color: rgb(231, 221, 201);
+  text-align: center ;
+
+}
+.card:hover {
+  border: 1px solid rgb(234, 174, 90);
+  transform: scale(1.2);
+
+}
+
+.card:active{
+  background-color: rgb(188, 165, 118);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns:repeat(3, minmax(15%, 100%));
+  gap: 15px;
+}
+
+.view-board {
+  background-color: #DED2D1;
+  width: minmax(100px, 1fr);
+  height: auto;
+  margin: 15px;
+  border: 2px solid #694c4c;
+  padding: min(50px, 7%);
+}
+
+.view-portal {
+  background-color: #DED2D1;
+  width: minmax(80px, .8fr);
+  height: max-content;
+  margin: 15px;
+  border: 25px;
+  padding: min(50px, 7%);
+}
+
+/*Adding mobile responsiveness to the website*/
+/*Hambuger menu styling for mobile*/
+.nav__hamburger{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 20;
+}
+
+.nav__hamburger span{
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background-color: #2C2C2A;
+  border-radius: 2px;
+  transition: all 300ms ease;
+}
+
+.nav__hamburger.open span:nth-child(1){ 
+  transform: translateY(7.5px) rotate(45deg); 
+}
+
+.nav__hamburger.open span:nth-child(2){ 
+  opacity: 0; 
+}
+
+.nav__hamburger.open span:nth-child(3){ 
+  transform: translateY(-7.5px) rotate(-45deg); 
+}
+
+/*Mobile compatibility*/
+@media screen and (max-width: 768px){
+  .container{
+    width: var(--container-width-sm);
+  }
+
+  .nav__hamburger{
+    display: flex;
+  }
+
+  .nav__menu{
+    display: none;
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    background: #DED2D1;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 1rem 0 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+  }
+
+  .nav__menu.nav__menu__open{
+    display: flex;
+  }
+
+  .nav__menu li{
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__menu li a{
+    display: block;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1 px solid rgba(0,0,0,0.06);
+  }
+
+  /*Stacking header section on mobile*/
+  .header__container{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+    text-align: center;
+  }
+
+  .header__right{
+    display: flex;
+    justify-content: center;
+  }
+
+  .header__right img{
+    max-width: 220px;
+    width: 60%;
+    max-width: 220px;
+  }
+
+  .header__left p{
+    margin: 1rem auto 2rem;
+    max-width: 90%;
+  }
+
+  /*Pages appear in one column on mobile*/
+  .courses__container, .lessons__container{
+    grid-template-columns: 1fr;
+  }
+
+  .lesson{
+    min-height: auto;
+  }
+
+  .lessoncourses__container{
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+
+  .header.lessons__header{
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  header.lessons__header .header__container{
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header.lessons__header .header__left p {
+    margin: 0 auto;
+  }
+
+  .header__right-image img{
+    max-width: 200px;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .login{
+    grid-template-columns: 1fr;
+    width: 95%;
+    min-height: auto;
+    margin: 2rem auto;
+  }
+
+  .login__details{
+    padding: 2rem 1.5rem; 
+  }
+
+  .quiz__fullpage__body{
+    padding: 2rem 1.2rem;
+  }
+
+  .quiz__topbar__row{
+    padding: 0.25rem 1rem;
+  }
+
+  .quiz__question{
+    font-size: 1.15rem;
+  }
+
+  .quiz_fullpage__footer{
+    padding: 0.75rem 1rem;
+  }
+
+  .footer__container{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .settings__container{
+    grid-template-columns: 1fr;
+    margin-top: 6rem;
+  }
+
+  .settings__sidebar{
+    position: static;
+  }
+
+  .settings__menu{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .settings__menu li a{
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /*Reducing font sizes on mobile for better readability*/
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.3rem; }
+ 
+  section {
+    padding: 3rem 0;
+  }
+}
+
+/*Additional media query for very small screens*/
+@media screen and (max-width: 480px){
+  h1{
+    font-size: 1.7rem;
+  }
+
+  .logo__header span{
+    font-size: 1.3rem;
+  }
+
+  .login__details{
+    padding: 1.5rem 1.2rem;
+  }
+
+  .quiz__question{
+    font-size: 1rem;
+  }
+
+  .quiz__option{
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .quiz__option__label {
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 0.75rem;
+  }
+ 
+  .lessoncourses__container {
+    padding: 0;
+  }
+}

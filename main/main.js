@@ -5,6 +5,31 @@ window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
 })
 
+//Hamburger menu toggle
+const hamburger = document.querySelector('.nav__hamburger');
+const navMenu = document.querySelector('.nav__menu');
+
+if(hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navMenu.classList.toggle('nav__menu__open');
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            navMenu.classList.remove('nav__menu__open');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if(!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('open');
+            navMenu.classList.remove('nav__menu__open');
+        }
+    });
+}
+
 // Settings tab bar toggle
 const settingsLinks = document.querySelectorAll('.settings__menu a');
 const settingsContents = document.querySelectorAll('.settings__content section');
@@ -38,6 +63,16 @@ if (signOutBtn) {
     window.location.href = '/pages/login.html';
   });
 }
+
+//Profile Select Accessory Functionability
+const elements = document.getElementsByClassName('card');
+
+Array.from(elements).forEach(element => {
+    element.addEventListener('click', () => {
+        console.log('Element clicked!');
+    });
+});
+
 /*
 //Login functionality
 const loginForm = document.getElementById('.login__form');
@@ -98,6 +133,24 @@ const lessonData = {
                 question: 'A node with no children is called?',
                 options: ['Root', 'Leaf', 'Parent','Branch'],
                 answer: 'Leaf'
+            },
+
+            {
+                question: 'What is the height of a tree?',
+                options: ['Number of nodes', 'Number of edges on longest path from root to leaf', 'Depth of the tree', 'Number of children'],
+                answer: 'Number of edges on longest path from root to leaf'
+            },
+
+            {
+                question: 'In a binary tree, each node can have at most how many children?',
+                options: ['1', '2', '3','unlimited'],
+                answer: '2'
+            },
+
+            {
+                question: 'What is a balanced tree?',
+                options: ['A tree where all leaves are at the same level', 'A tree where the difference in height between left and right subtrees is at most 1', 'A tree with equal number of nodes on each side', 'A tree with only one child per node'],
+                answer: 'A tree where the difference in height between left and right subtrees is at most 1'
             }
         ]
     },
@@ -114,6 +167,24 @@ const lessonData = {
                 question: 'In a full binary tree: ',
                 options: ['Every node has 1 child', 'Every node has 0 or 2 children', 'Only root has children', 'Nodes have unlimited children'],
                 answer: 'Every node has 0 or 2 children'
+            },
+
+            {
+                question: 'In a complete binary tree: ',
+                options: ['All levels are fully filled', 'All levels except possibly the last are fully filled and all nodes are as far left as possible', 'Only root is filled', 'Nodes have unlimited children'],
+                answer: 'All levels except possibly the last are fully filled and all nodes are as far left as possible'
+            },
+
+            {
+                question: 'In a perfect binary tree: ',
+                options: ['All levels are fully filled', 'All levels except possibly the last are fully filled and all nodes are as far left as possible', 'Only root is filled', 'Nodes have unlimited children'],
+                answer: 'All levels are fully filled'
+            },
+
+            {
+                question: 'A binary tree is balanced if: ',
+                options: ['All leaves are at the same level', 'The difference in height between left and right subtrees is at most 1', 'Equal number of nodes on each side', 'Only one child per node'],
+                answer: 'The difference in height between left and right subtrees is at most 1'
             }
         ]
     },
@@ -131,6 +202,24 @@ const lessonData = {
                 options: ['Height difference between left and right subtrees', 'Number of nodes', 'Depth of the tree', 'Number of children'],
                 answer: 'Height difference between left and right subtrees'
             },
+
+            {
+                question: 'What is the maximum allowed balance factor for any node in an AVL tree?',
+                options: ['0', '1', '2', '3'],
+                answer: '1'
+            },
+
+            {
+                question: 'Why are AVL trees used?',
+                options: ['To store data in a sorted manner', 'To ensure O(log n) time complexity for search, insert, and delete operations', 'To create a linked list', 'To implement a stack'],
+                answer: 'To ensure O(log n) time complexity for search, insert, and delete operations'
+            },
+
+            {
+                question: 'What happens when a node in an AVL tree becomes unbalanced after an insertion?',
+                options: ['The tree is deleted', 'The tree is rebalanced using rotations', 'The node is removed', 'Nothing happens'],
+                answer: 'The tree is rebalanced using rotations'
+            }
         ]
     },
     //Hash tables question lesson, there are 2
@@ -147,6 +236,24 @@ const lessonData = {
                 question: 'A collision in a hash table occurs when:',
                 options: ['Two keys map to the same index', 'Table is empty','Keys are sorted', 'Data is deleted'],
                 answer: 'Two keys map to the same index'
+            },
+
+            {
+                question: 'Which of the following is NOT a common type of hash function?',
+                options: ['Division method', 'Multiplication method', 'Universal hashing', 'Binary search'],
+                answer: 'Binary search'
+            },
+
+            {
+                question: 'Which of the following is a common method for handling collisions in a hash table?',
+                options: ['Chaining', 'Sorting', 'Binary search', 'Graph traversal'],
+                answer: 'Chaining'
+            },
+
+            {
+                question: 'What is a load factor in a hash table?',
+                options: ['Number of keys divided by table size', 'Number of collisions', 'Size of the hash table', 'Number of empty slots'],
+                answer: 'Number of keys divided by table size'
             }
         ]
     },
@@ -165,7 +272,27 @@ const lessonData = {
                 question: 'Which operation removes an elment from a stack?',
                 options: ['Push', 'Pop', 'Peek', 'Insert'],
                 answer: 'Pop'
+            },
+
+             {
+                question: 'Which operation inserts an element onto a stack?',
+                options: ['Push', 'Pop', 'Peek', 'Delete'],
+                answer: 'Push'
+            },
+
+            {
+                question: 'What is the time complexity of push and pop operations in a stack?',
+                options: ['O(1)', 'O(n)', 'O(log n)', 'O(n log n)'],
+                answer: 'O(1)'
+            },
+
+            {
+                question: 'Whhich of the following is NOT an abstract data type?',
+                options: ['Stack', 'Queue', 'Linked List', 'Array'],
+                answer: 'Array'
             }
+
+           
         ]
     },
     //Java course
@@ -183,6 +310,24 @@ const lessonData = {
                 question: 'What is a valid variable name in Java?',
                 options: ['1value', 'value_1', 'value-1', 'value 1'],
                 answer: 'value_1'
+            },
+
+            {
+                question: 'How do you declare an integer variable named "age" in Java?',
+                options: ['int age;', 'integer age;', 'var age;', 'age int;'],
+                answer: 'int age;'
+            },
+
+            {
+                question: 'How do you declare a string variable named "name" in Java?',
+                options: ['string name;', 'String name;', 'var name;', 'name String;'],
+                answer: 'String name;'
+            },
+
+            {
+                question: 'How do you declare a boolean variable named "isStudent" in Java?',
+                options: ['boolean isStudent;', 'bool isStudent;', 'var isStudent;', 'isStudent boolean;'],
+                answer: 'boolean isStudent;'
             }
         ]
     },
@@ -200,6 +345,24 @@ const lessonData = {
                 question: 'Which is logical operator in Java?',
                 options: ['+', '&&', '=', '%'],
                 answer: '&&'
+            },
+
+            {
+                question: 'What does the "!" operator do in Java?',
+                options: ['Logical AND', 'Logical OR', 'Logical NOT', 'Equality'],
+                answer: 'Logical NOT'
+            },
+
+            {
+                question: 'Which operator is used for string concatenation in Java?',
+                options: ['+', '&&', '=', '%'],
+                answer: '+'
+            },
+
+            {
+                question: 'What does the "%" operator do in Java?',
+                options: ['Addition', 'Subtraction', 'Multiplication', 'Modulus'],
+                answer: 'Modulus'
             }
         ]
     },
@@ -217,6 +380,24 @@ const lessonData = {
                 question: 'Which method gets string length in Java?',
                 options: ['size()', 'length()', 'count()', 'getLength()'],
                 answer: 'length()'
+            },
+
+            {
+                question: 'Which method concatenates two strings in Java?',
+                options: ['concat()', 'join()', 'append()', 'combine()'],
+                answer: 'concat()'
+            },
+
+            {
+                question: 'What does the substring method do in Java?',
+                options: ['Extracts a portion of a string', 'Concatenates strings', 'Replaces characters in a string', 'Checks if a string contains another string'],
+                answer: 'Extracts a portion of a string'
+            },
+
+            {
+                question: 'Strings in Java are referenced by:',
+                options: ['String literals', 'String objects', 'Both', 'None'],
+                answer: 'Both'
             }
 
         ]
@@ -235,6 +416,24 @@ const lessonData = {
                 question: 'Which operator neagtes a boolean value in Java?',
                 options: ['&&', '||', '!', '=='],
                 answer: '!'
+            },
+
+            {
+                question: 'Which operator is used for logical AND in Java?',
+                options: ['&&', '||', '!', '=='],
+                answer: '&&'
+            },
+
+            {
+                question: 'Which operator is used for logical OR in Java?',
+                options: ['&&', '||', '!', '=='],
+                answer: '||'
+            },
+
+            {
+                question: 'What is the result of true && false in Java?',
+                options: ['true', 'false', 'undefined', 'error'],
+                answer: 'false'
             }
 
         ]
@@ -253,6 +452,24 @@ const lessonData = {
                 question: 'Which loop is best when the number of iterations is known?',
                 options: ['while', 'for', 'do-while', 'if'],
                 answer: 'for'
+            },
+
+            {
+                question: 'Which loop is best when the number of iterations is unknown?',
+                options: ['while', 'for', 'do-while', 'if'],
+                answer: 'while'
+            },
+
+            {
+                question: 'What are if loops best used for?',
+                options: ['Iterating over arrays', 'Executing code based on conditions', 'Repeating code a specific number of times', 'Creating functions'],
+                answer: 'Executing code based on conditions'
+            },
+
+            {
+                question: 'For each loop is used to iterate over:',
+                options: ['Arrays and collections', 'Numbers', 'Strings', 'Booleans'],
+                answer: 'Arrays and collections'
             }
         ]
     },
@@ -272,6 +489,25 @@ const lessonData = {
                 question: 'What is the time complexity of merge sort?',
                 options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
                 answer: 'O(n log n)'
+            },
+
+            {
+                question: 'Why is merge sort efficient?',
+                options: ['It has a simple implementation', 'It has a time complexity of O(n log n)', 'It is a stable sort', 'All of the above'],
+                answer: 'It is a stable sort'
+
+            },
+
+            {
+                question: 'What is the best use for merge sort?',
+                options: ['Sorting small arrays', 'Sorting linked lists', 'Sorting large datasets that do not fit in memory', 'Sorting already sorted arrays'],
+                answer: 'Sorting large datasets that do not fit in memory'
+            },
+
+            {
+                question: 'Using`merge sort, how many comparisons are needed to sort an array of 4 elements?', 
+                options: ['4', '5', '6', '7'],
+                answer: '5'
             }
         ]
     },
@@ -289,6 +525,24 @@ const lessonData = {
                 question :'Radix sort is',
                 options: ['Comparison-based', 'Non-comparison-based', 'Recursive only', 'Graph-based'],
                 answer: 'Non-comparison-based'
+            },
+
+            {
+                question: 'What is the time complexity of radix sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(k * n) where k is the number of digits'],
+                answer: 'O(k * n) where k is the number of digits'
+            },
+
+            {
+                question: 'Radix sort is most efficient when:',
+                options: ['Sorting small arrays', 'Sorting large datasets with small range of digits', 'Sorting already sorted arrays', 'Sorting linked lists'],
+                answer: 'Sorting large datasets with small range of digits'
+            },
+
+            {
+                question: 'Using radix sort, how many passes are needed to sort an array of 3-digit numbers?',
+                options: ['1', '2', '3', '4'],
+                answer: '3'
             }
         ]
     },
@@ -306,6 +560,25 @@ const lessonData = {
                 question: 'What is the time complexity of selection sort?',
                 options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
                 answer: 'O(n^2)'
+            },
+
+            {
+                question: 'Selection sort is inefficient for:',
+                options: ['Sorting small arrays', 'Sorting large datasets', 'Sorting already sorted arrays', 'Sorting reverse sorted arrays'],
+                answer: 'Sorting large datasets'
+
+            },
+
+            {
+                question: 'Selection sort is',
+                options: ['Stable', 'Unstable', 'Recursive only', 'Graph-based'],
+                answer: 'Unstable'
+            },
+
+            {
+                question: 'Using selection sort, how many comparisons are needed to sort an array of 5 elements?',
+                options: ['10', '15', '20', '25'],
+                answer: '10'
             }
         ]
     },
@@ -323,6 +596,24 @@ const lessonData = {
                 question: 'What is the best case complexity of bubble sort?',
                 options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
                 answer: 'O(n)'
+            },
+
+            {
+                question: 'Bubble sort is efficient for:',
+                options: ['Sorting large datasets', 'Sorting small or nearly sorted arrays', 'Sorting linked lists', 'Sorting trees'],
+                answer: 'Sorting small or nearly sorted arrays'
+            },
+
+            {
+                question: 'What is the worst case complexity of bubble sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n^2)'
+            },
+
+            {
+                question: 'How many comparisons are needed to sort an array of 5 elements using bubble sort?',
+                options: ['10', '15', '20', '25'],  
+                answer: '10'
             }
         ]
     },
@@ -341,6 +632,24 @@ const lessonData = {
                 question: 'What is the time complexity of heap sort?',
                 options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
                 answer: 'O(n log n)'
+            },
+
+            {
+                question: 'Heap sort is efficient for:',
+                options: ['Sorting small arrays', 'Sorting large datasets', 'Sorting already sorted arrays', 'Sorting reverse sorted arrays'],
+                answer: 'Sorting large datasets'
+            },
+
+            {
+                question: 'Heap sort is',
+                options: ['Stable', 'Unstable', 'Recursive only', 'Graph-based'],
+                answer: 'Unstable'
+            },
+
+            {
+                question: 'Using heap sort, how many comparisons are needed to sort an array of 5 elements?',
+                options: ['10', '15', '20', '25'],
+                answer: '10'
             }
         ]
     },
@@ -358,6 +667,24 @@ const lessonData = {
                 question: 'What is the worst case time complexity of insertion sort?',
                 options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
                 answer: 'O(n^2)'
+            },
+
+            {
+                question: 'Insertion sort is efficient for:',
+                options: ['Sorting small arrays', 'Sorting large datasets', 'Sorting already sorted arrays', 'Sorting reverse sorted arrays'],
+                answer: 'Sorting small arrays'
+            },
+
+            {
+                question: 'What is the best case time complexity of insertion sort?',
+                options: ['O(n)', 'O(n log n)', 'O(n^2)', 'O(log n)'],
+                answer: 'O(n)'
+            },
+
+            {
+                question: 'Using insertion sort, how many comparisons are needed to sort an array of 5 elements?',
+                options: ['10', '15', '20', '25'],
+                answer: '10'
             }
         ]
     },
@@ -377,6 +704,24 @@ const lessonData = {
                 question: 'Example of a proposition is:',
                 options: ['Close the door', 'Is it raining?', 'It is raining', 'Please sit'],
                 answer: 'It is raining'
+            },
+
+            {
+                question: 'Which of the following is NOT a proposition?',
+                options: ['The sky is blue', '2 + 2 = 4', 'What time is it?', 'All dogs are mammals'],
+                answer: 'What time is it?'
+            },
+
+            {
+                question: 'Which of the following is a proposition?',
+                options: ['The sky is blue', '2 + 2 = 4', 'What time is it?', 'All dogs are mammals'],
+                answer: 'The sky is blue'
+            },
+
+            {
+                question: 'The truth value of a proposition can be:',
+                options: ['True', 'False', 'Both', 'Neither'],
+                answer: 'Both'
             }
         ]
     },
@@ -394,7 +739,26 @@ const lessonData = {
                 question: 'If p is true, then ¬P is:',
                 options: ['True', 'False', 'Undefined', 'Both'],
                 answer: 'False'
-            }
+            },
+
+            {
+                question: 'If p is false, then ¬P is:',
+                options: ['True', 'False', 'Undefined', 'Both'],
+                answer: 'True'
+            },
+
+            {
+                question: 'The negation of "All dogs are mammals" is:',
+                options: ['Some dogs are not mammals', 'All dogs are not mammals', 'Some dogs are mammals', 'No dogs are mammals'],
+                answer: 'Some dogs are not mammals'
+
+            },
+
+            {
+                question: 'The negation of "It is raining" is:',
+                options: ['It is not raining', 'It is sunny', 'It is cloudy', 'It is snowing'],
+                answer: 'It is not raining'
+            },
         ]
     },
     //Conjunction question lesson, there are 2
@@ -411,6 +775,24 @@ const lessonData = {
                 question: 'The conjunction P ∧ Q is true when:',
                 options: ['One is true', 'Both are true', 'Both are false', 'One is false'],
                 answer: 'Both are true'
+            },
+
+            {
+                question: 'The conjunction P ∧ Q is false when:',
+                options: ['One is true', 'Both are true', 'Both are false', 'One is false'],
+                answer: 'Both are false'
+            },
+
+            {
+                question: 'The conjunction of "It is raining" and "It is sunny" is:',
+                options: ['It is raining and sunny', 'It is raining or sunny', 'It is not raining and not sunny', 'It is either raining or sunny but not both'],
+                answer: 'It is raining and sunny'
+            },
+
+            {
+                question: 'The conjunction of "Its raining" and "It is cloudy" is:',
+                options: ['It is raining and cloudy', 'It is raining or cloudy', 'It is not raining and not cloudy', 'It is either raining or cloudy but not both'],
+                answer: 'It is raining and cloudy'
             }
         ]
     },
@@ -428,6 +810,24 @@ const lessonData = {
                 question: 'The disjunction P ∨ Q is false when:',
                 options: ['One is true', 'Both are true', 'Both are false', 'One is false'],
                 answer: 'Both are false'
+            },
+
+            {
+                question: 'The disjunction P ∨ Q is true when:',
+                options: ['One is true', 'Both are true', 'Both are false', 'One is false'],
+                answer: 'One is true'
+            },
+
+            {
+                question: 'The disjunction of "It is raining" and "It is sunny" is:',
+                options: ['It is raining and sunny', 'It is raining or sunny', 'It is not raining and not sunny', 'It is either raining or sunny but not both'],
+                answer: 'It is raining or sunny'
+            },
+
+            {
+                question: 'The disjunction of "Cats are mammals" and "Dogs are mammals" is:',
+                options: ['Cats are mammals and dogs are mammals', 'Cats are mammals or dogs are mammals', 'Cats are not mammals and dogs are not mammals', 'Either cats are mammals or dogs are mammals but not both'],
+                answer: 'Cats are mammals or dogs are mammals'
             }
         ]
     },
@@ -445,7 +845,25 @@ const lessonData = {
                 question: 'Rows in a truth table depend on:',
                 options: ['Operators', 'Variables', 'Constants', 'Functions'],
                 answer: 'Variables'
-            }
+            },
+
+            {
+                question: 'Columns in a truth table depend on:',
+                options: ['Operators', 'Variables', 'Constants', 'Functions'],
+                answer: 'Operators'
+            },
+
+            {
+                question: 'The truth table for P has how many rows?',
+                options: ['1', '2', '3', '4'],
+                answer: '2'
+            },
+
+            {
+                question: 'The truth table for P ∧ Q has how many rows?',
+                options: ['2', '4', '8', '16'],
+                answer: '4'
+            },
         ]
     },
     //XOR question lesson, there are 2
@@ -462,6 +880,24 @@ const lessonData = {
                 question: 'XOR is represented by which symbol?',
                 options: ['∧', '∨', '⊕', '→'],
                 answer: '⊕'
+            },
+
+            {
+                question: 'The XOR of "It is raining" and "It is sunny" is:',
+                options: ['It is raining and sunny', 'It is raining or sunny', 'It is not raining and not sunny', 'Either it is raining or it is sunny but not both'],
+                answer: 'Either it is raining or it is sunny but not both'
+            },
+
+            {
+                question: 'The XOR of "Cats are mammals" and "Dogs are mammals" is:',
+                options: ['Cats are mammals and dogs are mammals', 'Cats are mammals or dogs are mammals', 'Cats are not mammals and dogs are not mammals', 'Either cats are mammals or dogs are mammals but not both'],
+                answer: 'Either cats are mammals or dogs are mammals but not both'
+            },
+
+            {
+                question: 'XOR is useful in:',
+                options: ['Encryption', 'Error detection', 'Both', 'Neither'],
+                answer: 'Both'
             }
         ]
     },
@@ -479,6 +915,24 @@ const lessonData = {
                 question: 'Biconditional is represented by which symbol?',
                 options: ['∧', '∨', '↔', '→'],
                 answer: '↔'
+            },
+
+            {
+                question: 'The biconditional of "It is raining" and "It is sunny" is:',
+                options: ['It is raining and sunny', 'It is raining or sunny', 'It is not raining and not sunny', 'It is raining if and only if it is sunny'],
+                answer: 'It is raining if and only if it is sunny',
+            },
+
+            {
+                question: 'The biconditional of "Cats are mammals" and "Dogs are mammals" is:',
+                options: ['Cats are mammals and dogs are mammals', 'Cats are mammals or dogs are mammals', 'Cats are not mammals and dogs are not mammals', 'Cats are mammals if and only if dogs are mammals'],
+                answer: 'Cats are mammals if and only if dogs are mammals'
+            },
+
+            {
+                question: 'Biconditional is useful in:',
+                options: ['Mathematical proofs', 'Logical equivalence', 'Both', 'Neither'],
+                answer: 'Both'
             }
         ]
     }
