@@ -73,49 +73,216 @@ Array.from(elements).forEach(element => {
     });
 });
 
-/*
-//Login functionality
-const loginForm = document.getElementById('.login__form');
-if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-       const username = document.getElementById('username').value.trim();
-       const password = document.getElementById('password').value.trim();
+//Login and sign up form validation json
+const loginForm = document.querySelector('.login__form');
+if (loginForm){
+    loginForm.addEventListener('submit', async(e) => {
+        e.preventDefault();
 
-         if (!username || !password) {
-            e.preventDefault();
-            showError('Please enter both username and password.');
-         }
-    });
-}
-
-//Sign up functionality
-const signupForm = document.getElementById('.signup__form');
-if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
-        const fullName = document.getElementById('fullname').value.trim();
         const username = document.getElementById('username').value.trim();
-        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
-        const cpassword = document.getElementById('cpassword').value.trim();
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!username || !password) {
+            showFormError(loginForm, 'Please enter both username and password.');
+            return;
+        }
 
-        if (!fullName || !username || !email || !password || !cpassword) {
-            e.preventDefault();
-            showError('Please fill in all fields.');
-        } else if (!emailRegex.test(email)) {
-            e.preventDefault();
-            showError('Please enter a valid email address.');
-        } else if (password !== cpassword) {
-            e.preventDefault();
-            showError('Passwords do not match.');
-        } else if (password.length < 8) {
-            e.preventDefault();
-            showError('Password must be at least 8 characters long.');
+        const data = { username, password };
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                console.error('Server error:', response.status);
+                return;
+            }
+
+            const result = await response.json();
+            console.log(result);
+
+        } catch (error) {
+            console.error('Error:', error);
         }
     });
 }
-*/
+
+const signupForm = document.querySelector('.signup__form');
+if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fullName = document.getElementById('fullName').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const confirmPassword = document.getElementById('cpassword').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!fullName || !username || !email || !password || !confirmPassword) {
+            showFormError(signupForm, 'Please fill in all fields.');
+            return;
+        }else if (!emailRegex.test(email)) {
+            showFormError(signupForm, 'Please enter a valid email address.');
+            return;
+        } else if (password !== confirmPassword) {
+            showFormError(signupForm, 'Passwords do not match.');
+            return;
+        }else if (password.length < 6) {
+            showFormError(signupForm, 'Password must be at least 6 characters long.');
+            return;
+        }
+
+        const data = { fullName, username, email, password };
+
+        try {
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                console.error('Server error:', response.status);
+                return;
+            }
+
+            const result = await response.json();
+            console.log(result);
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+
+//Update email form validation in settings
+const emailForm = document.querySelector('.account__form:has(#newEmail)');
+if (emailForm) {
+    emailForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const newEmail = document.getElementById('newEmail').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(!newEmail || !emailRegex.test(newEmail)) {
+            showFormError(emailForm, 'Please enter a valid email address.');
+            return;
+        }
+
+        const data = { email: newEmail };
+
+        try {
+            const response = await fetch('/settings/email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                console.error('Server error:', response.status);
+                return;
+            }
+
+            const result = await response.json();
+            console.log(result);
+
+        } catch (error) {
+            console.error('Email update error:', error);
+        }
+    });
+}
+
+//Update password form validation in settings
+const passwordForm = document.querySelector('.account__form:has(#currentPassword)');
+if (passwordForm) {
+    passwordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const currentPassword = document.getElementById('currentPassword').value.trim();
+        const newPassword = document.getElementById('newPassword').value.trim();
+        const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
+
+        if (!currentPassword || !newPassword || !confirmNewPassword) {
+            showFormError(passwordForm, 'Please fill in all fields.');
+            return;
+        } else if (newPassword !== confirmNewPassword) {
+            showFormError(passwordForm, 'New passwords do not match.');
+            return;
+        } else if (newPassword.length < 6) {
+            showFormError(passwordForm, 'New password must be at least 6 characters long.');
+            return;
+        }
+
+        const data = { currentPassword, newPassword };
+
+        try {
+            const response = await fetch('/settings/password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                console.error('Server error:', response.status);
+                return;
+            }
+
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error('Password update error:', error);
+        }
+    });
+}
+
+//Notification form validation in settings
+const notificationForm = document.querySelector('.notifications__form');
+if (notificationForm) { 
+    notificationForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const data = {
+            emailUpdates: document.getElementById('emailUpdates').checked,
+            emailReminders: document.getElementById('emailReminders').checked
+        };
+
+        try {
+            const response = await fetch('/settings/notifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)  
+            });
+
+            if (!response.ok) {
+                console.error('Server error:', response.status);
+                 return;
+         }
+
+            const result = await response.json();
+            console.log(result);
+            
+        } catch (error) {
+            console.error('Notification update error:', error);
+        }
+    });
+}
+
+//Helper function to show form errors
+function showFormError(form, message) {
+    const existing = form.querySelector('.form__error');
+    if (existing) {
+        existing.remove();
+    }
+
+    const error = document.createElement('p');
+    error.classList.add('form__error');
+    error.textContent = message;
+    form.appendChild(error);
+}
 //Lesson data
 const lessonData = {
     //Data Structures course
