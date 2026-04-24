@@ -47,7 +47,7 @@
                     <h1>Account</h1>
                     <div class="settings__card">
                         <h3>Email</h3>
-                        <p class="settings__label">Email associated with your account:<span class="settings__currentvalue"></span></p>
+                        <p class="settings__label">Email associated with your account: <span class="settings__currentvalue">${currentEmail}</span></p>
                         <form class="account__form">
                             <div class="form__control">
                                 <label for="newemail">New email:</label>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="settings__card">
                         <h3>Password</h3>
-                        <p class="settings__label">Current password associated with your account:<span class="settings__currentvalue"></span></p>
+                        <p class="settings__label">Current password associated with your account: <span class="settings__currentvalue">${currentPassword}</span></p>
                         <form class="account__form">
                             <div class="form__control">
                                 <label for="currentpassword">Current password:</label>
@@ -74,6 +74,7 @@
                             </div>
                             <button type="submit" class="account__btn">Update Password</button>
                         </form>
+                    </div>
                 </section>
                 <section id="profilesettings">
                     <h1>Profile</h1>
@@ -90,11 +91,11 @@
                         <form class="notifications__form">
                             <div class="form__control">
                                 <label for="emailupdates">Receive updates about new lessons and features</label>
-                                <input type="checkbox" id="emailupdates">
+                                <input type="checkbox" id="emailupdates" ${emailUpdatesChecked}>
                             </div>
                             <div class="form__control">
                                 <label for="emailreminders">Receive reminders about upcoming lessons and deadlines</label>
-                                <input type="checkbox" id="emailreminders">
+                                <input type="checkbox" id="emailreminders" ${emailRemindersChecked}>
                             </div>
                             <button type="submit" class="notifications__btn">Save Preferences</button>
                         </form>
