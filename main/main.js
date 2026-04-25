@@ -60,7 +60,15 @@ const signOutBtn = document.getElementById('signoutbtn');
 if (signOutBtn) {
   signOutBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.href = '/login';
+	fetch("/logout", {
+	  method: "POST",
+	  body: JSON.stringify({
+	    logout: true
+	  }),
+	  headers: {
+	    "Content-type": "application/json; charset=UTF-8"
+	  }
+	});
   });
 }
 
