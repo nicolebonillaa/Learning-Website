@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="logo__header">
-            <a href="/main/index.html" class="nav__logo">
+            <a href="/" class="nav__logo">
             <img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span>
         </a>
     </div>
@@ -46,6 +46,7 @@
                         <input type="password" id="cpassword" placeholder="Confirm your password">
                     </div>
                     <input class="btn primary" type="submit" value="Sign up">
+                    <label th:text="${serverReply}"></label>
                     <!--<button class="btn">
                         <img src="/main/images/google.png" alt="Google logo">
                         <p>Sign in with Google</p>
