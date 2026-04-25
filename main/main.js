@@ -101,8 +101,21 @@ if (loginForm){
                 return;
             }
 
-            const result = await response.json();
-            console.log(result);
+            //const result = await response.json();
+            //console.log(result);
+
+            if (response.redirected) {
+                window.location.href = response.url;
+                return;
+            }
+
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const result = await response.json();
+                console.log(result);
+            } else {
+                window.location.href = '/login';
+            }
 
         } catch (error) {
             console.error('Error:', error);
@@ -115,10 +128,10 @@ if (signupForm) {
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const fullName = document.getElementById('fullName').value.trim();
-        const username = document.getElementById('username').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        const fullName = document.getElementById('signupfullname').value.trim();
+        const username = document.getElementById('signupusername').value.trim();
+        const email = document.getElementById('signupemail').value.trim();
+        const password = document.getElementById('signuppassword').value.trim();
         const confirmPassword = document.getElementById('cpassword').value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -160,12 +173,12 @@ if (signupForm) {
 }
 
 //Update email form validation in settings
-const emailForm = document.querySelector('.account__form:has(#newEmail)');
+const emailForm = document.querySelector('.account__form:has(#newemail)');
 if (emailForm) {
     emailForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const newEmail = document.getElementById('newEmail').value.trim();
+        const newEmail = document.getElementById('newemail').value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if(!newEmail || !emailRegex.test(newEmail)) {
@@ -197,14 +210,14 @@ if (emailForm) {
 }
 
 //Update password form validation in settings
-const passwordForm = document.querySelector('.account__form:has(#currentPassword)');
+const passwordForm = document.querySelector('.account__form:has(#currentpassword)');
 if (passwordForm) {
     passwordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const currentPassword = document.getElementById('currentPassword').value.trim();
-        const newPassword = document.getElementById('newPassword').value.trim();
-        const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
+        const currentPassword = document.getElementById('currentpassword').value.trim();
+        const newPassword = document.getElementById('newpassword').value.trim();
+        const confirmNewPassword = document.getElementById('confirmnewpassword').value.trim();
 
         if (!currentPassword || !newPassword || !confirmNewPassword) {
             showFormError(passwordForm, 'Please fill in all fields.');
@@ -270,6 +283,61 @@ if (notificationForm) {
         }
     });
 }
+
+//Profile update form validation and prefill inputs in settings
+const profileForm = document.querySelector('.profile__form');
+if (profileForm) {
+    //Prefill profile form with current user data
+    window.prefillProfile = function(userData) {
+        const fullNameInput = document.getElementById('fullname');
+        const usernameInput = document.getElementById('profileusername');
+
+        if (fullNameInput){
+            fullNameInput.value = userData.fullName || '';
+        } 
+
+        if(usernameInput){
+            usernameInput.value = userData.username || '';
+            updateCharCount(usernameInput.value.length);
+        }
+    };
+
+    profileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fullName = document.getElementById('fullName').value.trim();
+        const username = document.getElementById('profileusername').value.trim();
+
+        if (!fullName || !username) {
+            showFormError(profileForm, 'Please fill in all fields.');
+            return;
+        }else if (username.length < 3) {
+            showFormError(profileForm, 'Username must be at least 3 characters long.');
+            return;
+        }
+
+        const data = { fullName, username };
+
+        try {
+            const response = await fetch('/settings/profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                console.error('Server error:', response.status);
+                return;
+            }
+
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error('Profile update error:', error);
+        }
+    });
+}
+
 
 //Helper function to show form errors
 function showFormError(form, message) {

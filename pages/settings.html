@@ -80,7 +80,18 @@
                     <h1>Profile</h1>
                     <div class="settings__card">
                         <h3>Personal Information</h3>
-                        <p>Manage your personal information and profile details.</p>
+                        <p class="settings__label">Manage your personal information and profile details.</p>
+                        <form class="profile__form">
+                            <div class="form__control">
+                                <label for="fullname">Full name</label>
+                                <input type="text" id="fullname" placeholder="Enter your full name">
+                            </div>
+                            <div class="form__control">
+                                <label for="profileusername">Username</label>
+                                <input type="text" id="profileusername" placeholder="Enter your username">
+                            </div>
+                            <button type="submit" class="account__btn">Save Changes</button>
+                        </form>
                     </div>
                 </section>
                 <section id="notifications">
