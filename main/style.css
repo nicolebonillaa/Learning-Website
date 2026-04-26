@@ -22,351 +22,357 @@
   }
 
 /*how we want the website to look like on different screen sizes 38:11*/
-  :root{
-    --container-width-lg: 92%;
-    --container-width-md: 90%;
-    --container-width-sm: 94%;
-  }
+:root{
+  --container-width-lg: 92%;
+  --container-width-md: 90%;
+  --container-width-sm: 94%;
+}
 
-  body{
-    font-family: indie flower, cursive;
-    line-height: 1.7;
-    background: #d1c5c4;
-  }
-  .container{
-      width: var(--container-width-lg);
-      margin: 0 auto;
-  }
+body{
+  font-family: indie flower, cursive;
+  line-height: 1.7;
+   background: #d1c5c4;
+}
 
-  section{
-      padding: 6rem 0;
-  }
+.container{
+width: var(--container-width-lg);
+margin: 0 auto;
+}
 
-  section h2{
-      text-align: center;
-      margin-bottom: 4rem;
-  }
+section{
+  padding: 6rem 0;
+}
 
-  h1, h2, h3, h4, h5, h6{
-    line-height: 1.2;
-   }
+section h2{
+  text-align: center;
+  margin-bottom: 4rem;
+}
 
-    h1{
-      font-size: 2.4rem;
-    }
+h1, h2, h3, h4, h5, h6{
+  line-height: 1.2;
+}
 
-    h2{
-      font-size: 2rem;
-    }
+h1{
+  font-size: 2.4rem;
+}
 
-    h3{
-      font-size: 1.6rem;
-    }
+h2{
+  font-size: 2rem;
+}
 
-    h4{
-      font-size: 1.3rem;
-    }
+h3{
+  font-size: 1.6rem;
+}
 
-    img{
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
+h4{
+  font-size: 1.3rem;
+}
+
+img{
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
 
  /*How we want the navigation bar to look like*/
-  nav{
-    background: transparent; /*#DED2D1;*/
-    width: 100vw;
-    height: 5rem;
-    position: fixed;
-    top: 0;
-    z-index: 11;
-  }
+ nav{
+  background: transparent; /*#DED2D1;*/
+  width: 100vw;
+  height: 5rem;
+  position: fixed;
+  top: 0;
+  z-index: 11;
+}
 
   /*change navbar styles on scroll using js*/
-  .window-scroll{
-    background: #DED2D1;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+.window-scroll{
+  background: #DED2D1;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
   }
 
-    .nav__container{
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.nav__container{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .nav__container a{
-      text-decoration: none;
-      color: inherit;
-    }
+.nav__container a{
+  text-decoration: none;
+  color: inherit;
+}
 
-    .nav__menu{
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-    }
+.nav__menu{
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
 
-    .nav__menu a{
-      font-size: 0.9rem;
-      transition: all 400ms ease;
+.nav__menu a{
+  font-size: 0.9rem;
+  transition: all 400ms ease;
 
-    }
+}
 
-    .nav__menu a:hover{
-      color: #000; /*or maybe white?*/
-    }
+.nav__menu a:hover{
+  color: #000; /*or maybe white?*/
+ }
 /*navigation bar styling ends here*/
 
 /*header section styling*/
-  header{
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
-    padding-top: 5rem;
-  }
+header{
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding-top: 5rem;
+}
 
-  .header__container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 5rem;
-    height: 100%;
-  }
+.header__container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5rem;
+  height: 100%;
+}
 
-  .header__left p{
-    margin: 1rem 0 2.4rem; 
-   }
+.header__left p{
+  margin: 1rem 0 2.4rem; 
+}
 
-   .header__right img{
-    width: 80%;
-    max-width: 400px;
-    margin: 0 auto;
-   }
+.header__right img{
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+}
 
-   /*Courses section styling*/
-   .courses{
-    background: #d1c5c4;
-   }
+/*Courses section styling*/
+.courses{
+  background: #d1c5c4;
+}
 
-   .courses h1{
-    line-height: 1;
-    margin-bottom: 3rem;
-   }
+.courses h1{
+  line-height: 1;
+  margin-bottom: 3rem;
+}
 
-   .courses__container{
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-   }
+.courses__container{
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
 
-   .courses__left{
-    margin-bottom: 4rem;
-   }
+.courses__left{
+  margin-bottom: 4rem;
+}
 
-   .courses__left p{
-    margin: 1rem 0 3rem; 
-   }
+.courses__left p{
+  margin: 1rem 0 3rem; 
+}
 
-   .courses__right{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
-    grid-auto-rows: 1fr;
-   }
+.courses__right{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  grid-auto-rows: 1fr;
+}
 
-   .courses__right a{
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
+.courses__right a{
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
-   .course{
-    background: #DED2D1;
-    padding: 2rem;
-    border-radius: 2rem;
-    transition: all 400ms ease;
-    height: 100%;
-   }
+.course{
+  background: #DED2D1;
+  padding: 2rem;
+  border-radius: 2rem;
+  transition: all 400ms ease;
+  height: 100%;
+}
 
-   .course:hover{
-    box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
-    z-index: 1;
-   }
+.course:hover{
+  box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
 
-   /*course styling for lessons page*/
-   .lessons{
-    background: #d1c5c4;
-   }
+/*course styling for lessons page*/
+.lessons{
+  background: #d1c5c4;
+}
 
-   .lessons__header{
-      text-align: center;
-      margin-bottom: 3rem;
-   }
+.lessons__header{
+  text-align: center;
+  margin-bottom: 3rem;
+}
 
-    .lessons__header h1{
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-   }
+.lessons__header h1{
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
 
-    .lessons__header p{
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+.lessons__header p{
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-    .lessons__container{
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
+.lessons__container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
 
-    .lessons__container a{
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
+.lessons__container a{
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
-    .lesson{
-      background: #DED2D1;
-      padding: 1.5rem;
-      border-radius: 1.5rem;
-      text-align: center;
-      transition: all 300ms ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 32rem;
-    }
+.lesson{
+  background: #DED2D1;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  transition: all 300ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 32rem;
+}
 
-    .lesson:hover{
-      box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
-      z-index: 1;
-     }
+.lesson:hover{
+  box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
 
-    .lesson__img{
-      width: 100%;
-      height: 12rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-     }
+.lesson__img{
+  width: 100%;
+  height: 12rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-     .lesson__img img{
-      max-width: 80%;
-      max-height: 100%;
-      object-fit: contain;
-     }
+.lesson__img img{
+  max-width: 80%;
+  max-height: 100%;
+  object-fit: contain;
+}
 
-     .lesson h4{
-      margin-bottom: 0.5rem;
-     }
+.lesson h4{
+  margin-bottom: 0.5rem;
+}
 
-     .lesson p{
-      font-size: 0.9rem;
-     }
+.lesson p{
+  font-size: 0.9rem;
+}
 
-    /*lesson page styling ends here*/
+/*lesson page styling ends here*/
 
-    /*Login page styling*/
-    .login{
-    /*background: white;*/
-    width: 60rem;
-    font-size: 0.9rem;
-    max-width: 90%;
-    min-height: auto;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    background: #DED2D1;
-    border-radius: 1rem;
-    overflow: hidden;
-    }
+/*Login page styling*/
+.login{
+  width: 60rem;
+  font-size: 0.9rem;
+  max-width: 90%;
+  min-height: auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: #DED2D1;
+  border-radius: 1rem;
+  overflow: hidden;
+}
 
-    .login__logo{
-      display:grid;
-      height: 100%;
-      place-content: center;
-    }
+.login__logo{
+  display:grid;
+  height: 100%;
+  place-content: center;
+}
 
-    .login h1{
-      color: black;
-      font-size: 2rem;
-      margin-bottom: 0.3rem;
-    }
+.login h1{
+  color: black;
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
 
-    .login .btn{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.7rem;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 300ms ease;
-    }
+.login .btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
 
-    .login .btn.primary{
-      background: #cf6730;
-      color: white;
-    }
+.login .btn.primary{
+  background: #cf6730;
+  color: white;
+}
 
-    .login .btn:hover{
-      background: black;
-      color: white;
-    }
+.login .btn:hover{
+  background: black;
+  color: white;
+}
 
-    .login__details{
-      padding: 2rem 4rem;
-    }
+.login__details{
+  padding: 2rem 4rem;
+}
 
-    .login__form{
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 3rem;
-    }
+.auth__form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 3rem;
+}
 
-    .form__control{
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+.form__error {
+  color: #cf6730;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
 
-    input:not([type="checkbox"]){
-      width: 100%;
-      border: 1px solid #ccc;
-      padding: 0.7rem;
-      border-radius: 0.5rem;
-    }
+.form__control{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-    input::placeholder{
-      color: #999;
-    }
+input:not([type="checkbox"]){
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+input::placeholder{
+  color: #999;
+}
 
 label{
-    font-weight: 500;
-    color:#000;
+  font-weight: 500;
+  color:#000;
 }
 
 .login__extras{
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .login__extras div{
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    }
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
 
 .next__page{
-    margin-top: 1rem;
-    text-align: center;
-    display: block;
-  }
+  margin-top: 1rem;
+  text-align: center;
+  display: block;
+}
 
 .logo__header {
   text-align: center;
@@ -548,7 +554,7 @@ footer ul li a:hover{
 
 .settings__label{
   font-size: 0.9rem;
-  color: #5F5E5A;
+  color: #2C2C2A;
 }
 
 .settings__currentvalue{
@@ -1117,3 +1123,233 @@ input::placeholder{
   padding: min(50px, 7%);
 }
 
+/*Adding mobile responsiveness to the website*/
+/*Hambuger menu styling for mobile*/
+.nav__hamburger{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 20;
+}
+
+.nav__hamburger span{
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background-color: #2C2C2A;
+  border-radius: 2px;
+  transition: all 300ms ease;
+}
+
+.nav__hamburger.open span:nth-child(1){ 
+  transform: translateY(7.5px) rotate(45deg); 
+}
+
+.nav__hamburger.open span:nth-child(2){ 
+  opacity: 0; 
+}
+
+.nav__hamburger.open span:nth-child(3){ 
+  transform: translateY(-7.5px) rotate(-45deg); 
+}
+
+/*Mobile compatibility*/
+@media screen and (max-width: 768px){
+  .container{
+    width: var(--container-width-sm);
+  }
+
+  .nav__hamburger{
+    display: flex;
+  }
+
+  .nav__menu{
+    display: none;
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    background: #DED2D1;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 1rem 0 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+  }
+
+  .nav__menu.nav__menu__open{
+    display: flex;
+  }
+
+  .nav__menu li{
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__menu li a{
+    display: block;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1 px solid rgba(0,0,0,0.06);
+  }
+
+  /*Stacking header section on mobile*/
+  .header__container{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+    text-align: center;
+  }
+
+  .header__right{
+    display: flex;
+    justify-content: center;
+  }
+
+  .header__right img{
+    max-width: 220px;
+    width: 60%;
+    max-width: 220px;
+  }
+
+  .header__left p{
+    margin: 1rem auto 2rem;
+    max-width: 90%;
+  }
+
+  /*Pages appear in one column on mobile*/
+  .courses__container, .lessons__container{
+    grid-template-columns: 1fr;
+  }
+
+  .lesson{
+    min-height: auto;
+  }
+
+  .lessoncourses__container{
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+
+  .header.lessons__header{
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  header.lessons__header .header__container{
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  header.lessons__header .header__left p {
+    margin: 0 auto;
+  }
+
+  .header__right-image img{
+    max-width: 200px;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .login{
+    grid-template-columns: 1fr;
+    width: 95%;
+    min-height: auto;
+    margin: 2rem auto;
+  }
+
+  .login__details{
+    padding: 2rem 1.5rem; 
+  }
+
+  .quiz__fullpage__body{
+    padding: 2rem 1.2rem;
+  }
+
+  .quiz__topbar__row{
+    padding: 0.25rem 1rem;
+  }
+
+  .quiz__question{
+    font-size: 1.15rem;
+  }
+
+  .quiz_fullpage__footer{
+    padding: 0.75rem 1rem;
+  }
+
+  .footer__container{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .settings__container{
+    grid-template-columns: 1fr;
+    margin-top: 6rem;
+  }
+
+  .settings__sidebar{
+    position: static;
+  }
+
+  .settings__menu{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .settings__menu li a{
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /*Reducing font sizes on mobile for better readability*/
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.3rem; }
+ 
+  section {
+    padding: 3rem 0;
+  }
+}
+
+/*Additional media query for very small screens*/
+@media screen and (max-width: 480px){
+  h1{
+    font-size: 1.7rem;
+  }
+
+  .logo__header span{
+    font-size: 1.3rem;
+  }
+
+  .login__details{
+    padding: 1.5rem 1.2rem;
+  }
+
+  .quiz__question{
+    font-size: 1rem;
+  }
+
+  .quiz__option{
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .quiz__option__label {
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 0.75rem;
+  }
+ 
+  .lessoncourses__container {
+    padding: 0;
+  }
+}
