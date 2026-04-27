@@ -78,13 +78,14 @@ const accessories = [
   { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.png" },
   { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.png" },
   { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.png" },
+  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.png" },
 
   { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.png" },
   { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.png" },
-  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
-  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
-  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" },
-  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" }
+  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" },
+  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
+  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
+  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" }
 ];
 
 const state = {
@@ -95,7 +96,10 @@ const state = {
   }
 };
 
-const BASE_AVATAR_IMAGE = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
+const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
+const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.png";
+
+
 const LAYER_ORDER = ["glasses", "hat"];
 
 const avatarPreviewEl = document.getElementById("avatarPreview");
@@ -134,7 +138,13 @@ function renderAvatarPreview() {
   avatarPreviewEl.innerHTML = "";
 
   const baseImg = document.createElement("img");
-  baseImg.src = BASE_AVATAR_IMAGE;
+  
+    if (state.avatar.hat) {
+    baseImg.src = BASE_AVATAR_IMAGE_1;
+    } else {
+    baseImg.src = BASE_AVATAR_IMAGE_0;
+    }
+  
   baseImg.alt = "Base avatar";
   baseImg.className = "avatar-layer";
   avatarPreviewEl.appendChild(baseImg);
