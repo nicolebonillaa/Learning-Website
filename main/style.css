@@ -1256,6 +1256,12 @@ input::placeholder{
   border-color: #222;
 }
 
+.lesson_gif {
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
 /*Adding mobile responsiveness to the website*/
 /*Hambuger menu styling for mobile*/
 .nav__hamburger{

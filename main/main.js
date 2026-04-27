@@ -74,22 +74,124 @@ if (signOutBtn) {
   });
 }
 
+// --progress page code--
+const progressBar = [
+
+    { id: "progress0", category: "inProgress", name: "progress0", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_00.gif" },
+    { id: "progress1", category: "inProgress", name: "progress1", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_01.gif" },
+    { id: "progress2", category: "inProgress", name: "progress2", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_02.gif" },
+    { id: "progress3", category: "inProgress", name: "progress3", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_03.gif" },
+    { id: "progress4", category: "inProgress", name: "progress4", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_04.gif" },
+    { id: "progress5", category: "inProgress", name: "progress5", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_05.gif" },
+    { id: "progress6", category: "inProgress", name: "progress6", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_06.gif" },
+    { id: "progress7", category: "inProgress", name: "progress7", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_07.gif" },
+    { id: "progress8", category: "inProgress", name: "progress8", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_08.gif" },
+    { id: "progress9", category: "inProgress", name: "progress9", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_09.gif" },
+    { id: "progress10", category: "inProgress", name: "progress10", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_10.gif"},
+    { id: "progress11", category: "inProgress", name: "progress11", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_11.gif" },
+    { id: "progress12", category: "inProgress", name: "progress12", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_12.gif" },
+    { id: "progress13", category: "inProgress", name: "progress13", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_13.gif" },
+    { id: "progress14", category: "inProgress", name: "progress14", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_14.gif" },
+    { id: "progress15", category: "inProgress", name: "progress15", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_15.gif" },
+    { id: "progress16", category: "inProgress", name: "progress16", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_16.gif" },
+    { id: "progress17", category: "inProgress", name: "progress17", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_17.gif" },
+    { id: "progress18", category: "inProgress", name: "progress18", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_18.gif" },
+    { id: "progress19", category: "inProgress", name: "progress19", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_19.gif" },
+    { id: "progress20", category: "inProgress", name: "progress20", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_20.gif" },
+    { id: "progress21", category: "inProgress", name: "progress21", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_21.gif" },
+    { id: "progress22", category: "inProgress", name: "progress22", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_22.gif" },
+    { id: "progress23", category: "inProgress", name: "progress23", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_23.gif" },
+    { id: "progress24", category: "inProgress", name: "progress24", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_24.gif" },
+    { id: "progress25", category: "inProgress", name: "progress25", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_25.gif" },
+    { id: "progress26", category: "inProgress", name: "progress26", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_26.gif" },
+    { id: "progress27", category: "inProgress", name: "progress27", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_27.gif" },
+    { id: "progress28", category: "inProgress", name: "progress28", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_28.gif" },
+    { id: "progress29", category: "inProgress", name: "progress29", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_29.gif" },
+    { id: "progress30", category: "inProgress", name: "progress30", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_30.gif" },
+    { id: "progress31", category: "inProgress", name: "progress31", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_31.gif" },
+    { id: "progress32", category: "inProgress", name: "progress32", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_32.gif" },
+    { id: "progress33", category: "inProgress", name: "progress33", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_33.gif" },
+    { id: "progress34", category: "inProgress", name: "progress34", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_34.gif" },
+    { id: "progress35", category: "inProgress", name: "progress35", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_35.gif" }
+    // 100% progress
+];
+
+// Map each backend value to a container
+const progressConfig = [
+  { id: "fProgress", container: "progress-f" },
+  { id: "dProgress", container: "progress-d" },
+  { id: "jProgress", container: "progress-j" },
+  { id: "sProgress", container: "progress-s" }
+];
+
+// Convert 0-100 into 0-35
+function getProgressImageIndex(progressValue) {
+  if (isNaN(progressValue)) return 0;
+
+  const clamped = Math.max(0, Math.min(100, progressValue));
+  return Math.round((clamped / 100) * 35);
+}
+
+function renderAllProgressBars() {
+  progressConfig.forEach(item => {
+    const element = document.getElementById(item.id);
+    if (!element) return;
+
+    const raw = element.textContent;
+    const value = raw ? Math.round(Number(raw)) : 0;
+    const imageIndex = getProgressImageIndex(value);
+
+    const img = document.createElement("img");
+    img.src = `/main/images/progress-html-assets/progress-bar-assets/progress_bar_${imageIndex}.gif`;
+    img.alt = `Progress ${value}%`;
+    img.className = "progress-image";
+
+    img.onerror = () => {
+      img.src = "/main/images/progress-html-assets/progress-bar-assets/progress_bar_0.gif";
+    };
+
+    const container = document.getElementById(item.container);
+    if (!container) return;
+
+    container.innerHTML = "";
+    container.appendChild(img);
+  });
+}
+var test = 0;
+
+if (test === 0) {
+    const backendReady = true;
+} else {
+    const backendReady = false;
+}
+
+if (backendReady) {
+  renderAllProgressBars();
+  test++;
+}
+
+// renderAllProgressBars();
+
+// --End of progress page code--
+
+// --Avatar customization code--
+
 //Array of accessories for avatar customization
 const accessories = [
-  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.png" },
-  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.png" },
-  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.png" },
-  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.png" },
-  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.png" },
-  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.png" },
-  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.png" },
+  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.gif" },
+  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.gif" },
+  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.gif" },
+  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.gif" },
+  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.gif" },
+  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.gif" },
+  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.gif" },
 
-  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.png" },
-  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.png" },
-  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" },
-  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
-  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
-  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" }
+  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.gif" },
+  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.gif" },
+  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.gif" },
+  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.gif" },
+  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.gif" },
+  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.gif" }
 ];
 
 
@@ -104,8 +206,8 @@ const state = {
 
 
 // Base avatar images for different states (with and without hat)
-const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
-const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.png";
+const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.gif";
+const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.gif";
 
 // Define the order of layers for rendering the avatar
 const LAYER_ORDER = ["glasses", "hat"];
