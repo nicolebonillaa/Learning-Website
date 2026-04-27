@@ -850,6 +850,10 @@ input::placeholder{
   transition: width 300ms ease;
   display: block;
 }
+.grid-container-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
 
 .quiz__option{
   display: flex;
@@ -858,20 +862,41 @@ input::placeholder{
   width: 100%;
   padding: 1rem 1.25rem;
   border-radius: 0.8rem;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 2px solid rgba(0,0,0,0.12);
   margin-bottom: 0.75rem;
   font-size: 1rem;
   font-family: 'Indie Flower', cursive;
   cursor: pointer;
   background: #EDE6E5;
-  color: #2C2C2A;
+  color: #171715;
   text-align: left;
-  transition: border-color 150ms;
+  transition: border-color 75ms;
 }
 
-.quiz__option:hover{
+.quiz__option:hover .quiz__option__label{
   border-color: #cf6730;
 }
+
+.quiz__option.quiz__option:active {
+  color: #cf6730;
+}
+
+.quiz__option:hover {
+  border: 2px solid #cf6730;
+}
+
+.quiz__option:active {
+  scale: 1.08;
+  color: #cf6730; 
+}
+
+.quiz__option:active .quiz__option__label{
+  scale: 1.08;
+  border-color: #cf6730;
+  background-color: #ea9b70;
+  color: white;
+}
+
 
 .quiz__option__label{
   width: 2rem;
@@ -889,19 +914,20 @@ input::placeholder{
 
 .quiz__option__correct{
   background: #EAF3DE;
-  border-color: #639922;
+  border: 2px solid #639922;
   color: #27500A;
+  
 }
 
 .quiz__option__correct .quiz__option__label{
   background: #639922;
-  border-color: #639922;
+  border-color:#639922;
   color: white;
 }
 
 .quiz__option__incorrect{
   background: #FCEBEB;
-  border-color: #A32D2D;
+  border: 2px solid #A32D2D;
   color: #501313;
 }
 
@@ -922,12 +948,14 @@ input::placeholder{
 .quiz__feedback__correct{
   display: block;
   background: #EAF3DE;
+  border: 1px solid #27500A;
   color: #27500A;
 }
 
 .quiz__feedback__incorrect{
   display: block;
   background: #FCEBEB;
+  border: 1px solid #501313;
   color: #501313;
 }
 
@@ -1062,7 +1090,15 @@ input::placeholder{
   justify-content: center;
 }
 
+.grid-container-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+
 .progress-topic{
+  display: grid;
   background: #DED2D1;
   padding: 2rem;
   border-radius: 1.5rem;
@@ -1072,7 +1108,7 @@ input::placeholder{
   width: var(--container-width-lg);
 }
 
-/* --Profile Start -- */
+/* --Profile Start-- */
 
 .profile-title{
   margin: 25px;
@@ -1098,24 +1134,26 @@ input::placeholder{
   padding: 1rem;
   border: 1.5px solid black;
   border-radius: 10px;
-  background-color: rgb(231, 221, 201);
+  background-color: #EDE6E5;
   text-align: center ;
 
 }
 .card:hover {
-  border: 1px solid rgb(234, 174, 90);
+  border: 2px solid rgb(234, 174, 90);
   transform: scale(1.2);
 
 }
 
 .card:active{
   background-color: rgb(188, 165, 118);
+  cursor: pointer;
 }
 
-.grid-container {
+.grid-container-card {
   display: grid;
-  grid-template-columns:repeat(3, minmax(15%, 100%));
+  grid-template-columns:repeat(auto-fit, minmax(25px, 150px));
   gap: 15px;
+  justify-content: center;
 }
 
 .view-board {
@@ -1123,7 +1161,7 @@ input::placeholder{
   width: minmax(100px, 1fr);
   height: auto;
   margin: 15px;
-  border: 2px solid #694c4c;
+  border: 2px solid #8a7272;
   padding: min(50px, 7%);
 }
 
@@ -1134,6 +1172,88 @@ input::placeholder{
   margin: 15px;
   border: 25px;
   padding: min(50px, 7%);
+}
+
+.avatar-preview {
+  position: relative;
+  width: 320px;   /* TODO: adjust to your avatar size */
+  height: 320px;  /* TODO: adjust to your avatar size */
+  overflow: hidden;
+  padding: 5px;
+  margin-right: 50px;
+}
+
+.avatar-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.preview-panel {
+  flex: 1;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #efe4e4;
+}
+
+.progress-page-footer {
+
+  height: 4cm;
+  width: 2fr;
+  padding: 50px;
+  border: 25px solid red;
+  margin: 50px;
+}
+
+.avatar-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+#statusMessage {
+  min-height: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .avatar-page {
+    flex-direction: column;
+  }
+
+  .accessory-panel,
+  .preview-panel {
+    width: 100%;
+  }
+}
+
+.progress-title-mini {
+  color: black;
+}
+
+.avatar-actions{
+  display: block;
+}
+
+.tab {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  background: #f5f5f5;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab:hover {
+  scale: 1.1;
+}
+
+.tab.active {
+  background-color: #222;
+  color: #2f2626;
+  border-color: #222;
 }
 
 /*Adding mobile responsiveness to the website*/

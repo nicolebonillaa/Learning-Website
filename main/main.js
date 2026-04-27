@@ -71,15 +71,154 @@ if (signOutBtn) {
 	});
   });
 }
+const accessories = [
+  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.png" },
+  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.png" },
+  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.png" },
+  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.png" },
+  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.png" },
+  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.png" },
 
-//Profile Select Accessory Functionability
-const elements = document.getElementsByClassName('card');
+  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.png" },
+  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.png" },
+  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
+  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
+  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" },
+  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" }
+];
 
-Array.from(elements).forEach(element => {
-    element.addEventListener('click', () => {
-        console.log('Element clicked!');
-    });
+const state = {
+  accessories: accessories,
+  avatar: {
+    hat: null,
+    glasses: null
+  }
+};
+
+const BASE_AVATAR_IMAGE = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
+const LAYER_ORDER = ["glasses", "hat"];
+
+const avatarPreviewEl = document.getElementById("avatarPreview");
+const saveBtn = document.getElementById("saveBtn");
+const resetBtn = document.getElementById("resetBtn");
+const statusMessageEl = document.getElementById("statusMessage");
+
+const cardButtons = document.querySelectorAll("#accessoryList .card");
+
+cardButtons.forEach((button, index) => {
+  const item = accessories[index];
+
+  if (!item) return;
+
+  button.addEventListener("click", () => {
+    handleAccessoryClick(item);
+  });
 });
+
+function handleAccessoryClick(item) {
+  const category = item.category;
+
+  if (state.avatar[category] === item.id) {
+    state.avatar[category] = null;
+  } else {
+    state.avatar[category] = item.id;
+  }
+
+  console.log("Clicked item:", item);
+  console.log("Updated avatar state:", state.avatar);
+
+  renderAvatarPreview();
+}
+
+function renderAvatarPreview() {
+  avatarPreviewEl.innerHTML = "";
+
+  const baseImg = document.createElement("img");
+  baseImg.src = BASE_AVATAR_IMAGE;
+  baseImg.alt = "Base avatar";
+  baseImg.className = "avatar-layer";
+  avatarPreviewEl.appendChild(baseImg);
+
+  LAYER_ORDER.forEach(category => {
+    const selectedItemId = state.avatar[category];
+    if (!selectedItemId) return;
+
+    const item = state.accessories.find(accessory => accessory.id === selectedItemId);
+    if (!item) return;
+
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.name;
+    img.className = "avatar-layer";
+
+    avatarPreviewEl.appendChild(img);
+
+    console.log("Selected category:", category);
+    console.log("Selected item id:", selectedItemId);
+    console.log("Matched item:", item);
+  });
+
+  console.log("Rendering avatar:", state.avatar);
+}
+
+function resetAvatar() {
+  state.avatar.hat = null;
+  state.avatar.glasses = null;
+
+  statusMessageEl.textContent = "Avatar reset.";
+  renderAvatarPreview();
+}
+
+async function saveAvatar() {
+  try {
+    statusMessageEl.textContent = "Saving...";
+
+    const response = await fetch("/api/avatar/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(state.avatar)
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save avatar");
+    }
+
+    statusMessageEl.textContent = "Avatar saved successfully.";
+  } catch (error) {
+    statusMessageEl.textContent = "Error saving avatar.";
+    console.error(error);
+  }
+}
+
+async function loadSavedAvatar() {
+  try {
+    const response = await fetch("/api/avatar/me");
+    if (!response.ok) {
+      throw new Error("Failed to load avatar");
+    }
+
+    const savedAvatar = await response.json();
+
+    state.avatar = {
+      hat: savedAvatar.hat || null,
+      glasses: savedAvatar.glasses || null
+    };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function initAvatarPage() {
+  // await loadSavedAvatar(); // enable when backend is ready
+  renderAvatarPreview();
+
+  saveBtn.addEventListener("click", saveAvatar);
+  resetBtn.addEventListener("click", resetAvatar);
+}
+
+initAvatarPage();
 
 //Login and sign up form validation json
 const loginForm = document.querySelector('.login__form');
