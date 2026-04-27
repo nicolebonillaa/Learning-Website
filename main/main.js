@@ -1,5 +1,7 @@
 //Learning website focused on teaching computer science concepts through brief lessons.
 
+const { use } = require("react");
+
 //change navbar styles on scroll
 window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
@@ -462,13 +464,18 @@ if (notificationForm) {
 //Profile update form validation and prefill inputs in settings
 const profileForm = document.querySelector('.profile__form');
 if (profileForm) {
+
+    const availableUsername = document.getElementById('available__username');
+    const usernameInput = document.getElementById('profileusername');
+    const charCount = document.getElementById('username__charcount');
+    const maxChars = 20;
+
     //Prefill profile form with current user data
     window.prefillProfile = function(userData) {
-        const fullNameInput = document.getElementById('fullname');
-        const usernameInput = document.getElementById('profileusername');
 
         if (fullNameInput){
             fullNameInput.value = userData.fullName || '';
+            updateCharCount(fullNameInput.value.length);
         } 
 
         if(usernameInput){
@@ -476,6 +483,65 @@ if (profileForm) {
             updateCharCount(usernameInput.value.length);
         }
     };
+
+    //Charcter counter for username input
+    function updateCharCount(count) {
+        charCount.textContent = `${count}/${maxChars}`;
+
+        if (count >= maxChars) {
+            charCount.classList.add('profile__charcount__limit');
+        } else {
+            charCount.classList.remove('profile__charcount__limit');
+        }
+    }
+
+    //Check for username availability on input
+    function checkUsernameAvailability(val) {
+        availableUsername.textContent = '';
+        availableUsername.className = 'available__username';
+
+        if (val.length < 3) {
+            return;
+        }
+
+        availableUsername.textContent = 'Checking availability...';
+        availableUsername.classList.add('available__username__checking');
+
+        fetch('/settings/check__username', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: val })
+        })
+        
+        .then(response =>{
+            availableUsername.className = 'available__username';
+            if( response.status === 200) {
+                availableUsername.textContent = '✓ Username is available';
+                availableUsername.classList.add('available__username__available');
+            }else if (response.status === 409) {
+                availableUsername.textContent = '✗ Username is already taken';
+                availableUsername.classList.add('available__username__taken');
+            }
+        })
+        .catch(error => {
+            availableUsername.textContent = '';
+            console.error('Error checking username availability:', error);
+        }); 
+    }
+
+    usernameInput.addEventListener('input', () => {
+        if (usernameInput.value.length > maxChars) {
+            usernameInput.value = usernameInput.value.slice(0, maxChars);
+        }
+
+        updateCharCount(usernameInput.value.length);
+        availableUsername.textContent = '';
+        availableUsername.className = 'available__username';
+    });
+
+    usernameInput.addEventListener('blur', () => {
+        checkUsernameAvailability(usernameInput.value.trim());
+    });
 
     profileForm.addEventListener('submit', async (e) => {
         e.preventDefault();
