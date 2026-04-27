@@ -114,6 +114,20 @@ const saveBtn = document.getElementById("saveBtn");
 const resetBtn = document.getElementById("resetBtn");
 const statusMessageEl = document.getElementById("statusMessage");
 
+// Set up event listeners for accessory selection
+const cardButtons = document.querySelectorAll("#accessoryList .card");
+
+// Loop through each accessory card button and attach click event listeners to handle accessory selection
+cardButtons.forEach((button, index) => {
+  const item = accessories[index];
+
+  if (!item) return;
+
+  button.addEventListener("click", () => {
+    handleAccessoryClick(item);
+  });
+});
+
 // Handle accessory click to update avatar state
 function handleAccessoryClick(item) {
   const category = item.category;
