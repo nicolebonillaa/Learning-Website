@@ -71,6 +71,8 @@ if (signOutBtn) {
 	});
   });
 }
+
+//Array of accessories for avatar customization
 const accessories = [
   { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.png" },
   { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.png" },
@@ -88,6 +90,8 @@ const accessories = [
   { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" }
 ];
 
+
+// State management for avatar customization
 const state = {
   accessories: accessories,
   avatar: {
@@ -96,29 +100,21 @@ const state = {
   }
 };
 
+
+// Base avatar images for different states (with and without hat)
 const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
 const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.png";
 
-
+// Define the order of layers for rendering the avatar
 const LAYER_ORDER = ["glasses", "hat"];
 
+// DOM elements
 const avatarPreviewEl = document.getElementById("avatarPreview");
 const saveBtn = document.getElementById("saveBtn");
 const resetBtn = document.getElementById("resetBtn");
 const statusMessageEl = document.getElementById("statusMessage");
 
-const cardButtons = document.querySelectorAll("#accessoryList .card");
-
-cardButtons.forEach((button, index) => {
-  const item = accessories[index];
-
-  if (!item) return;
-
-  button.addEventListener("click", () => {
-    handleAccessoryClick(item);
-  });
-});
-
+// Handle accessory click to update avatar state
 function handleAccessoryClick(item) {
   const category = item.category;
 
@@ -134,11 +130,12 @@ function handleAccessoryClick(item) {
   renderAvatarPreview();
 }
 
+// Render the avatar preview based on the current state
 function renderAvatarPreview() {
   avatarPreviewEl.innerHTML = "";
 
   const baseImg = document.createElement("img");
-  
+    // Use different base image depending on whether a hat is selected to ensure proper layering of accessories
     if (state.avatar.hat) {
     baseImg.src = BASE_AVATAR_IMAGE_1;
     } else {
@@ -171,6 +168,7 @@ function renderAvatarPreview() {
   console.log("Rendering avatar:", state.avatar);
 }
 
+// Reset avatar to default state
 function resetAvatar() {
   state.avatar.hat = null;
   state.avatar.glasses = null;
@@ -179,10 +177,11 @@ function resetAvatar() {
   renderAvatarPreview();
 }
 
+// Save avatar state to backend
 async function saveAvatar() {
   try {
     statusMessageEl.textContent = "Saving...";
-
+    // Send the current avatar state to the backend API to save it for the user
     const response = await fetch("/api/avatar/save", {
       method: "POST",
       headers: {
@@ -202,6 +201,7 @@ async function saveAvatar() {
   }
 }
 
+// Load saved avatar state from backend when the page initializes
 async function loadSavedAvatar() {
   try {
     const response = await fetch("/api/avatar/me");
@@ -220,6 +220,7 @@ async function loadSavedAvatar() {
   }
 }
 
+// Initialize the avatar page by loading saved avatar and setting up event listeners
 async function initAvatarPage() {
   // await loadSavedAvatar(); // enable when backend is ready
   renderAvatarPreview();
@@ -228,7 +229,10 @@ async function initAvatarPage() {
   resetBtn.addEventListener("click", resetAvatar);
 }
 
+// Call the initialization function when the DOM is fully loaded
 initAvatarPage();
+
+// --End of avatar customization code--
 
 //Login and sign up form validation json
 const loginForm = document.querySelector('.login__form');
