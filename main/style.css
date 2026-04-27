@@ -21,6 +21,15 @@
     box-sizing: border-box;
   }
 
+  /*Custom cursors*/
+  *, *::before, *::after {
+    cursor: url('/main/images/cursor-assets/cursor-passive.png') 12 6, auto !important;
+  }
+
+  a, button, .course, .lesson, .lesson__course, .card, .quiz__option, .quiz__next__btn, .quiz__retry__btn, .permalinks a, footer a, nav a, a *, a img, a span, .nav__logo, .nav__logo *, .course *, article, article *, a > article, a > div, [role="button"], input[type="submit"], input[type="button"], input[type="text"], input[type="email"], input[type="password"], label[for], select {
+    cursor: url('/main/images/cursor-assets/cursor-active.png') 12 6, pointer !important;
+  }
+
 /*how we want the website to look like on different screen sizes 38:11*/
 :root{
   --container-width-lg: 92%;
@@ -579,6 +588,10 @@ footer ul li a:hover{
   cursor: pointer;
   transition: all 300ms ease;
   border: none;
+}
+
+#profile__save__btn {
+  margin-top: 0.8rem;
 }
 
 .account__btn:hover{
