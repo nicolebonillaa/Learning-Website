@@ -72,14 +72,167 @@ if (signOutBtn) {
   });
 }
 
-//Profile Select Accessory Functionability
-const elements = document.getElementsByClassName('card');
+//Array of accessories for avatar customization
+const accessories = [
+  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.png" },
+  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.png" },
+  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.png" },
+  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.png" },
+  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.png" },
+  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.png" },
+  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.png" },
 
-Array.from(elements).forEach(element => {
-    element.addEventListener('click', () => {
-        console.log('Element clicked!');
+  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.png" },
+  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.png" },
+  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" },
+  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
+  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
+  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" }
+];
+
+
+// State management for avatar customization
+const state = {
+  accessories: accessories,
+  avatar: {
+    hat: null,
+    glasses: null
+  }
+};
+
+
+// Base avatar images for different states (with and without hat)
+const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
+const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.png";
+
+// Define the order of layers for rendering the avatar
+const LAYER_ORDER = ["glasses", "hat"];
+
+// DOM elements
+const avatarPreviewEl = document.getElementById("avatarPreview");
+const saveBtn = document.getElementById("saveBtn");
+const resetBtn = document.getElementById("resetBtn");
+const statusMessageEl = document.getElementById("statusMessage");
+
+// Handle accessory click to update avatar state
+function handleAccessoryClick(item) {
+  const category = item.category;
+
+  if (state.avatar[category] === item.id) {
+    state.avatar[category] = null;
+  } else {
+    state.avatar[category] = item.id;
+  }
+
+  console.log("Clicked item:", item);
+  console.log("Updated avatar state:", state.avatar);
+
+  renderAvatarPreview();
+}
+
+// Render the avatar preview based on the current state
+function renderAvatarPreview() {
+  avatarPreviewEl.innerHTML = "";
+
+  const baseImg = document.createElement("img");
+    // Use different base image depending on whether a hat is selected to ensure proper layering of accessories
+    if (state.avatar.hat) {
+    baseImg.src = BASE_AVATAR_IMAGE_1;
+    } else {
+    baseImg.src = BASE_AVATAR_IMAGE_0;
+    }
+  
+  baseImg.alt = "Base avatar";
+  baseImg.className = "avatar-layer";
+  avatarPreviewEl.appendChild(baseImg);
+
+  LAYER_ORDER.forEach(category => {
+    const selectedItemId = state.avatar[category];
+    if (!selectedItemId) return;
+
+    const item = state.accessories.find(accessory => accessory.id === selectedItemId);
+    if (!item) return;
+
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.name;
+    img.className = "avatar-layer";
+
+    avatarPreviewEl.appendChild(img);
+
+    console.log("Selected category:", category);
+    console.log("Selected item id:", selectedItemId);
+    console.log("Matched item:", item);
+  });
+
+  console.log("Rendering avatar:", state.avatar);
+}
+
+// Reset avatar to default state
+function resetAvatar() {
+  state.avatar.hat = null;
+  state.avatar.glasses = null;
+
+  statusMessageEl.textContent = "Avatar reset.";
+  renderAvatarPreview();
+}
+
+// Save avatar state to backend
+async function saveAvatar() {
+  try {
+    statusMessageEl.textContent = "Saving...";
+    // Send the current avatar state to the backend API to save it for the user
+    const response = await fetch("/api/avatar/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(state.avatar)
     });
-});
+
+    if (!response.ok) {
+      throw new Error("Failed to save avatar");
+    }
+
+    statusMessageEl.textContent = "Avatar saved successfully.";
+  } catch (error) {
+    statusMessageEl.textContent = "Error saving avatar.";
+    console.error(error);
+  }
+}
+
+// Load saved avatar state from backend when the page initializes
+async function loadSavedAvatar() {
+  try {
+    const response = await fetch("/api/avatar/me");
+    if (!response.ok) {
+      throw new Error("Failed to load avatar");
+    }
+
+    const savedAvatar = await response.json();
+
+    state.avatar = {
+      hat: savedAvatar.hat || null,
+      glasses: savedAvatar.glasses || null
+    };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Initialize the avatar page by loading saved avatar and setting up event listeners
+async function initAvatarPage() {
+  // await loadSavedAvatar(); // enable when backend is ready
+  renderAvatarPreview();
+
+  saveBtn.addEventListener("click", saveAvatar);
+  resetBtn.addEventListener("click", resetAvatar);
+}
+
+// Call the initialization function when the DOM is fully loaded
+initAvatarPage();
+
+// --End of avatar customization code--
 
 //Login and sign up form validation json
 const loginForm = document.querySelector('.login__form');
