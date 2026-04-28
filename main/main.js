@@ -458,10 +458,10 @@ if (profileForm) {
 
     //Prefill profile form with current user data
     window.prefillProfile = function(userData) {
+        const fullNameInput = document.getElementById('profilefullname');
 
         if (fullNameInput){
             fullNameInput.value = userData.fullName || '';
-            updateCharCount(fullNameInput.value.length);
         } 
 
         if(usernameInput){
@@ -515,6 +515,7 @@ if (profileForm) {
         }); 
     }
 
+    //Updates character cpunt and clears availability message on input
     usernameInput.addEventListener('input', () => {
         if (usernameInput.value.length > maxChars) {
             usernameInput.value = usernameInput.value.slice(0, maxChars);
@@ -525,6 +526,7 @@ if (profileForm) {
         availableUsername.className = 'available__username';
     });
 
+    //Check username availability when user finishes typing
     usernameInput.addEventListener('blur', () => {
         checkUsernameAvailability(usernameInput.value.trim());
     });
@@ -532,14 +534,17 @@ if (profileForm) {
     profileForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const fullName = document.getElementById('fullName').value.trim();
-        const username = document.getElementById('profileusername').value.trim();
+        const fullName = document.getElementById('profilefullname').value.trim();
+        const username = usernameInput.value.trim();
 
         if (!fullName || !username) {
             showFormError(profileForm, 'Please fill in all fields.');
             return;
         }else if (username.length < 3) {
             showFormError(profileForm, 'Username must be at least 3 characters long.');
+            return;
+        }else if(availableUsername.classList.contains('available__username__taken')) {
+            showFormError(profileForm, 'Username is already taken.');
             return;
         }
 
