@@ -1,6 +1,6 @@
 //Learning website focused on teaching computer science concepts through brief lessons.
 
-const { use } = require("react");
+//const { use } = require("react");
 
 //change navbar styles on scroll
 window.addEventListener('scroll', () => {
@@ -144,7 +144,7 @@ function renderAllProgressBars() {
     const img = document.createElement("img");
     img.src = `/main/images/progress-html-assets/progress-bar-assets/progress_bar_${imageIndex}.gif`;
     img.alt = `Progress ${value}%`;
-    img.className = "progress-image";
+    img.className = "progress_gif";
 
     img.onerror = () => {
       img.src = "/main/images/progress-html-assets/progress-bar-assets/progress_bar_0.gif";
@@ -157,12 +157,14 @@ function renderAllProgressBars() {
     container.appendChild(img);
   });
 }
+
+var backendReady = false; // Simulate backend readiness, set to true when backend is ready
 var test = 0;
 
 if (test === 0) {
-    const backendReady = true;
+    backendReady = true;
 } else {
-    const backendReady = false;
+    backendReady = false;
 }
 
 if (backendReady) {
@@ -178,20 +180,20 @@ if (backendReady) {
 
 //Array of accessories for avatar customization
 const accessories = [
-  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.gif" },
-  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.gif" },
-  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.gif" },
-  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.gif" },
-  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.gif" },
-  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.gif" },
-  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.gif" },
+  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.png" },
+  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.png" },
+  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.png" },
+  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.png" },
+  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.png" },
+  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.png" },
+  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.png" },
 
-  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.gif" },
-  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.gif" },
-  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.gif" },
-  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.gif" },
-  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.gif" },
-  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.gif" }
+  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.png" },
+  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.png" },
+  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" },
+  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
+  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
+  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" }
 ];
 
 
@@ -206,8 +208,8 @@ const state = {
 
 
 // Base avatar images for different states (with and without hat)
-const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.gif";
-const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.gif";
+const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
+const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.png";
 
 // Define the order of layers for rendering the avatar
 const LAYER_ORDER = ["glasses", "hat"];
@@ -227,7 +229,7 @@ cardButtons.forEach((button, index) => {
 
   if (!item) return;
 
-  button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
     handleAccessoryClick(item);
   });
 });

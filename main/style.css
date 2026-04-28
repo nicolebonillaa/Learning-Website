@@ -1127,25 +1127,23 @@ input::placeholder{
   border: 2px solid #694c4c;
   padding: min(50px, 7%);
   background-color: #DED2D1;
-  
 }
 
 .card {
   padding: 1rem;
-  border: 1.5px solid black;
+  border: 1.5px solid rgba(0,0,0,0.12);
   border-radius: 10px;
   background-color: #EDE6E5;
   text-align: center ;
-
 }
 .card:hover {
-  border: 2px solid rgb(234, 174, 90);
+  border: 2px solid #cf6730;
   transform: scale(1.2);
-
+  cursor: pointer;
 }
 
 .card:active{
-  background-color: rgb(188, 165, 118);
+  background-color: #ea9b70;
   cursor: pointer;
 }
 
@@ -1176,8 +1174,8 @@ input::placeholder{
 
 .avatar-preview {
   position: relative;
-  width: 320px;   /* TODO: adjust to your avatar size */
-  height: 320px;  /* TODO: adjust to your avatar size */
+  width: 320px; 
+  height: 320px;
   overflow: hidden;
   padding: 5px;
   margin-right: 50px;
@@ -1256,7 +1254,7 @@ input::placeholder{
   border-color: #222;
 }
 
-.lesson_gif {
+.progress_gif {
   display: block;
   width: 200px;
   height: 200px;
