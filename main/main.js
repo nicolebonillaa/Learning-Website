@@ -77,7 +77,7 @@ if (signOutBtn) {
 // --progress page code--
 const progressBar = [
 
-    { id: "progress0", category: "inProgress", name: "progress0", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_00.gif" },
+    { id: "progress0", category: "inProgress", name: "progress0", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_0.gif" },
     { id: "progress1", category: "inProgress", name: "progress1", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_01.gif" },
     { id: "progress2", category: "inProgress", name: "progress2", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_02.gif" },
     { id: "progress3", category: "inProgress", name: "progress3", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_03.gif" },
@@ -133,6 +133,8 @@ function getProgressImageIndex(progressValue) {
 }
 
 function renderAllProgressBars() {
+    console.log("renderAllProgressBars called");
+
   progressConfig.forEach(item => {
     const element = document.getElementById(item.id);
     if (!element) return;
@@ -141,13 +143,15 @@ function renderAllProgressBars() {
     const value = raw ? Math.round(Number(raw)) : 0;
     const imageIndex = getProgressImageIndex(value);
 
+    console.log(item.id, "raw text =", raw, "value =", value, "imageIndex =", imageIndex);
+
     const img = document.createElement("img");
-    img.src = `/main/images/progress-html-assets/progress-bar-assets/progress_bar_${imageIndex}.gif`;
+    img.src = `/main/images/progress-html-assests/progress-bar-assets/progress_bar_${imageIndex}.gif`;
     img.alt = `Progress ${value}%`;
     img.className = "progress_gif";
 
     img.onerror = () => {
-      img.src = "/main/images/progress-html-assets/progress-bar-assets/progress_bar_0.gif";
+      img.src = "/main/images/progress-html-assests/progress-bar-assets/progress_bar_0.gif";
     };
 
     const container = document.getElementById(item.container);
@@ -158,22 +162,9 @@ function renderAllProgressBars() {
   });
 }
 
-var backendReady = false; // Simulate backend readiness, set to true when backend is ready
-var test = 0;
-
-if (test === 0) {
-    backendReady = true;
-} else {
-    backendReady = false;
-}
-
-if (backendReady) {
+document.addEventListener("DOMContentLoaded", () => {
   renderAllProgressBars();
-  test++;
-}
-
-// renderAllProgressBars();
-
+});
 // --End of progress page code--
 
 // --Avatar customization code--
@@ -576,10 +567,10 @@ if (profileForm) {
 
     //Prefill profile form with current user data
     window.prefillProfile = function(userData) {
+        const fullNameInput = document.getElementById('profilefullname');
 
         if (fullNameInput){
             fullNameInput.value = userData.fullName || '';
-            updateCharCount(fullNameInput.value.length);
         } 
 
         if(usernameInput){
@@ -633,6 +624,7 @@ if (profileForm) {
         }); 
     }
 
+    //Updates character cpunt and clears availability message on input
     usernameInput.addEventListener('input', () => {
         if (usernameInput.value.length > maxChars) {
             usernameInput.value = usernameInput.value.slice(0, maxChars);
@@ -643,6 +635,7 @@ if (profileForm) {
         availableUsername.className = 'available__username';
     });
 
+    //Check username availability when user finishes typing
     usernameInput.addEventListener('blur', () => {
         checkUsernameAvailability(usernameInput.value.trim());
     });
@@ -650,14 +643,17 @@ if (profileForm) {
     profileForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const fullName = document.getElementById('fullName').value.trim();
-        const username = document.getElementById('profileusername').value.trim();
+        const fullName = document.getElementById('profilefullname').value.trim();
+        const username = usernameInput.value.trim();
 
         if (!fullName || !username) {
             showFormError(profileForm, 'Please fill in all fields.');
             return;
         }else if (username.length < 3) {
             showFormError(profileForm, 'Username must be at least 3 characters long.');
+            return;
+        }else if(availableUsername.classList.contains('available__username__taken')) {
+            showFormError(profileForm, 'Username is already taken.');
             return;
         }
 
