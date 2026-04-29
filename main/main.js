@@ -1639,7 +1639,7 @@ function renderQuestion() {
     document.getElementById('question__feedback').className = 'quiz__feedback';
     document.getElementById('question__feedback').textContent = '';
 
-    const optionsContainer = document.getElementById('question__options');
+    const optionsContainer = document.getElementById('question-options');
     const template = document.getElementById('option__template');
     optionsContainer.innerHTML = '';
 

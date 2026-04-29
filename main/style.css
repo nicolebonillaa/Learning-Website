@@ -766,6 +766,14 @@ input::placeholder{
   z-index: 10;
 }
 
+.grid-container-question-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(75px, 1fr));
+  width: auto;
+  border: 50px solid transparent;
+  gap: 10px;
+}
+
 .quiz__topbar__row{
   display: grid;
   align-items: center;
@@ -806,7 +814,7 @@ input::placeholder{
   margin: 0 auto;
 }
 
-.quiz__question{
+.question-options{
   font-size: 1.4rem;
   font-weight: 700;
   color: #2C2C2A;
@@ -1414,7 +1422,7 @@ input::placeholder{
     padding: 0.25rem 1rem;
   }
 
-  .quiz__question{
+  .question-options{
     font-size: 1.15rem;
   }
 
@@ -1471,7 +1479,7 @@ input::placeholder{
     padding: 1.5rem 1.2rem;
   }
 
-  .quiz__question{
+  .question-options{
     font-size: 1rem;
   }
 
