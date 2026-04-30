@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learning Website | Error</title>
+        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+
+        <!-- Google fonts for website using indie flower -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+        <!-- Preload custom cursor images for faster loading -->
+        <link rel="preload" href="/main/images/cursor-assets/cursor-active.png" as="image">
+        <link rel="preload" href="/main/images/cursor-assets/cursor-passive.png" as="image">
+
+        <link rel="stylesheet" href="/main/style.css">
+    </head>
+    <body>
+    <section class="error">
+        <article class="error__details">
+            <h1>Oops!</h1>
+            <p class="error__status" th:text="${errorStatus}">Something went wrong.</p>
+            <p>We apologize for the inconvenience. Please try refreshing the page or come back later.</p>
+            <div class="error__actions">
+                <a href="/main/index.html" class="btn btn-primary">Go back to Home</a>
+                <a href="#" class="btn btn__back">Go back</a>            
+            </div>
+        </article>
+    </section>
+    <script src="/main/main.js"></script>
+     </body>
+</html>

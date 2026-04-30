@@ -80,60 +80,249 @@ Array.from(elements).forEach(element => {
         console.log('Element clicked!');
     });
 });
+// --progress page code--
+const progressBar = [
+
+    { id: "progress0", category: "inProgress", name: "progress0", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_00.gif" },
+    { id: "progress1", category: "inProgress", name: "progress1", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_01.gif" },
+    { id: "progress2", category: "inProgress", name: "progress2", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_02.gif" },
+    { id: "progress3", category: "inProgress", name: "progress3", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_03.gif" },
+    { id: "progress4", category: "inProgress", name: "progress4", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_04.gif" },
+    { id: "progress5", category: "inProgress", name: "progress5", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_05.gif" },
+    { id: "progress6", category: "inProgress", name: "progress6", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_06.gif" },
+    { id: "progress7", category: "inProgress", name: "progress7", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_07.gif" },
+    { id: "progress8", category: "inProgress", name: "progress8", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_08.gif" },
+    { id: "progress9", category: "inProgress", name: "progress9", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_09.gif" },
+    { id: "progress10", category: "inProgress", name: "progress10", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_10.gif"},
+    { id: "progress11", category: "inProgress", name: "progress11", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_11.gif" },
+    { id: "progress12", category: "inProgress", name: "progress12", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_12.gif" },
+    { id: "progress13", category: "inProgress", name: "progress13", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_13.gif" },
+    { id: "progress14", category: "inProgress", name: "progress14", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_14.gif" },
+    { id: "progress15", category: "inProgress", name: "progress15", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_15.gif" },
+    { id: "progress16", category: "inProgress", name: "progress16", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_16.gif" },
+    { id: "progress17", category: "inProgress", name: "progress17", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_17.gif" },
+    { id: "progress18", category: "inProgress", name: "progress18", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_18.gif" },
+    { id: "progress19", category: "inProgress", name: "progress19", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_19.gif" },
+    { id: "progress20", category: "inProgress", name: "progress20", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_20.gif" },
+    { id: "progress21", category: "inProgress", name: "progress21", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_21.gif" },
+    { id: "progress22", category: "inProgress", name: "progress22", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_22.gif" },
+    { id: "progress23", category: "inProgress", name: "progress23", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_23.gif" },
+    { id: "progress24", category: "inProgress", name: "progress24", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_24.gif" },
+    { id: "progress25", category: "inProgress", name: "progress25", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_25.gif" },
+    { id: "progress26", category: "inProgress", name: "progress26", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_26.gif" },
+    { id: "progress27", category: "inProgress", name: "progress27", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_27.gif" },
+    { id: "progress28", category: "inProgress", name: "progress28", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_28.gif" },
+    { id: "progress29", category: "inProgress", name: "progress29", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_29.gif" },
+    { id: "progress30", category: "inProgress", name: "progress30", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_30.gif" },
+    { id: "progress31", category: "inProgress", name: "progress31", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_31.gif" },
+    { id: "progress32", category: "inProgress", name: "progress32", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_32.gif" },
+    { id: "progress33", category: "inProgress", name: "progress33", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_33.gif" },
+    { id: "progress34", category: "inProgress", name: "progress34", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_34.gif" },
+    { id: "progress35", category: "inProgress", name: "progress35", image: "/main/images/progress-html-assests/prgress-bar-assets/progress_bar_35.gif" }
+    // 100% progress
+];
+
+// Map each backend value to a container
+const progressConfig = [
+  { id: "fProgress", container: "progress-f" },
+  { id: "dProgress", container: "progress-d" },
+  { id: "jProgress", container: "progress-j" },
+  { id: "sProgress", container: "progress-s" }
+];
+
+// Convert 0-100 into 0-35
+function getProgressImageIndex(progressValue) {
+  if (isNaN(progressValue)) return 0;
+
+  const clamped = Math.max(0, Math.min(100, progressValue));
+  return Math.round((clamped / 100) * 35);
+}
+
+function renderAllProgressBars() {
+  progressConfig.forEach(item => {
+    const element = document.getElementById(item.id);
+    if (!element) return;
+
+    const raw = element.textContent;
+    const value = raw ? Math.round(Number(raw)) : 0;
+    const imageIndex = getProgressImageIndex(value);
+
+    const img = document.createElement("img");
+    img.src = `/main/images/progress-html-assets/progress-bar-assets/progress_bar_${imageIndex}.gif`;
+    img.alt = `Progress ${value}%`;
+    img.className = "progress_gif";
+
+    img.onerror = () => {
+      img.src = "/main/images/progress-html-assets/progress-bar-assets/progress_bar_0.gif";
+    };
+
+    const container = document.getElementById(item.container);
+    if (!container) return;
+
+    container.innerHTML = "";
+    container.appendChild(img);
+  });
+}
+/*
+var backendReady = false; // Simulate backend readiness, set to true when backend is ready
+var test = 0;
+
+if (test === 0) {
+    backendReady = true;
+} else {
+    backendReady = false;
+}
+
+if (backendReady) {
+  renderAllProgressBars();
+  test++;
+}
+*/
+// renderAllProgressBars();
+
+// --End of progress page code--
+
+// --Avatar customization code--
+
+//Array of accessories for avatar customization
+const accessories = [
+  { id: "head_accessory_00", category: "hat", name: "Funny hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-00.png" },
+  { id: "head_accessory_01", category: "hat", name: "Crown hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-01.png" },
+  { id: "head_accessory_02", category: "hat", name: "Baseball hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-02.png" },
+  { id: "head_accessory_03", category: "hat", name: "Peach hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-03.png" },
+  { id: "head_accessory_04", category: "hat", name: "Flower hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-04.png" },
+  { id: "head_accessory_05", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-05.png" },
+  { id: "head_accessory_06", category: "hat", name: "Fancy hat", image: "/main/images/profile-html-assets/red-panda-head-accessories/head-accessory-06.png" },
+
+  { id: "eye_accessory_00", category: "glasses", name: "Sun glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-00.png" },
+  { id: "eye_accessory_01", category: "glasses", name: "Nerd glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-01.png" },
+  { id: "eye_accessory_02", category: "glasses", name: "Fancy glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-05.png" },
+  { id: "eye_accessory_03", category: "glasses", name: "Round glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-02.png" },
+  { id: "eye_accessory_04", category: "glasses", name: "Heart glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-03.png" },
+  { id: "eye_accessory_05", category: "glasses", name: "Pirate glasses", image: "/main/images/profile-html-assets/red-panda-eye-accessories/eye-accessory-04.png" }
+];
+
+
+// State management for avatar customization
+const state = {
+  accessories: accessories,
+  avatar: {
+    hat: null,
+    glasses: null
+  }
+};
+
+
+// Base avatar images for different states (with and without hat)
+const BASE_AVATAR_IMAGE_0 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-up.png";
+const BASE_AVATAR_IMAGE_1 = "/main/images/profile-html-assets/red-panda-bodies/red-panda-body-ears-down.png";
+
+// Define the order of layers for rendering the avatar
+const LAYER_ORDER = ["glasses", "hat"];
+
+// DOM elements
+const avatarPreviewEl = document.getElementById("avatarPreview");
+const saveBtn = document.getElementById("saveBtn");
+const resetBtn = document.getElementById("resetBtn");
+const statusMessageEl = document.getElementById("statusMessage");
+
+// Set up event listeners for accessory selection
+const cardButtons = document.querySelectorAll("#accessoryList .card");
+
+// Loop through each accessory card button and attach click event listeners to handle accessory selection
+cardButtons.forEach((button, index) => {
+  const item = accessories[index];
+
+  if (!item) return;
+
+    button.addEventListener("click", () => {
+    handleAccessoryClick(item);
+  });
+});
 
 //Login and sign up form validation json
 const loginForm = document.querySelector('.login__form');
 if (loginForm){
-    loginForm.addEventListener('submit', async(e) => {
-        e.preventDefault();
+    loginForm.addEventListener('submit', (e) => {
 
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
 
         if (!username || !password) {
+            e.preventDefault();
             showFormError(loginForm, 'Please enter both username and password.');
             return;
-        }
-
-        const data = { username, password };
-
-        try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            //const result = await response.json();
-            //console.log(result);
-
-            if (response.redirected) {
-                window.location.href = response.url;
-                return;
-            }
-
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                const result = await response.json();
-                console.log(result);
-            } else {
-                window.location.href = '/login';
-            }
-
-        } catch (error) {
-            console.error('Error:', error);
         }
     });
 }
 
 const signupForm = document.querySelector('.signup__form');
 if (signupForm) {
-    signupForm.addEventListener('submit', async (e) => {
+
+    const usernameInput = document.getElementById('signupusername');
+    const usernameHint  = document.getElementById('username__hint');
+    let usernameCheckTimer = null;
+    let usernameAvailable  = false;
+
+    if (usernameInput && usernameHint) {
+        usernameInput.addEventListener('input', () => {
+        const val = usernameInput.value.trim();
+        clearTimeout(usernameCheckTimer);
+ 
+        if (val.length < 3) {
+            usernameHint.textContent = 'Username must be at least 3 characters.';
+            usernameHint.className = 'field__hint field__hint__error';
+            usernameAvailable = false;
+            return;
+        }
+ 
+        usernameHint.textContent = 'Checking…';
+        usernameHint.className = 'field__hint';
+ 
+        usernameCheckTimer = setTimeout(async () => {
+            try {
+                const res  = await fetch(`/signup/check__username?username=${encodeURIComponent(val)}`);
+                const data = await res.json();
+
+                if (data.available) {
+                    usernameHint.textContent = '✓ Username is available!';
+                    usernameHint.className = 'field__hint field__hint__success';
+                    usernameAvailable = true;
+                } else {
+                    usernameHint.textContent = '✗ Username is already taken.';
+                    usernameHint.className = 'field__hint field__hint__error';
+                    usernameAvailable = false;
+                }
+            } catch (err) {
+                usernameHint.textContent = 'Could not check username.';
+                usernameHint.className = 'field__hint';
+                usernameAvailable = false;
+            }
+        }, 600);
+    });
+}   
+const passwordInput = document.getElementById('signuppassword');
+const passwordCounter = document.getElementById('password__counter');
+ 
+    if (passwordInput && passwordCounter) {
+        passwordInput.addEventListener('input', () => {
+            const len = passwordInput.value.length;
+            if (len === 0) {
+                passwordCounter.textContent = '';
+                passwordCounter.className = 'field__hint';
+            } else if (len < 6) {
+                passwordCounter.textContent = `${len} / 6 characters minimum`;
+                passwordCounter.className = 'field__hint field__hint__error';
+            } else {
+                passwordCounter.textContent = `${len} characters ✓`;
+                passwordCounter.className = 'field__hint field__hint__success';
+            }
+        });
+    }
+
+    //Signup submit
+    signupForm.addEventListener('submit', async(e) => {
+
         e.preventDefault();
 
         const fullName = document.getElementById('signupfullname').value.trim();
@@ -146,6 +335,12 @@ if (signupForm) {
         if (!fullName || !username || !email || !password || !confirmPassword) {
             showFormError(signupForm, 'Please fill in all fields.');
             return;
+        }else if (username.length < 3) {
+            showFormError(signupForm, 'Username must be at least 3 characters long.');
+            return;
+        } else if (!usernameAvailable) {
+            showFormError(signupForm, 'Please choose an available username.');
+            return;
         }else if (!emailRegex.test(email)) {
             showFormError(signupForm, 'Please enter a valid email address.');
             return;
@@ -157,25 +352,35 @@ if (signupForm) {
             return;
         }
 
-        const data = { fullName, username, email, password };
-
+        // Step 1 create the account
         try {
+            const signupBody = new URLSearchParams({ fullName, username, email, password });
             const response = await fetch('/signup', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: signupBody.toString()
             });
-
+ 
             if (!response.ok) {
-                console.error('Server error:', response.status);
+                const text = await response.text().catch(() => '');
+                showFormError(signupForm, text || 'Signup failed. Please try again.');
                 return;
             }
-
-            const result = await response.json();
-            console.log(result);
-
+ 
+            // Step 2 generate the magic link for the new account
+            const ottBody = new URLSearchParams({ username });
+            await fetch('/ott/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: ottBody.toString()
+            });
+ 
+            // Step 3  go to success page
+            window.location.href = '/success';
+ 
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Signup error:', error);
+            showFormError(signupForm, 'An error occurred. Please try again.');
         }
     });
 }
@@ -183,36 +388,14 @@ if (signupForm) {
 //Update email form validation in settings
 const emailForm = document.querySelector('.account__form:has(#newemail)');
 if (emailForm) {
-    emailForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    emailForm.addEventListener('submit', (e) => {
 
         const newEmail = document.getElementById('newemail').value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if(!newEmail || !emailRegex.test(newEmail)) {
+            e.preventDefault();
             showFormError(emailForm, 'Please enter a valid email address.');
-            return;
-        }
-
-        const data = { email: newEmail };
-
-        try {
-            const response = await fetch('/settings/email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            const result = await response.json();
-            console.log(result);
-
-        } catch (error) {
-            console.error('Email update error:', error);
         }
     });
 }
@@ -220,77 +403,27 @@ if (emailForm) {
 //Update password form validation in settings
 const passwordForm = document.querySelector('.account__form:has(#currentpassword)');
 if (passwordForm) {
-    passwordForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    passwordForm.addEventListener('submit', (e) => {
 
         const currentPassword = document.getElementById('currentpassword').value.trim();
         const newPassword = document.getElementById('newpassword').value.trim();
         const confirmNewPassword = document.getElementById('confirmnewpassword').value.trim();
 
         if (!currentPassword || !newPassword || !confirmNewPassword) {
+            e.preventDefault();
             showFormError(passwordForm, 'Please fill in all fields.');
-            return;
         } else if (newPassword !== confirmNewPassword) {
+            e.preventDefault();
             showFormError(passwordForm, 'New passwords do not match.');
-            return;
         } else if (newPassword.length < 6) {
+            e.preventDefault();
             showFormError(passwordForm, 'New password must be at least 6 characters long.');
-            return;
-        }
-
-        const data = { currentPassword, newPassword };
-
-        try {
-            const response = await fetch('/settings/password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error('Password update error:', error);
         }
     });
 }
 
 //Notification form validation in settings
 const notificationForm = document.querySelector('.notifications__form');
-if (notificationForm) { 
-    notificationForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const data = {
-            emailUpdates: document.getElementById('emailUpdates').checked,
-            emailReminders: document.getElementById('emailReminders').checked
-        };
-
-        try {
-            const response = await fetch('/settings/notifications', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)  
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                 return;
-         }
-
-            const result = await response.json();
-            console.log(result);
-            
-        } catch (error) {
-            console.error('Notification update error:', error);
-        }
-    });
-}
 
 //Profile update form validation and prefill inputs in settings
 const profileForm = document.querySelector('.profile__form');
@@ -310,38 +443,84 @@ if (profileForm) {
         }
     };
 
-    profileForm.addEventListener('submit', async (e) => {
+    //Charcter counter for username input
+    function updateCharCount(count) {
+        charCount.textContent = `${count}/${maxChars}`;
+
+        if (count >= maxChars) {
+            charCount.classList.add('profile__charcount__limit');
+        } else {
+            charCount.classList.remove('profile__charcount__limit');
+        }
+    }
+
+    //Check for username availability on input
+    function checkUsernameAvailability(val) {
+        availableUsername.textContent = '';
+        availableUsername.className = 'available__username';
+
+        if (val.length < 3) {
+            return;
+        }
+
+        availableUsername.textContent = 'Checking availability...';
+        availableUsername.classList.add('available__username__checking');
+
+        const formData = new FormData();
+        formData.append('username', val);
+        fetch('/settings/check__username', {
+            method: 'POST',
+            body: formData
+        })
+        
+        .then(response =>{
+            availableUsername.className = 'available__username';
+            if( response.status === 200) {
+                availableUsername.textContent = '✓ Username is available';
+                availableUsername.classList.add('available__username__available');
+            }else if (response.status === 409) {
+                availableUsername.textContent = '✗ Username is already taken';
+                availableUsername.classList.add('available__username__taken');
+            }
+        })
+        .catch(error => {
+            availableUsername.textContent = '';
+            console.error('Error checking username availability:', error);
+        }); 
+    }
+
+    //Updates character cpunt and clears availability message on input
+    usernameInput.addEventListener('input', () => {
+        if (usernameInput.value.length > maxChars) {
+            usernameInput.value = usernameInput.value.slice(0, maxChars);
+        }
+
+        updateCharCount(usernameInput.value.length);
+        availableUsername.textContent = '';
+        availableUsername.className = 'available__username';
+    });
+
+    //Check username availability when user finishes typing
+    usernameInput.addEventListener('blur', () => {
+        checkUsernameAvailability(usernameInput.value.trim());
+    });
+
+    profileForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const fullName = document.getElementById('fullName').value.trim();
         const username = document.getElementById('profileusername').value.trim();
 
         if (!fullName || !username) {
+            e.preventDefault();
             showFormError(profileForm, 'Please fill in all fields.');
-            return;
         }else if (username.length < 3) {
+            e.preventDefault();
             showFormError(profileForm, 'Username must be at least 3 characters long.');
             return;
-        }
-
-        const data = { fullName, username };
-
-        try {
-            const response = await fetch('/settings/profile', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error('Profile update error:', error);
+        }else if(availableUsername.classList.contains('available__username__taken')) {
+            e.preventDefault();
+            showFormError(profileForm, 'Username is already taken.');
         }
     });
 }
@@ -359,6 +538,96 @@ function showFormError(form, message) {
     error.textContent = message;
     form.appendChild(error);
 }
+
+//OTT submit page
+const ottMessage = document.getElementById('ott__message');
+if (ottMessage) {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const type = params.get('type');
+
+    if (token && type) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/ott/login/submit';
+
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = 'token';
+        tokenInput.value = token;
+        
+        const typeInput = document.createElement('input');
+        typeInput.type = 'hidden';
+        typeInput.name = 'type';
+        typeInput.value = type;
+
+        form.appendChild(tokenInput);
+        form.appendChild(typeInput);
+        document.body.appendChild(form);
+        form.submit();
+    } else {
+        ottMessage.textContent = 'Invalid or expired link. Redirecting...';
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 2500);
+    }
+}
+
+//Password reset form validation
+const passwordResetForm = document.querySelector('.password__reset__form');
+if (passwordResetForm) {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+
+    if(token){
+        document.getElementById('resettoken').value = token;
+    }
+
+    passwordResetForm.addEventListener('submit', (e) => {
+        const newPassword = document.getElementById('newpassword').value.trim();
+        const confirmPassword = document.getElementById('confirmnewpassword').value.trim();
+
+        if (!newPassword || !confirmPassword) {
+            e.preventDefault();
+            showFormError(passwordResetForm, 'Please fill in all fields.');
+        } else if (newPassword !== confirmPassword) {
+            e.preventDefault();
+            showFormError(passwordResetForm, 'Passwords do not match.');
+        } else if (newPassword.length < 6) {
+            e.preventDefault();
+            showFormError(passwordResetForm, 'Password must be at least 6 characters long.');
+        }
+    });
+}
+
+//Email reset form validation
+const emailResetForm = document.querySelector('.email__reset__form');
+if (emailResetForm) {
+    const params = new URLSearchParams(window.location.search);
+    const token  = params.get('token');
+ 
+    if (token) {
+        document.getElementById('resettoken').value = token;
+    } 
+ 
+    emailResetForm.addEventListener('submit', (e) => {
+        const newEmail     = document.getElementById('newemail').value.trim();
+        const confirmEmail = document.getElementById('confirmnewemail').value.trim();
+        const emailRegex   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ 
+        if (!newEmail || !confirmEmail) {
+            e.preventDefault();
+            showFormError(emailResetForm, 'Please fill in all fields.');
+        } else if (!emailRegex.test(newEmail)) {
+            e.preventDefault();
+            showFormError(emailResetForm, 'Please enter a valid email address.');
+        } else if (newEmail !== confirmEmail) {
+            e.preventDefault();
+            showFormError(emailResetForm, 'Email addresses do not match.');
+        }
+    });
+}
+
 //Lesson data
 const lessonData = {
     //Data Structures course
@@ -1383,4 +1652,13 @@ function closeQuiz() {
     document.getElementById('quiz__fullpage').classList.remove('quiz__overlay__active');
     document.querySelector('.lesson__courses').style.display = 'block';
     document.querySelector('header.lessons__header').style.display = 'flex';
+}
+
+//Back button for error page
+const backBtn = document.querySelector('.btn__back');
+if (backBtn) {
+    backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+    });
 }

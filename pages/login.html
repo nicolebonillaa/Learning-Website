@@ -31,18 +31,17 @@
                 <form class="login__form auth__form" action="/login" method="post">
                     <div class ="form__control">
                         <label for="username">Username</label>
-                        <input type="username" id="username" placeholder="Enter your username">
+                        <input type="text" id="username" name="username" placeholder="Enter your username">
                     </div>
                     <div class ="form__control">
                         <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password">
+                        <input type="password" id="password" name="password" placeholder="Enter your password">
                     </div>
                     <div class="login__extras">
                         <div>
                             <input type="checkbox" id="remember">
                             <label for="remember">Remember me</label>
                         </div>
-                        <a href="">Forgot password</a>
                     </div>
                     <input class="btn primary" type="submit" value="Login">
                     <!--<button class="btn">
