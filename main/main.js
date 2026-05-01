@@ -628,6 +628,52 @@ if (emailResetForm) {
     });
 }
 
+//Form validation
+function isValidEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function setupFormValidation(formSelector, btnId, getIsValid){
+    const form = document.querySelector(formSelector);
+    if(!form){
+        return;
+    }
+
+    const btn = form.querySelector('#' + btnId);
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    const validate = () => { btn.disabled = !getIsValid(form); };
+    inputs.forEach(input => input.addEventListener('input', validate));
+}
+
+setupFormValidation('.login__form', 'loginbtn', form =>
+    form.querySelector('#username').value.trim() &&
+    form.querySelector('#password').value.trim()
+);
+
+setupFormValidation('.signup__form', 'signupbtn', form => {
+    const signuppw = form.querySelector('#signuppassword').value;
+    document.getElementById('username__hint').textContent = 
+        form.querySelector('#signupusername').value.length > 0 &&
+        form.querySelector('#signupusername').value.length < 3 ? 'At least 3 characters' : '';
+    document.getElementById('password__counter').textContent =
+        signuppw.length > 0 && signuppw.length < 8 ? `${signuppw.length}/8 characters` : '';
+    return form.querySelector('#signupfullname').value.trim() &&
+        form.querySelector('#signupusername').value.trim().length >= 3 &&
+        isValidEmail(form.querySelector('#signupemail').value) &&
+        signuppw.length >= 8 &&
+        signuppw === form.querySelector('#cpassword').value;
+});
+
+setupFormValidation('.password__reset__form', 'passwordresetbtn', form => {
+    const pwreset = form.querySelector('#newpassword').value;
+    return pwreset.length >= 8 && pwreset === form.querySelector('#confirmnewpassword').value;
+});
+
+setupFormValidation('.email__reset__form', 'emailresetbtn', form => {
+    const emailreset = form.querySelector('#newemail').value;
+    return isValidEmail(emailreset) && emailreset == form.querySelector('#confirmnewemail').value;
+});
+
 //Lesson data
 const lessonData = {
     //Data Structures course

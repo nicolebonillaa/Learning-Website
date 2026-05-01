@@ -51,12 +51,8 @@
                         <label for="cpassword">Confirm Password</label>
                         <input type="password" id="cpassword" name="cpassword" placeholder="Confirm your password">
                     </div>
-                    <input class="btn primary" type="submit" value="Sign up">
+                    <input class="btn primary" type="submit" value="Sign up" id="signupbtn" disabled>
                     <label th:text="${serverReply}"></label>
-                    <!--<button class="btn">
-                        <img src="/main/images/google.png" alt="Google logo">
-                        <p>Sign in with Google</p>
-                    </button> if i want google sign in-->
                 </form>
                 <small class="next__page">Already have an account? <a href="/login">Login</a></small>
             </article>
