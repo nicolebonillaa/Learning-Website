@@ -430,8 +430,11 @@ const profileForm = document.querySelector('.profile__form');
 if (profileForm) {
     //Prefill profile form with current user data
     window.prefillProfile = function(userData) {
-        const fullNameInput = document.getElementById('fullname');
+        const maxChars = 20;
+        const charCount = document.getElementById('charcount');
+        const fulleNameInput = document.getElementById('profilefullname');
         const usernameInput = document.getElementById('profileusername');
+        const availableUsername = document.getElementById('available__username');
 
         if (fullNameInput){
             fullNameInput.value = userData.fullName || '';
@@ -652,15 +655,10 @@ setupFormValidation('.login__form', 'loginbtn', form =>
 
 setupFormValidation('.signup__form', 'signupbtn', form => {
     const signuppw = form.querySelector('#signuppassword').value;
-    document.getElementById('username__hint').textContent = 
-        form.querySelector('#signupusername').value.length > 0 &&
-        form.querySelector('#signupusername').value.length < 3 ? 'At least 3 characters' : '';
-    document.getElementById('password__counter').textContent =
-        signuppw.length > 0 && signuppw.length < 8 ? `${signuppw.length}/8 characters` : '';
     return form.querySelector('#signupfullname').value.trim() &&
         form.querySelector('#signupusername').value.trim().length >= 3 &&
         isValidEmail(form.querySelector('#signupemail').value) &&
-        signuppw.length >= 8 &&
+        signuppw.length >= 6 &&
         signuppw === form.querySelector('#cpassword').value;
 });
 

@@ -87,12 +87,14 @@
                         <p class="settings__label">Manage your personal information and profile details.</p>
                         <form class="profile__form">
                             <div class="form__control">
-                                <label for="fullname">Full name</label>
-                                <input type="text" id="fullname" placeholder="Enter your full name">
+                                <label for="profilefullname">Full name</label>
+                                <input type="text" id="profilefullname" placeholder="Enter your full name">
                             </div>
                             <div class="form__control">
                                 <label for="profileusername">Username</label>
                                 <input type="text" id="profileusername" placeholder="Enter your username">
+                                <small id="charcount">0/20</small>
+                                <small id="available__username"></small>
                             </div>
                             <button type="submit" id="profile__save__btn" class="account__btn">Save Changes</button>
                         </form>
