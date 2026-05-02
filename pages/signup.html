@@ -12,11 +12,15 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
+        <!-- Preload custom cursor images for faster loading -->
+        <link rel="preload" href="/main/images/cursor-assets/cursor-active.png" as="image">
+        <link rel="preload" href="/main/images/cursor-assets/cursor-passive.png" as="image">
+
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
         <div class="logo__header">
-            <a href="/main/index.html" class="nav__logo">
+            <a href="/" class="nav__logo">
             <img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span>
         </a>
     </div>
@@ -24,28 +28,29 @@
             <article class="login__details">
                 <h1>Sign up</h1>
                 <p>Fill the form below to create your account.</p>
-                <form class="login__form"  action="/signup" method="post">
+                <form class="signup__form auth__form"  action="/signup" method="post">
                     <div class ="form__control">
-                        <label for="fullname">Full Name</label>
-                        <input type="fullname" id="fullname" placeholder="Enter your full name">
+                        <label for="signupfullname">Full Name</label>
+                        <input type="fullname" id="signupfullname" placeholder="Enter your full name">
                     </div>
                     <div class ="form__control">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" placeholder="Create your username">
+                        <label for="signupusername">Username</label>
+                        <input type="text" id="signupusername" placeholder="Create your username">
                     </div>
                     <div class ="form__control">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Enter your email">
+                        <label for="signupemail">Email</label>
+                        <input type="email" id="signupemail" placeholder="Enter your email">
                     </div>
                     <div class ="form__control">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password">
+                        <label for="signuppassword">Password</label>
+                        <input type="password" id="signuppassword" placeholder="Enter your password">
                     </div>
                     <div class ="form__control">
                         <label for="cpassword">Confirm Password</label>
                         <input type="password" id="cpassword" placeholder="Confirm your password">
                     </div>
                     <input class="btn primary" type="submit" value="Sign up">
+                    <label th:text="${serverReply}"></label>
                     <!--<button class="btn">
                         <img src="/main/images/google.png" alt="Google logo">
                         <p>Sign in with Google</p>
