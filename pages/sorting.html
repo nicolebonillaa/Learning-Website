@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Learning Website</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Sorting Algorithms - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,19 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
-                <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>
-                <button class="nav__hamburger" aria-label="Toggle menu">
+                <a href="/" class="nav__logo"><img src="/main/images/website_icon.png" alt="Logo" class="logo"><span>Learning Website</span></a>
+                <button class="nav__hamburger"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="main-menu"
+                    type="button">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>                
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -36,8 +40,8 @@
                 </ul>
             </div>    
         </nav>
-        <header class="lessons__header">
-            <div class="container header__container">
+        <header class="lessons__header high-contrast">
+            <div class="container header__container high-contrast">
                 <div class="header__left">
                 <h1>Sorting Algorithms</h1>
                 <p>Explore various sorting algorithms such as bubble sort, selection sort, insertion sort, merge sort, and quicksort. Learn how they work and when to use each one.</p>

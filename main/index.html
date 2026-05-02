@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Learning Website</title>
+        <title>Ailurus Learning</title>
         <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
@@ -18,15 +18,19 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
-                <a href="/" class="nav__logo"><img src="/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>  
-                <button class="nav__hamburger" aria-label="Toggle menu">
+                <a href="/" class="nav__logo"><img src="/main/images/website_icon.png" alt="Logo" class="logo"><span>Learning Website</span></a>  
+                <button class="nav__hamburger"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="main-menu"
+                    type="button">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>              
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -35,6 +39,7 @@
                 </ul>
             </div>    
         </nav>
+        <main id="main-content" tabindex="-1">
         <header>
             <div class="container header__container">
                 <div class="header__left">
@@ -44,39 +49,42 @@
                 </div>
                 <div class="header__right">
                     <div class="header__right-image">
-                        <img src="/main/images/pandasmart.png" >
+                        <img src="/main/images/pandasmart.png" alt="Smart panda illustration" >
                     </div>
                 </div>
             </div>
     </header>
-    <section class="courses">
+
+    <section class="courses high-contrast">
         <div class="container courses__container">
             <div class="courses__left">
-                <h1>What we offer</h1>
-                <p>
-                    We offer a variety of computer science lessons, Java programming, data structures, sorting algorithms, and more. Our lessons are designed to be interactive and engaging, with lessons to help you learn. We also offer a progress tracker to help you keep track of your learning journey.
-                </p>
+                <h2>What we offer</h2>
+                <p>We offer a variety of computer science lessons, Java programming, data structures, sorting algorithms, and more. Our lessons are designed to be interactive and engaging, with lessons to help you learn. We also offer a progress tracker to help you keep track of your learning journey.</p>
                 <a href="/lessons" class="btn btn-primary">Learn more</a>
             </div>
+
             <div class="courses__right">
-                <a href="datastructures">
+                <a href="/datastructures">
                 <article class="course">
                     <h3>Data Structures</h3>
                     <p>Learn about data structures such as arrays, linked lists, stacks, queues, trees, and graphs. Understand how to implement and use these data structures in your programming projects.</p>
                 </article>
                 </a>
+
                 <a href="/java">
                 <article class="course">
                     <h3>Java Programming</h3>
                     <p>Get started with Java programming language. Learn about Java syntax, object-oriented programming concepts, and how to build applications using Java.</p>
                 </article>
                 </a>
+
                  <a href="/sorting">
                 <article class="course">
                     <h3>Sorting Algorithms</h3>
                     <p>Explore various sorting algorithms like bubble sort, selection sort, insertion sort, merge sort, quicksort, and more. Learn how these algorithms work and their time complexities.</p>
                 </article>
                 </a>
+
                 <a href="/formallogic">
                 <article class="course">
                     <h3>Formal Logic</h3>

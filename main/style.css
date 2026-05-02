@@ -2,7 +2,7 @@
 .nav__logo {/*logo styling*/
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 18px;
     text-decoration: none;
 }
 
@@ -243,8 +243,7 @@ header{
   border-radius: 1.5rem;
   text-align: center;
   transition: all 300ms ease;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   align-items: center;
   min-height: 32rem;
 }
@@ -1499,4 +1498,184 @@ input::placeholder{
   .lessoncourses__container {
     padding: 0;
   }
+}
+
+/* --HIGH CONTRAST ACTIVATION-- */
+
+body.high-contrast {
+  --bg: #000000;
+  --text: #ffffff;
+  --surface: #000000;
+  --border: #ffffff;
+  --link: #ffff00;
+  --button-bg: #ffffff;
+  --button-text: #000000;
+  --focus: #ffff00;
+
+  background: #000;
+  color: #fff;
+}
+
+/* --GLOBAL ELEMENTS-- */
+
+body.high-contrast a {
+  color: #ffff00;
+}
+
+body.high-contrast a:hover {
+  text-decoration: underline;
+  color: yellow;
+}
+
+body.high-contrast button:focus-visible,
+body.high-contrast a:focus-visible,
+body.high-contrast [tabindex]:focus-visible {
+  outline: 3px solid #ffff00;
+  outline-offset: 3px;
+}
+
+/* --NAV / HEADER-- */
+
+body.high-contrast .window-scroll {
+  background: #000;
+  color: #fff;
+}
+
+body.high-contrast .nav__hamburger span{
+  background-color: white;
+}
+
+/* --COURSES / LESSONS-- */
+
+body.high-contrast .courses,
+body.high-contrast .lessons,
+body.high-contrast .lesson,
+body.high-contrast .lesson__course {
+  background: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: none;
+}
+
+body.high-contrast .lesson__course__description,
+body.high-contrast .question__count {
+  color: #fff;
+  box-shadow: none;
+}
+
+/* --QUIZ-- */
+
+body.high-contrast .quiz__fullpage {
+  background: #000;
+  color: #fff;
+}
+
+body.high-contrast .quiz__fullpage__footer {
+  background: #000;
+  border-top: 2px solid #fff;
+}
+
+body.high-contrast .quiz__fullpage__topbar {
+  border-bottom: 2px solid #fff;
+  background: #000;
+  color: white;
+}
+
+body.high-contrast .quiz__step,
+body.high-contrast .quiz__modal__topic {
+  color: #fff;
+}
+
+body.high-contrast .quiz__progress__wrap {
+  background: #222;
+  border: 2px solid #fff;
+}
+
+body.high-contrast .quiz__progress__fill {
+  background: #ffffff;
+}
+
+/* --Buttons -- */
+body.high-contrast .quiz__next__btn {
+  background: #fff;
+  color: #000;
+  border: 2px solid #fff;
+}
+
+body.high-contrast .quiz__feedback,
+body.high-contrast .quiz__next__btn:hover {
+  background: #000;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* --Disabled -- */
+body.high-contrast .quiz__next__btn:disabled {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* --Question options-- */
+body.high-contrast #question-options > * {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #fff;
+}
+
+body.high-contrast #question-options > *:hover {
+  border: 2px solid #1900ff;
+}
+
+/* --States-- */
+body.high-contrast .selected {
+  border-color: #00ffff;
+}
+
+body.high-contrast .correct {
+  background: #003300;
+  border-color: #00ff00;
+}
+
+body.high-contrast .incorrect {
+  background: #ff0000;
+  border-color: #ff4d4d;
+}
+
+/* --MISC-- */
+
+body.high-contrast .account__btn,
+body.high-contrast .quiz__back__btn,
+body.high-contrast .quiz__open__btn {
+  background: #000;
+  color: #fff;
+  border: 2px solid #cf6730;
+  box-shadow: none;
+}
+
+body.high-contrast .board-upper {
+  background: #000;
+  border: 2px solid #fff;
+} 
+
+body.high-contrast .settings__content,
+body.high-contrast .settings__sidebar,
+body.high-contrast .progress-topic,
+body.high-contrast .card-board,
+body.high-contrast .view-board,
+body.high-contrast .login,
+body.high-contrast .course {
+  background: #000;
+  border: 2px solid #ffffff;
+  color: #fff;
+}
+
+body.high-contrast .settings__label,
+body.high-contrast .settings__content,
+body.high-contrast .settings__card,
+body.high-contrast .settings__content header,
+body.high-contrast .settings__content > #account,
+body.high-contrast h2 {
+    background: #000;
+  color:white;
 }
