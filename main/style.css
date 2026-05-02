@@ -1481,3 +1481,15 @@ input::placeholder{
 .field__hint__error{ 
   color: #cf6730; 
 }
+/*Form feedback*/
+.form__feedback__success{
+  color: green;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.form__feedback__error{
+  color: #cf6730;
+  font-size: 0.5rem;
+  margin-top: 0.5rem;
+}

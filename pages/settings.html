@@ -51,33 +51,21 @@
                     <h1>Account</h1>
                     <div class="settings__card">
                         <h3>Email</h3>
-                        <p class="settings__label">Email associated with your account: <span class="settings__currentvalue">${currentEmail}</span></p>
-                        <form class="account__form">
+                        <p class="settings__label">Email associated with your account: <span class="settings__currentvalue" id="currentemail"></span></p>
+                        <form class="account__form" id="emailresetform">
                             <div class="form__control">
                                 <label for="newemail">New email:</label>
-                                <input type="email" id="newemail" placeholder="Enter your new email">
+                                <input type="email" id="newemail" placeholder="Enter your new email" required>
                             </div>
-                            <button type="submit" class="account__btn">Update Email</button>
+                            <button type="submit" class="account__btn">Send Confirmation Link</button>
                         </form>
+                        <p id="emailmessage" class="form__feedback"></p>
                     </div>
                     <div class="settings__card">
                         <h3>Password</h3>
-                        <p class="settings__label">Current password associated with your account: <span class="settings__currentvalue">${currentPassword}</span></p>
-                        <form class="account__form">
-                            <div class="form__control">
-                                <label for="currentpassword">Current password:</label>
-                                <input type="password" id="currentpassword" placeholder="Enter your current password">
-                            </div>
-                            <div class="form__control">
-                                <label for="newpassword">New password:</label>
-                                <input type="password" id="newpassword" placeholder="Enter your new password">
-                            </div>
-                            <div class="form__control">
-                                <label for="confirmnewpassword">Confirm new password:</label>
-                                <input type="password" id="confirmnewpassword" placeholder="Confirm your new password">
-                            </div>
-                            <button type="submit" class="account__btn">Update Password</button>
-                        </form>
+                        <p class="settings__label">To reset your password, we'll send you link to your email.</p>
+                        <button class="account__btn" id="passwordresetbtn__settings">Send Password Reset Link</button>
+                        <p id="passwordmessage" class="form__feedback"></p>
                     </div>
                 </section>
                 <section id="profilesettings">

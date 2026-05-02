@@ -35,9 +35,11 @@ const settingsLinks = document.querySelectorAll('.settings__menu a');
 const settingsContents = document.querySelectorAll('.settings__content section');
 
 if (settingsLinks.length > 0) {
-    settingsContents.forEach((s, i) => {
+    settingsContents.forEach((s, i)=> {
         s.style.display = i === 0 ? 'block' : 'none';
     });
+
+    settingsLinks[0].classList.add('active');
 
     settingsLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -240,7 +242,7 @@ cardButtons.forEach((button, index) => {
   });
 });
 
-//Login and sign up form validation json
+//Login and sign up form validation 
 const loginForm = document.querySelector('.login__form');
 if (loginForm){
     loginForm.addEventListener('submit', (e) => {
@@ -384,57 +386,83 @@ const passwordCounter = document.getElementById('password__counter');
         }
     });
 }
-
-//Update email form validation in settings
-const emailForm = document.querySelector('.account__form:has(#newemail)');
-if (emailForm) {
-    emailForm.addEventListener('submit', (e) => {
-
+//Settinfs in account page
+if(document.getElementById('emailresetform')){
+    //load current email
+    fetch('/api/account/me', { credentials: 'include' })
+        .then(res => res.json())
+        .then(data => {
+            const el = document.getElementById('currentemail');
+            if(el){
+                el.textContent = data.email;
+            }
+        })
+        .catch(() => {});
+    //Email change form
+    document.getElementById('emailresetform').addEventListener('submit', async (e) => {
+        e.preventDefault();
         const newEmail = document.getElementById('newemail').value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const message = document.getElementById('emailmessage');
 
-        if(!newEmail || !emailRegex.test(newEmail)) {
-            e.preventDefault();
-            showFormError(emailForm, 'Please enter a valid email address.');
+        try{
+            const res = await fetch('/api/account/request-email-change', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ newEmail })
+            });
+
+            if(res.ok){
+                message.textContent = 'Confirmation link sent!';
+                message.className = 'form__feedback form__feedback__success';
+            }else{
+                message.textContent = 'Something went wrong.';
+                message.className = 'form__feedback form__feedback__error';
+            }
+        }catch{
+            message.textContent = 'Network error. Please try again.';
+            message.className = 'form__feedback form__feedback__error';
+        }
+    });
+
+    //Password reset button linking
+    document.getElementById('passwordresetbtn__settings').addEventListener('click', async function(){
+        const message = document.getElementById('passwordmessage');
+    
+        try {
+            const res = await fetch('/api/account/request-password-reset', {
+                method: 'POST',
+                credentials: 'include'
+            });
+ 
+            if (res.ok) {
+                message.textContent = 'Password reset link sent! Check your email.';
+                message.className = 'form__feedback form__feedback__success';
+            } else {
+                message.textContent = 'Something went wrong. Please try again.';
+                message.className = 'form__feedback form__feedback__error';
+            }
+        } catch {
+            message.textContent = 'Network error. Please try again.';
+            message.className = 'form__feedback form__feedback__error';
         }
     });
 }
 
-//Update password form validation in settings
-const passwordForm = document.querySelector('.account__form:has(#currentpassword)');
-if (passwordForm) {
-    passwordForm.addEventListener('submit', (e) => {
-
-        const currentPassword = document.getElementById('currentpassword').value.trim();
-        const newPassword = document.getElementById('newpassword').value.trim();
-        const confirmNewPassword = document.getElementById('confirmnewpassword').value.trim();
-
-        if (!currentPassword || !newPassword || !confirmNewPassword) {
-            e.preventDefault();
-            showFormError(passwordForm, 'Please fill in all fields.');
-        } else if (newPassword !== confirmNewPassword) {
-            e.preventDefault();
-            showFormError(passwordForm, 'New passwords do not match.');
-        } else if (newPassword.length < 6) {
-            e.preventDefault();
-            showFormError(passwordForm, 'New password must be at least 6 characters long.');
-        }
-    });
-}
-
+//Email reset page
 //Notification form validation in settings
 const notificationForm = document.querySelector('.notifications__form');
 
 //Profile update form validation and prefill inputs in settings
 const profileForm = document.querySelector('.profile__form');
 if (profileForm) {
+    const maxChars = 20;
+    const charCount = document.getElementById('charcount');
+    const fulleNameInput = document.getElementById('profilefullname');
+    const usernameInput = document.getElementById('profileusername');
+    const availableUsername = document.getElementById('available__username');
     //Prefill profile form with current user data
     window.prefillProfile = function(userData) {
-        const maxChars = 20;
-        const charCount = document.getElementById('charcount');
-        const fulleNameInput = document.getElementById('profilefullname');
-        const usernameInput = document.getElementById('profileusername');
-        const availableUsername = document.getElementById('available__username');
 
         if (fullNameInput){
             fullNameInput.value = userData.fullName || '';
@@ -586,17 +614,28 @@ if (passwordResetForm) {
         document.getElementById('resettoken').value = token;
     }
 
-    passwordResetForm.addEventListener('submit', (e) => {
-        const newPassword = document.getElementById('newpassword').value.trim();
-        const confirmPassword = document.getElementById('confirmnewpassword').value.trim();
+    const newPassword = document.getElementById('newpassword');
+    const confirmPassword = document.getElementById('confirmnewpassword');
+    const passwordbtn = document.getElementById('passwordresetbtn');
 
-        if (!newPassword || !confirmPassword) {
+    function checkPasswordMatch(){
+        passwordbtn.disabled = !(newPassword.value && newPassword.value === confirmPassword.value);
+    }
+
+    newPassword.addEventListener('input', checkPasswordMatch);
+    confirmPassword.addEventListener('input', checkPasswordMatch);
+
+    passwordResetForm.addEventListener('submit', (e) => {
+        const newPw = document.getElementById('newpassword');
+        const confirmPw = document.getElementById('confirmnewpassword');
+
+        if (!newPw || !confirmPw) {
             e.preventDefault();
             showFormError(passwordResetForm, 'Please fill in all fields.');
-        } else if (newPassword !== confirmPassword) {
+        } else if (newPw !== confirmPw) {
             e.preventDefault();
             showFormError(passwordResetForm, 'Passwords do not match.');
-        } else if (newPassword.length < 6) {
+        } else if (newPw.length < 6) {
             e.preventDefault();
             showFormError(passwordResetForm, 'Password must be at least 6 characters long.');
         }
@@ -612,9 +651,20 @@ if (emailResetForm) {
     if (token) {
         document.getElementById('resettoken').value = token;
     } 
+
+    const newEm = document.getElementById('newemail').value;
+    const confirmEm = document.getElementById('confirmnewemail').value;
+    const embtn = document.getElementById('emailresetbtn');
+
+    function checkEmailMatch(){
+        embtn.disabled = !(newEm.value && newEm.value === confirmEm.value && newEm.value.includes('@'));
+    }
+
+    newEm.addEventListener('input', checkEmailMatch);
+    confirmEm.addEventListener('input', checkEmailMatch);
  
     emailResetForm.addEventListener('submit', (e) => {
-        const newEmail     = document.getElementById('newemail').value.trim();
+        const newEmail = document.getElementById('newemail').value.trim();
         const confirmEmail = document.getElementById('confirmnewemail').value.trim();
         const emailRegex   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  
@@ -664,7 +714,7 @@ setupFormValidation('.signup__form', 'signupbtn', form => {
 
 setupFormValidation('.password__reset__form', 'passwordresetbtn', form => {
     const pwreset = form.querySelector('#newpassword').value;
-    return pwreset.length >= 8 && pwreset === form.querySelector('#confirmnewpassword').value;
+    return pwreset.length >= 6 && pwreset === form.querySelector('#confirmnewpassword').value;
 });
 
 setupFormValidation('.email__reset__form', 'emailresetbtn', form => {
