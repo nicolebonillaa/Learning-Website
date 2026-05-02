@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Learning Website</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Profile - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,19 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
-                <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>                 
-                <button class="nav__hamburger" aria-label="Toggle menu">
+                <a href="/" class="nav__logo"><img src="/main/images/website_icon.png" alt="Logo" class="logo"><span>Learning Website</span></a>                 
+                <button class="nav__hamburger"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="main-menu"
+                    type="button">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -42,43 +46,43 @@
             <div class="page-board">
                 <aside class="card-board">
                     <div id="accessoryList" class="grid-container-card accessory-list">
-                        <button class="card accessory-item" data-id="head_accessory_00">
+                        <button type="button" class="card accessory-item" data-id="head_accessory_00">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_00.png" alt="Funny hat">
                         </button>
-                        <button class="card accessory-item" data-id="head_accessory_01">
+                        <button type="button"class="card accessory-item" data-id="head_accessory_01">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_01.png" alt="Crown">
                         </button>
-                        <button class="card accessory-item" data-id="head_accessory_02">
+                        <button type="button" class="card accessory-item" data-id="head_accessory_02">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_02.png" alt="Baseball cap">
                         </button>
-                        <button class="card accessory-item" data-id="head_accessory_03">
+                        <button type="button" class="card accessory-item" data-id="head_accessory_03">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_03.png" alt="Peach hat">
                         </button>
-                        <button class="card accessory-item" data-id="head_accessory_04">
+                        <button type="button" class="card accessory-item" data-id="head_accessory_04">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_04.png" alt=" Flower hat">
                         </button>
-                        <button class="card accessory-item" data-id="head_accessory_05">
+                        <button type="button" class="card accessory-item" data-id="head_accessory_05">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_05.png" alt=" Chef hat">
                         </button>
-                        <button class="card accessory-item" data-id="head_accessory_06">
+                        <button type="button" class="card accessory-item" data-id="head_accessory_06">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_06.png" alt="Top hat">
                         </button>
-                        <button class="card accessory-item" data-id="eye_accessory_00">
+                        <button type="button" class="card accessory-item" data-id="eye_accessory_00">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_07.png" alt="Sunglasses">
                         </button>
-                        <button class="card accessory-item" data-id="eye_accessory_01">
+                        <button type="button" class="card accessory-item" data-id="eye_accessory_01">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_08.png" alt="Nerd glasses">
                         </button>
-                        <button class="card accessory-item" data-id="eye_accessory_02">
+                        <button type="button" class="card accessory-item" data-id="eye_accessory_02">
                            <img src="/main/images/profile-html-assets/accessory-previews/sprite_09.png" alt="Pirate eye patch">
                         </button>
-                        <button class="card accessory-item" data-id="eye_accessory_03">
+                        <button type="button" class="card accessory-item" data-id="eye_accessory_03">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_10.png" alt="Monicole">
                         </button>
-                        <button class="card accessory-item" data-id="eye_accessory_04">
+                        <button type="button" class="card accessory-item" data-id="eye_accessory_04">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_11.png" alt="Round glasses">
                         </button>
-                        <button class="card accessory-item"data-id="eye_accessory_05S">
+                        <button type="button" class="card accessory-item"data-id="eye_accessory_05S">
                             <img src="/main/images/profile-html-assets/accessory-previews/sprite_12.png" alt="Heart glasses">
                         </button>
                     </div>

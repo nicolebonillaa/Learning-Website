@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Learning Website</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Progress - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,19 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
-                <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>
-                <button class="nav__hamburger" aria-label="Toggle menu">
+                <a href="/" class="nav__logo"><img src="/main/images/website_icon.png" alt="Logo" class="logo"><span>Learning Website</span></a>
+                <button class="nav__hamburger"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="main-menu"
+                    type="button">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>                
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -36,11 +40,11 @@
                 </ul>
             </div>    
         </nav>
-        <section class="progress-board-upper">
+        <section class="progress-board-upper high-contrast">
             <div>
                 <h1 class="progress-title">Progress Streak</h1>
             </div>
-            <div class="board-upper">
+            <div class="board-upper high-contrast">
                 <img src="/main/images/progress-html-assests/progress-streak-active.gif" class="progress-image">
                 <img src="/main/images/redpanda.png" class="progress-image">
             </div>
@@ -54,7 +58,7 @@
                     <div id="progress-f"></div>
                 </div>
                 <div class="progress-topic">
-                    <label hidden id="dProgress" th:text="${dProgress}"></label>
+                    <label hidden id="dProgress" th:text="${dProgress}">75</label>
                     <a href="/datastructures">Data Structures</a>
                     <div id="progress-d"></div>
                 </div>

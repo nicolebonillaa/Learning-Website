@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Learning Website</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Data Structures - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,19 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
-                <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Learning Website</span></a>
-                <button class="nav__hamburger" aria-label="Toggle menu">
+                <a href="/" class="nav__logo"><img src="/main/images/website_icon.png" alt="Logo" class="logo"><span>Learning Website</span></a>
+                <button class="nav__hamburger"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="main-menu"
+                    type="button">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>                
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -37,7 +41,7 @@
             </div>    
         </nav>
         <header class="lessons__header">
-            <div class="container header__container">
+            <div class="container header__container high-contrast">
                 <div class="header__left">
                 <h1>Data Structures</h1>
                 <p>Learn about data structures such as arrays, linked lists, stacks, queues, trees, and graphs. Understand how to implement and use these data structures in your programming projects.</p>
@@ -45,16 +49,16 @@
 
                 <div class="header__right">
                     <div class="header__right-image">
-                        <img src="/main/images/datastructures.png" >
+                        <img src="/main/images/datastructures.png" alt="Data Structures illustration">
                     </div>
                 </div>
             </div>
     </header>
-   <section class="lesson__courses">
+   <section class="lesson__courses high-contrast">
         <div class = "lessoncourses__container" id="lesson__cards__grid"></div>         
     </section>
     <!--Fullpage-->
-    <section class="quiz__fullpage" id="quiz__fullpage">
+    <section class="quiz__fullpage high-contrast" id="quiz__fullpage">
         <div class="quiz__fullpage__topbar">
             <div class="quiz__topbar__row">
                 <span class="quiz__modal__topic" id="question__topic"></span>
@@ -69,7 +73,7 @@
             <div class="quiz__fullpage__body">
                 <div class="quiz__modal__title" id="question__title"></div>
                 <p class="quiz__question" id="question__question"></p>
-                <div id="question__options"></div>
+                    <div id="question-options" class="grid-container-question-options"></div>
                 <div class="quiz__feedback" id="question__feedback"></div>
             </div>
             <div class="quiz__fullpage__footer">
