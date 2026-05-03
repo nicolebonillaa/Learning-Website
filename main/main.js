@@ -120,10 +120,10 @@ const progressBar = [
 
 // Map each backend value to a container
 const progressConfig = [
-  { id: "fProgress", container: "progress-f" },
   { id: "dProgress", container: "progress-d" },
   { id: "jProgress", container: "progress-j" },
-  { id: "sProgress", container: "progress-s" }
+  { id: "sProgress", container: "progress-s" },
+  { id: "fProgress", container: "progress-f" }
 ];
 
 // Convert 0-100 into 0-35
@@ -335,7 +335,7 @@ async function loadSavedAvatar() {
 
 // Initialize the avatar page by loading saved avatar and setting up event listeners
 async function initAvatarPage() {
-  // await loadSavedAvatar(); // enable when backend is ready
+  await loadSavedAvatar(); 
   renderAvatarPreview();
 
   saveBtn.addEventListener("click", saveAvatar);
@@ -461,11 +461,15 @@ const passwordCounter = document.getElementById('password__counter');
 
         // Step 1 create the account
         try {
-            const signupBody = new URLSearchParams({ fullName, username, email, password });
+			const signupBody = new FormData();
+			signupBody.append("fullname", fullName);
+			signupBody.append("username", username);
+			signupBody.append("email", email);
+			signupBody.append("password", password);
+			signupBody.append("cpassword", confirmPassword);
             const response = await fetch('/signup', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: signupBody.toString()
+                body: signupBody
             });
  
             if (!response.ok) {
@@ -473,7 +477,7 @@ const passwordCounter = document.getElementById('password__counter');
                 showFormError(signupForm, text || 'Signup failed. Please try again.');
                 return;
             }
- 
+ 			/* Currently circumvented with backend code
             // Step 2 generate the magic link for the new account
             const ottBody = new URLSearchParams({ username });
             await fetch('/ott/generate', {
@@ -481,7 +485,7 @@ const passwordCounter = document.getElementById('password__counter');
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: ottBody.toString()
             });
- 
+ 			*/
             // Step 3  go to success page
             window.location.href = '/success';
  
@@ -506,20 +510,20 @@ if(document.getElementById('emailresetform')){
     //Email change form
     document.getElementById('emailresetform').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const newEmail = document.getElementById('newemail').value.trim();
+        const emailConfirm = document.getElementById('useremail').value.trim();
         const message = document.getElementById('emailmessage');
 
+		const newEmailForm = new FormData();
+		newEmailForm.append("emailcon", emailConfirm);
         try{
-            const res = await fetch('/api/account/request-email-change', {
+            const res = await fetch('/settings/request-email-change', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({ newEmail })
+                body: newEmailForm
             });
 
             if(res.ok){
-                message.textContent = 'Confirmation link sent!';
-                message.className = 'form__feedback form__feedback__success';
+                window.location.href="/emailreset";
             }else{
                 message.textContent = 'Something went wrong.';
                 message.className = 'form__feedback form__feedback__error';
@@ -531,13 +535,21 @@ if(document.getElementById('emailresetform')){
     });
 
     //Password reset button linking
-    document.getElementById('passwordresetbtn__settings').addEventListener('click', async function(){
+    document.getElementById('passwordresetform').addEventListener('submit', async (e) => {
+		e.preventDefault();
         const message = document.getElementById('passwordmessage');
-    
+		const emailConfirm = document.getElementById('passwordemail').value.trim();
+		const usernameToken = document.getElementById('passwordresettoken').value.trim();
+		
+		
+		const passwordEmailForm = new FormData();
+		passwordEmailForm.append("emailcon", emailConfirm);
+		passwordEmailForm.append("username", usernameToken);
         try {
-            const res = await fetch('/api/account/request-password-reset', {
+            const res = await fetch('/settings/request-password-reset', {
                 method: 'POST',
-                credentials: 'include'
+                credentials: 'include',
+				body: passwordEmailForm
             });
  
             if (res.ok) {
@@ -604,9 +616,8 @@ if (profileForm) {
 
         const formData = new FormData();
         formData.append('username', val);
-        fetch('/settings/check__username', {
-            method: 'POST',
-            body: formData
+        fetch('/settings/check__username?username='+val, {
+            method: 'GET'
         })
         
         .then(response =>{
@@ -640,24 +651,45 @@ if (profileForm) {
     usernameInput.addEventListener('blur', () => {
         checkUsernameAvailability(usernameInput.value.trim());
     });
-
+	
     profileForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const fullName = document.getElementById('profilefullname').value.trim();
         const username = usernameInput.value.trim();
 
-        if (!fullName || !username) {
-            e.preventDefault();
-            showFormError(profileForm, 'Please fill in all fields.');
-        }else if (username.length < 3) {
+        if (username.length < 3 && username.length > 0) {
             e.preventDefault();
             showFormError(profileForm, 'Username must be at least 3 characters long.');
-            return;
         }else if(availableUsername.classList.contains('available__username__taken')) {
             e.preventDefault();
             showFormError(profileForm, 'Username is already taken.');
         }
+		else{
+			const nameFormBody = new FormData();
+			nameFormBody.append("fullname", fullName);
+			nameFormBody.append("username", username);
+            fetch('/settings/profile', {
+                method: 'POST',
+                body: nameFormBody
+            })
+			.then(response =>{
+	            if( response.status === 200) {
+					window.location.href = '/logout';
+	            }else if (response.status === 201) {
+					window.location.href = '/settings';
+	            }
+				else if (response.status === 409) {
+					console.error('Profile update failed:', error);
+					showFormError(profileForm, 'Profile update failed. Please try again.');
+				}
+	        })
+			.catch(error=> {
+				console.error('Profile update error:', error);
+				showFormError(profileForm, 'An error occurred. Please try again.');
+				return;
+			});
+		}
     });
 }
 
@@ -713,11 +745,6 @@ if (ottMessage) {
 const passwordResetForm = document.querySelector('.password__reset__form');
 if (passwordResetForm) {
     const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
-
-    if(token){
-        document.getElementById('resettoken').value = token;
-    }
 
     const newPassword = document.getElementById('newpassword');
     const confirmPassword = document.getElementById('confirmnewpassword');
@@ -731,8 +758,8 @@ if (passwordResetForm) {
     confirmPassword.addEventListener('input', checkPasswordMatch);
 
     passwordResetForm.addEventListener('submit', (e) => {
-        const newPw = document.getElementById('newpassword');
-        const confirmPw = document.getElementById('confirmnewpassword');
+        const newPw = document.getElementById('newpassword').value.trim();
+        const confirmPw = document.getElementById('confirmnewpassword').value.trim();
 
         if (!newPw || !confirmPw) {
             e.preventDefault();
@@ -757,8 +784,8 @@ if (emailResetForm) {
         document.getElementById('resettoken').value = token;
     } 
 
-    const newEm = document.getElementById('newemail').value;
-    const confirmEm = document.getElementById('confirmnewemail').value;
+    const newEm = document.getElementById('newemail');
+    const confirmEm = document.getElementById('confirmnewemail');
     const embtn = document.getElementById('emailresetbtn');
 
     function checkEmailMatch(){
@@ -1659,6 +1686,7 @@ const courseTopics = {
 //Variables to track quiz state
 let course = null;
 let topic = null;
+let storeTopic = null;
 let currentQuestionIndex = 0;
 let score = 0;
 let userAnswered = false;
@@ -1670,6 +1698,7 @@ function initCoursePage(courseKey){
     document.getElementById('lesson__cards__grid').addEventListener('click', (e) => {
         const btn = e.target.closest('.quiz__open__btn');
         if (btn) {
+			storeTopic=btn.dataset.topic;
             openQuiz(btn.dataset.course, btn.dataset.topic);
         }   
     });
@@ -1770,7 +1799,7 @@ function renderQuestion() {
     document.getElementById('question__feedback').className = 'quiz__feedback';
     document.getElementById('question__feedback').textContent = '';
 
-    const optionsContainer = document.getElementById('question-options');
+    const optionsContainer = document.getElementById('question__options');
     const template = document.getElementById('option__template');
     optionsContainer.innerHTML = '';
 
@@ -1827,11 +1856,39 @@ function nextQuestion() {
 function showResult() {
    const totalQuestions = topic.questions.length;
    const percentage = Math.round((score / totalQuestions) * 100);
-
+   
+   
+   
    document.getElementById('quiz__question__screen').style.display = 'none';
    document.getElementById('quiz__result__screen').style.display = 'block';
    document.getElementById('result__score').textContent = score + ' / ' + totalQuestions;
    document.getElementById('result__percentage').textContent = percentage == 100 ? 'Perfect score!' : percentage >= 50 ? 'Good job!' : 'Keep practicing!';
+   const scoreForm = new FormData();
+  if (course=="datastructures"){
+  		scoreForm.append('course', 0);
+  }
+  else if (course=="java"){
+  		scoreForm.append('course', 1);
+  }
+  else if (course=="sorting"){
+  		scoreForm.append('course', 2);
+  }
+  else if (course=="formallogic"){
+  		scoreForm.append('course', 3);
+  }
+  console.log(course+" " +storeTopic+" "+score);
+  scoreForm.append("topic", courseTopics[course].indexOf(storeTopic));
+  scoreForm.append('score', score);
+  try {
+  	   fetch('/quiz', {
+          method: 'POST',
+          body: scoreForm
+      });
+
+  } catch (error) {
+      console.error('Quiz score submission error:', error);
+      showFormError(quiz__form, 'An error occurred. Please try again.');
+  }
 }
 
 //Retry quiz for lesson
