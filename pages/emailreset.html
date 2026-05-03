@@ -27,8 +27,8 @@
         <article class="login__details">
             <h1>Update Email</h1>
             <p>Enter your new email address below.</p>
-            <form class="email__reset__form auth__form" action="/emailreset" method="post">
-                <input type="hidden" id="resettoken" name="token">
+            <form class="email__reset__form auth__form" action="/emailreset/submit" method="post">
+                <input type="hidden" id="resettoken" name="username" th:value="${username}">
                 <div class="form__control">
                     <label for="newemail">New email:</label>
                     <input type="email" id="newemail" name="newemail" placeholder="Enter your new email address">
@@ -39,6 +39,7 @@
                 </div>
                 <input class="btn primary" type="submit" value="Update Email" id="emailresetbtn" disabled>
             </form>
+			<a th:text="${invalid}"></a>
         </article>
         <article class="login__logo">
             <img src="/main/images/pandasmart.png" alt="Website logo">

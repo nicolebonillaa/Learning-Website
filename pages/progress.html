@@ -49,24 +49,32 @@
             <h2 class="progress-title">Course Progress</h2>
             <div class="container lessons__container">
                 <div class="progress-topic">
-                    <label hidden id="fProgress" th:text="${fProgress}">65</label>
-                    <a href="/datastructures">Data Structures</a>
-                    <div id="progress-f"></div>
-                </div>
-                <div class="progress-topic">
-                    <label hidden id="dProgress" th:text="${dProgress}">75</label>
+                    <label hidden id="dProgress" th:text="${dProgress}"></label>
                     <a href="/datastructures">Data Structures</a>
                     <div id="progress-d"></div>
+					<a th:text="#{quizzes.expression(${dComplete},'5')}"></a>
+					<a th:text="#{average.expression(${dAverage})}"></a>
                 </div>
                 <div class="progress-topic">
-                    <label hidden id="jProgress" th:text="${jProgress}">100</label>
-                    <a href="/datastructures">Data Structures</a>
+                    <label hidden id="jProgress" th:text="${jProgress}"></label>
+                    <a href="/java">Java Programming</a>
                     <div id="progress-j"></div>
+					<a th:text="#{quizzes.expression(${jComplete},'5')}"></a>
+					<a th:text="#{average.expression(${jAverage})}"></a>
                 </div>
                 <div class="progress-topic">
-                    <label hidden id="sProgress" th:text="${sProgress}">38</label>
-                    <a href="/datastructures">Data Structures</a>
+                    <label hidden id="sProgress" th:text="${sProgress}"></label>
+                    <a href="/sorting">Sorting Algorithms</a>
                     <div id="progress-s"></div>
+					<a th:text="#{quizzes.expression(${sComplete},'6')}"></a>
+					<a th:text="#{average.expression(${sAverage})}"></a>
+                </div>
+                <div class="progress-topic">
+                    <label hidden id="fProgress" th:text="${fProgress}"></label>
+                    <a href="/formallogic">Formal Logic</a>
+                    <div id="progress-f"></div>
+					<a th:text="#{quizzes.expression(${fComplete},'7')}"></a>
+					<a th:text="#{average.expression(${fAverage})}"></a>
                 </div>
             </div>
         </section>

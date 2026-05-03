@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Settings - Ailurus Learning</title>
-        <link rel="icon" type="image/png" href="/main/images/website_icon.png"">
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,20 +51,28 @@
                     <h1>Account</h1>
                     <div class="settings__card">
                         <h3>Email</h3>
-                        <p class="settings__label">Email associated with your account: <span class="settings__currentvalue" id="currentemail"></span></p>
-                        <form class="account__form" id="emailresetform">
+                        <p class="settings__label">Email associated with your account: <span class="settings__currentvalue" th:text="${currentEmail}" id="currentemail"></span></p>
+                        <p class="settings__labl">To change your email, confirm your current email address</p>
+						<form class="account__form" id="emailresetform">
                             <div class="form__control">
-                                <label for="newemail">New email:</label>
-                                <input type="email" id="newemail" placeholder="Enter your new email" required>
+                                <label for="useremail">Confirm email:</label>
+                                <input type="email" id="useremail" placeholder="Enter your current email" required>
                             </div>
-                            <button type="submit" class="account__btn">Send Confirmation Link</button>
+                            <button type="submit" class="account__btn">Confirm</button>
                         </form>
                         <p id="emailmessage" class="form__feedback"></p>
                     </div>
                     <div class="settings__card">
                         <h3>Password</h3>
                         <p class="settings__label">To reset your password, we'll send you link to your email.</p>
-                        <button class="account__btn" id="passwordresetbtn__settings">Send Password Reset Link</button>
+						<form class="account__form" id="passwordresetform">
+						    <div class="form__control">
+						        <label for="passwordemail">Confirm email:</label>
+						        <input type="email" id="passwordemail" placeholder="Enter your current email" required>
+								<input type="hidden" id="passwordresettoken" name="username" th:value="${username}">
+						    </div>
+						    <button type="submit" id="passwordresetbtn__settings" class="account__btn">Send Password Reset Link</button>
+						</form>
                         <p id="passwordmessage" class="form__feedback"></p>
                     </div>
                 </section>
@@ -72,8 +80,8 @@
                     <h1>Profile</h1>
                     <div class="settings__card">
                         <h3>Personal Information</h3>
-                        <p class="settings__label">Manage your personal information and profile details.</p>
-                        <form class="profile__form" action="/settings/profile" method="post">
+                        <p class="settings__label">Manage your personal information and profile details. Changing your username will log you out.</p>
+                        <form class="profile__form">
                             <div class="form__control">
                                 <label for="profilefullname">Full name</label>
                                 <input type="text" id="profilefullname" placeholder="Enter your full name">
@@ -93,7 +101,7 @@
                     <div class="settings__card">
                         <h3>Email Notifications</h3>
                         <p>Manage your email notification preferences for updates, reminders, and announcements.</p>
-                        <form class="notifications__form">
+                        <form class="notifications__form" action="/settings/notifications" method="post">
                             <div class="form__control">
                                 <label for="emailupdates">Receive updates about new lessons and features</label>
                                 <input type="checkbox" id="emailupdates" ${emailUpdatesChecked}>
