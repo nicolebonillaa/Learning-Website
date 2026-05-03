@@ -1,6 +1,6 @@
 <!--Sign up page for learning website-->
 <!doctype html>
-<html lang="en">
+<html lang="en"> 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
             <a href="/" class="nav__logo">
             <img src="/main/images/website_icon.png" alt="Logo" class="logo"><span>Learning Website</span>
         </a>
-    </div>
+        </div>
         <section class="login">
             <article class="login__details">
                 <h1>Sign up</h1>
@@ -31,30 +31,28 @@
                 <form class="signup__form auth__form"  action="/signup" method="post">
                     <div class ="form__control">
                         <label for="signupfullname">Full Name</label>
-                        <input type="fullname" id="signupfullname" placeholder="Enter your full name">
+                        <input type="text" id="signupfullname" name="signupfullname" placeholder="Enter your full name">
                     </div>
                     <div class ="form__control">
                         <label for="signupusername">Username</label>
-                        <input type="text" id="signupusername" placeholder="Create your username">
+                        <input type="text" id="signupusername" name="signupusername" placeholder="Create your username">
+                        <small id="username__hint"></small>
                     </div>
                     <div class ="form__control">
                         <label for="signupemail">Email</label>
-                        <input type="email" id="signupemail" placeholder="Enter your email">
+                        <input type="email" id="signupemail" name="signupemail" placeholder="Enter your email">
                     </div>
                     <div class ="form__control">
                         <label for="signuppassword">Password</label>
-                        <input type="password" id="signuppassword" placeholder="Enter your password">
+                        <input type="password" id="signuppassword" name="signuppassword" placeholder="Enter your password">
+                        <small id="password__counter"></small>
                     </div>
                     <div class ="form__control">
                         <label for="cpassword">Confirm Password</label>
-                        <input type="password" id="cpassword" placeholder="Confirm your password">
+                        <input type="password" id="cpassword" name="cpassword" placeholder="Confirm your password">
                     </div>
-                    <input class="btn primary" type="submit" value="Sign up">
+                    <input class="btn primary" type="submit" value="Sign up" id="signupbtn" disabled>
                     <label th:text="${serverReply}"></label>
-                    <!--<button class="btn">
-                        <img src="/main/images/google.png" alt="Google logo">
-                        <p>Sign in with Google</p>
-                    </button> if i want google sign in-->
                 </form>
                 <small class="next__page">Already have an account? <a href="/login">Login</a></small>
             </article>

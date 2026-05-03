@@ -37,9 +37,11 @@ const settingsLinks = document.querySelectorAll('.settings__menu a');
 const settingsContents = document.querySelectorAll('.settings__content section');
 
 if (settingsLinks.length > 0) {
-    settingsContents.forEach((s, i) => {
+    settingsContents.forEach((s, i)=> {
         s.style.display = i === 0 ? 'block' : 'none';
     });
+
+    settingsLinks[0].classList.add('active');
 
     settingsLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -345,59 +347,89 @@ initAvatarPage();
 
 // --End of avatar customization code--
 
-//Login and sign up form validation json
+//Login and sign up form validation 
 const loginForm = document.querySelector('.login__form');
 if (loginForm){
-    loginForm.addEventListener('submit', async(e) => {
-        e.preventDefault();
+    loginForm.addEventListener('submit', (e) => {
 
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
 
         if (!username || !password) {
+            e.preventDefault();
             showFormError(loginForm, 'Please enter both username and password.');
             return;
-        }
-
-        const data = { username, password };
-
-        try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            //const result = await response.json();
-            //console.log(result);
-
-            if (response.redirected) {
-                window.location.href = response.url;
-                return;
-            }
-
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                const result = await response.json();
-                console.log(result);
-            } else {
-                window.location.href = '/login';
-            }
-
-        } catch (error) {
-            console.error('Error:', error);
         }
     });
 }
 
 const signupForm = document.querySelector('.signup__form');
 if (signupForm) {
-    signupForm.addEventListener('submit', async (e) => {
+
+    const usernameInput = document.getElementById('signupusername');
+    const usernameHint  = document.getElementById('username__hint');
+    let usernameCheckTimer = null;
+    let usernameAvailable  = false;
+
+    if (usernameInput && usernameHint) {
+        usernameInput.addEventListener('input', () => {
+        const val = usernameInput.value.trim();
+        clearTimeout(usernameCheckTimer);
+ 
+        if (val.length < 3) {
+            usernameHint.textContent = 'Username must be at least 3 characters.';
+            usernameHint.className = 'field__hint field__hint__error';
+            usernameAvailable = false;
+            return;
+        }
+ 
+        usernameHint.textContent = 'Checking…';
+        usernameHint.className = 'field__hint';
+ 
+        usernameCheckTimer = setTimeout(async () => {
+            try {
+                const res  = await fetch(`/signup/check__username?username=${encodeURIComponent(val)}`);
+                const data = await res.json();
+
+                if (data.available) {
+                    usernameHint.textContent = '✓ Username is available!';
+                    usernameHint.className = 'field__hint field__hint__success';
+                    usernameAvailable = true;
+                } else {
+                    usernameHint.textContent = '✗ Username is already taken.';
+                    usernameHint.className = 'field__hint field__hint__error';
+                    usernameAvailable = false;
+                }
+            } catch (err) {
+                usernameHint.textContent = 'Could not check username.';
+                usernameHint.className = 'field__hint';
+                usernameAvailable = false;
+            }
+        }, 600);
+    });
+}   
+const passwordInput = document.getElementById('signuppassword');
+const passwordCounter = document.getElementById('password__counter');
+ 
+    if (passwordInput && passwordCounter) {
+        passwordInput.addEventListener('input', () => {
+            const len = passwordInput.value.length;
+            if (len === 0) {
+                passwordCounter.textContent = '';
+                passwordCounter.className = 'field__hint';
+            } else if (len < 6) {
+                passwordCounter.textContent = `${len} / 6 characters minimum`;
+                passwordCounter.className = 'field__hint field__hint__error';
+            } else {
+                passwordCounter.textContent = `${len} characters ✓`;
+                passwordCounter.className = 'field__hint field__hint__success';
+            }
+        });
+    }
+
+    //Signup submit
+    signupForm.addEventListener('submit', async(e) => {
+
         e.preventDefault();
 
         const fullName = document.getElementById('signupfullname').value.trim();
@@ -410,6 +442,12 @@ if (signupForm) {
         if (!fullName || !username || !email || !password || !confirmPassword) {
             showFormError(signupForm, 'Please fill in all fields.');
             return;
+        }else if (username.length < 3) {
+            showFormError(signupForm, 'Username must be at least 3 characters long.');
+            return;
+        } else if (!usernameAvailable) {
+            showFormError(signupForm, 'Please choose an available username.');
+            return;
         }else if (!emailRegex.test(email)) {
             showFormError(signupForm, 'Please enter a valid email address.');
             return;
@@ -421,153 +459,115 @@ if (signupForm) {
             return;
         }
 
-        const data = { fullName, username, email, password };
-
+        // Step 1 create the account
         try {
+            const signupBody = new URLSearchParams({ fullName, username, email, password });
             const response = await fetch('/signup', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: signupBody.toString()
             });
-
+ 
             if (!response.ok) {
-                console.error('Server error:', response.status);
+                const text = await response.text().catch(() => '');
+                showFormError(signupForm, text || 'Signup failed. Please try again.');
                 return;
             }
-
-            const result = await response.json();
-            console.log(result);
-
+ 
+            // Step 2 generate the magic link for the new account
+            const ottBody = new URLSearchParams({ username });
+            await fetch('/ott/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: ottBody.toString()
+            });
+ 
+            // Step 3  go to success page
+            window.location.href = '/success';
+ 
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Signup error:', error);
+            showFormError(signupForm, 'An error occurred. Please try again.');
         }
     });
 }
-
-//Update email form validation in settings
-const emailForm = document.querySelector('.account__form:has(#newemail)');
-if (emailForm) {
-    emailForm.addEventListener('submit', async (e) => {
+//Settinfs in account page
+if(document.getElementById('emailresetform')){
+    //load current email
+    fetch('/api/account/me', { credentials: 'include' })
+        .then(res => res.json())
+        .then(data => {
+            const el = document.getElementById('currentemail');
+            if(el){
+                el.textContent = data.email;
+            }
+        })
+        .catch(() => {});
+    //Email change form
+    document.getElementById('emailresetform').addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const newEmail = document.getElementById('newemail').value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const message = document.getElementById('emailmessage');
 
-        if(!newEmail || !emailRegex.test(newEmail)) {
-            showFormError(emailForm, 'Please enter a valid email address.');
-            return;
-        }
-
-        const data = { email: newEmail };
-
-        try {
-            const response = await fetch('/settings/email', {
+        try{
+            const res = await fetch('/api/account/request-email-change', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                credentials: 'include',
+                body: JSON.stringify({ newEmail })
             });
 
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
+            if(res.ok){
+                message.textContent = 'Confirmation link sent!';
+                message.className = 'form__feedback form__feedback__success';
+            }else{
+                message.textContent = 'Something went wrong.';
+                message.className = 'form__feedback form__feedback__error';
             }
+        }catch{
+            message.textContent = 'Network error. Please try again.';
+            message.className = 'form__feedback form__feedback__error';
+        }
+    });
 
-            const result = await response.json();
-            console.log(result);
-
-        } catch (error) {
-            console.error('Email update error:', error);
+    //Password reset button linking
+    document.getElementById('passwordresetbtn__settings').addEventListener('click', async function(){
+        const message = document.getElementById('passwordmessage');
+    
+        try {
+            const res = await fetch('/api/account/request-password-reset', {
+                method: 'POST',
+                credentials: 'include'
+            });
+ 
+            if (res.ok) {
+                message.textContent = 'Password reset link sent! Check your email.';
+                message.className = 'form__feedback form__feedback__success';
+            } else {
+                message.textContent = 'Something went wrong. Please try again.';
+                message.className = 'form__feedback form__feedback__error';
+            }
+        } catch {
+            message.textContent = 'Network error. Please try again.';
+            message.className = 'form__feedback form__feedback__error';
         }
     });
 }
 
-//Update password form validation in settings
-const passwordForm = document.querySelector('.account__form:has(#currentpassword)');
-if (passwordForm) {
-    passwordForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const currentPassword = document.getElementById('currentpassword').value.trim();
-        const newPassword = document.getElementById('newpassword').value.trim();
-        const confirmNewPassword = document.getElementById('confirmnewpassword').value.trim();
-
-        if (!currentPassword || !newPassword || !confirmNewPassword) {
-            showFormError(passwordForm, 'Please fill in all fields.');
-            return;
-        } else if (newPassword !== confirmNewPassword) {
-            showFormError(passwordForm, 'New passwords do not match.');
-            return;
-        } else if (newPassword.length < 6) {
-            showFormError(passwordForm, 'New password must be at least 6 characters long.');
-            return;
-        }
-
-        const data = { currentPassword, newPassword };
-
-        try {
-            const response = await fetch('/settings/password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error('Password update error:', error);
-        }
-    });
-}
-
+//Email reset page
 //Notification form validation in settings
 const notificationForm = document.querySelector('.notifications__form');
-if (notificationForm) { 
-    notificationForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const data = {
-            emailUpdates: document.getElementById('emailUpdates').checked,
-            emailReminders: document.getElementById('emailReminders').checked
-        };
-
-        try {
-            const response = await fetch('/settings/notifications', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)  
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                 return;
-         }
-
-            const result = await response.json();
-            console.log(result);
-            
-        } catch (error) {
-            console.error('Notification update error:', error);
-        }
-    });
-}
 
 //Profile update form validation and prefill inputs in settings
 const profileForm = document.querySelector('.profile__form');
 if (profileForm) {
-
-    const availableUsername = document.getElementById('available__username');
-    const usernameInput = document.getElementById('profileusername');
-    const charCount = document.getElementById('username__charcount');
     const maxChars = 20;
-
+    const charCount = document.getElementById('charcount');
+    const fulleNameInput = document.getElementById('profilefullname');
+    const usernameInput = document.getElementById('profileusername');
+    const availableUsername = document.getElementById('available__username');
     //Prefill profile form with current user data
     window.prefillProfile = function(userData) {
-        const fullNameInput = document.getElementById('profilefullname');
 
         if (fullNameInput){
             fullNameInput.value = userData.fullName || '';
@@ -602,10 +602,11 @@ if (profileForm) {
         availableUsername.textContent = 'Checking availability...';
         availableUsername.classList.add('available__username__checking');
 
+        const formData = new FormData();
+        formData.append('username', val);
         fetch('/settings/check__username', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: val })
+            body: formData
         })
         
         .then(response =>{
@@ -640,41 +641,22 @@ if (profileForm) {
         checkUsernameAvailability(usernameInput.value.trim());
     });
 
-    profileForm.addEventListener('submit', async (e) => {
+    profileForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const fullName = document.getElementById('profilefullname').value.trim();
         const username = usernameInput.value.trim();
 
         if (!fullName || !username) {
+            e.preventDefault();
             showFormError(profileForm, 'Please fill in all fields.');
-            return;
         }else if (username.length < 3) {
+            e.preventDefault();
             showFormError(profileForm, 'Username must be at least 3 characters long.');
             return;
         }else if(availableUsername.classList.contains('available__username__taken')) {
+            e.preventDefault();
             showFormError(profileForm, 'Username is already taken.');
-            return;
-        }
-
-        const data = { fullName, username };
-
-        try {
-            const response = await fetch('/settings/profile', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                console.error('Server error:', response.status);
-                return;
-            }
-
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error('Profile update error:', error);
         }
     });
 }
@@ -692,6 +674,159 @@ function showFormError(form, message) {
     error.textContent = message;
     form.appendChild(error);
 }
+
+//OTT submit page
+const ottMessage = document.getElementById('ott__message');
+if (ottMessage) {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const type = params.get('type');
+
+    if (token && type) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/ott/login/submit';
+
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = 'token';
+        tokenInput.value = token;
+        
+        const typeInput = document.createElement('input');
+        typeInput.type = 'hidden';
+        typeInput.name = 'type';
+        typeInput.value = type;
+
+        form.appendChild(tokenInput);
+        form.appendChild(typeInput);
+        document.body.appendChild(form);
+        form.submit();
+    } else {
+        ottMessage.textContent = 'Invalid or expired link. Redirecting...';
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 2500);
+    }
+}
+
+//Password reset form validation
+const passwordResetForm = document.querySelector('.password__reset__form');
+if (passwordResetForm) {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+
+    if(token){
+        document.getElementById('resettoken').value = token;
+    }
+
+    const newPassword = document.getElementById('newpassword');
+    const confirmPassword = document.getElementById('confirmnewpassword');
+    const passwordbtn = document.getElementById('passwordresetbtn');
+
+    function checkPasswordMatch(){
+        passwordbtn.disabled = !(newPassword.value && newPassword.value === confirmPassword.value);
+    }
+
+    newPassword.addEventListener('input', checkPasswordMatch);
+    confirmPassword.addEventListener('input', checkPasswordMatch);
+
+    passwordResetForm.addEventListener('submit', (e) => {
+        const newPw = document.getElementById('newpassword');
+        const confirmPw = document.getElementById('confirmnewpassword');
+
+        if (!newPw || !confirmPw) {
+            e.preventDefault();
+            showFormError(passwordResetForm, 'Please fill in all fields.');
+        } else if (newPw !== confirmPw) {
+            e.preventDefault();
+            showFormError(passwordResetForm, 'Passwords do not match.');
+        } else if (newPw.length < 6) {
+            e.preventDefault();
+            showFormError(passwordResetForm, 'Password must be at least 6 characters long.');
+        }
+    });
+}
+
+//Email reset form validation
+const emailResetForm = document.querySelector('.email__reset__form');
+if (emailResetForm) {
+    const params = new URLSearchParams(window.location.search);
+    const token  = params.get('token');
+ 
+    if (token) {
+        document.getElementById('resettoken').value = token;
+    } 
+
+    const newEm = document.getElementById('newemail').value;
+    const confirmEm = document.getElementById('confirmnewemail').value;
+    const embtn = document.getElementById('emailresetbtn');
+
+    function checkEmailMatch(){
+        embtn.disabled = !(newEm.value && newEm.value === confirmEm.value && newEm.value.includes('@'));
+    }
+
+    newEm.addEventListener('input', checkEmailMatch);
+    confirmEm.addEventListener('input', checkEmailMatch);
+ 
+    emailResetForm.addEventListener('submit', (e) => {
+        const newEmail = document.getElementById('newemail').value.trim();
+        const confirmEmail = document.getElementById('confirmnewemail').value.trim();
+        const emailRegex   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ 
+        if (!newEmail || !confirmEmail) {
+            e.preventDefault();
+            showFormError(emailResetForm, 'Please fill in all fields.');
+        } else if (!emailRegex.test(newEmail)) {
+            e.preventDefault();
+            showFormError(emailResetForm, 'Please enter a valid email address.');
+        } else if (newEmail !== confirmEmail) {
+            e.preventDefault();
+            showFormError(emailResetForm, 'Email addresses do not match.');
+        }
+    });
+}
+
+//Form validation
+function isValidEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function setupFormValidation(formSelector, btnId, getIsValid){
+    const form = document.querySelector(formSelector);
+    if(!form){
+        return;
+    }
+
+    const btn = form.querySelector('#' + btnId);
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    const validate = () => { btn.disabled = !getIsValid(form); };
+    inputs.forEach(input => input.addEventListener('input', validate));
+}
+
+setupFormValidation('.login__form', 'loginbtn', form =>
+    form.querySelector('#username').value.trim() &&
+    form.querySelector('#password').value.trim()
+);
+
+setupFormValidation('.signup__form', 'signupbtn', form => {
+    const signuppw = form.querySelector('#signuppassword').value;
+    return form.querySelector('#signupfullname').value.trim() &&
+        form.querySelector('#signupusername').value.trim().length >= 3 &&
+        isValidEmail(form.querySelector('#signupemail').value) &&
+        signuppw.length >= 6 &&
+        signuppw === form.querySelector('#cpassword').value;
+});
+
+setupFormValidation('.password__reset__form', 'passwordresetbtn', form => {
+    const pwreset = form.querySelector('#newpassword').value;
+    return pwreset.length >= 6 && pwreset === form.querySelector('#confirmnewpassword').value;
+});
+
+setupFormValidation('.email__reset__form', 'emailresetbtn', form => {
+    const emailreset = form.querySelector('#newemail').value;
+    return isValidEmail(emailreset) && emailreset == form.querySelector('#confirmnewemail').value;
+});
+
 //Lesson data
 const lessonData = {
     //Data Structures course
@@ -1718,6 +1853,14 @@ function closeQuiz() {
     document.querySelector('header.lessons__header').style.display = 'flex';
 }
 
+//Back button for error page
+const backBtn = document.querySelector('.btn__back');
+if (backBtn) {
+    backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+    });
+}
 
 const contrastToggle = document.getElementById('contrastToggle');
 const HIGH_CONTRAST_KEY = 'highContrastEnabled';
