@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ailurus Learning</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Settings - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png"">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
                 <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Ailurus Learning</span></a>
                 <button class="nav__hamburger" aria-label="Toggle menu">
@@ -27,7 +27,7 @@
                     <span></span>
                     <span></span>
                 </button>                
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -73,7 +73,7 @@
                     <div class="settings__card">
                         <h3>Personal Information</h3>
                         <p class="settings__label">Manage your personal information and profile details.</p>
-                        <form class="profile__form">
+                        <form class="profile__form" action="/settings/profile" method="post">
                             <div class="form__control">
                                 <label for="profilefullname">Full name</label>
                                 <input type="text" id="profilefullname" placeholder="Enter your full name">
@@ -109,6 +109,11 @@
                 <section id="accessibility">
                     <h2>Accessibility</h2>
                     <p>Adjust accessibility settings such as font size, color contrast, and screen reader support to enhance your learning experience.</p>
+                    <div class="setting-row">
+                    <label for="contrastToggle">High contrast</label>
+                    <input type="checkbox" id="contrastToggle" aria-describedby="contrastHelp" />
+                    <p id="contrastHelp">Improves text and UI contrast for readability.</p>
+                        </div>
                 </section>
             </div>
         </div>

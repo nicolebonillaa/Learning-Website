@@ -1,5 +1,7 @@
 //Learning website focused on teaching computer science concepts through brief lessons.
 
+//const { use } = require("react");
+
 //change navbar styles on scroll
 window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
@@ -74,18 +76,10 @@ if (signOutBtn) {
   });
 }
 
-//Profile Select Accessory Functionability
-const elements = document.getElementsByClassName('card');
-
-Array.from(elements).forEach(element => {
-    element.addEventListener('click', () => {
-        console.log('Element clicked!');
-    });
-});
 // --progress page code--
 const progressBar = [
 
-    { id: "progress0", category: "inProgress", name: "progress0", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_00.gif" },
+    { id: "progress0", category: "inProgress", name: "progress0", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_0.gif" },
     { id: "progress1", category: "inProgress", name: "progress1", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_01.gif" },
     { id: "progress2", category: "inProgress", name: "progress2", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_02.gif" },
     { id: "progress3", category: "inProgress", name: "progress3", image: "/main/images/progress-html-assests/progress-bar-assets/progress_bar_03.gif" },
@@ -141,6 +135,8 @@ function getProgressImageIndex(progressValue) {
 }
 
 function renderAllProgressBars() {
+    console.log("renderAllProgressBars called");
+
   progressConfig.forEach(item => {
     const element = document.getElementById(item.id);
     if (!element) return;
@@ -149,13 +145,15 @@ function renderAllProgressBars() {
     const value = raw ? Math.round(Number(raw)) : 0;
     const imageIndex = getProgressImageIndex(value);
 
+    console.log(item.id, "raw text =", raw, "value =", value, "imageIndex =", imageIndex);
+
     const img = document.createElement("img");
-    img.src = `/main/images/progress-html-assets/progress-bar-assets/progress_bar_${imageIndex}.gif`;
+    img.src = `/main/images/progress-html-assests/progress-bar-assets/progress_bar_${imageIndex}.gif`;
     img.alt = `Progress ${value}%`;
     img.className = "progress_gif";
 
     img.onerror = () => {
-      img.src = "/main/images/progress-html-assets/progress-bar-assets/progress_bar_0.gif";
+      img.src = "/main/images/progress-html-assests/progress-bar-assets/progress_bar_0.gif";
     };
 
     const container = document.getElementById(item.container);
@@ -165,23 +163,10 @@ function renderAllProgressBars() {
     container.appendChild(img);
   });
 }
-/*
-var backendReady = false; // Simulate backend readiness, set to true when backend is ready
-var test = 0;
 
-if (test === 0) {
-    backendReady = true;
-} else {
-    backendReady = false;
-}
-
-if (backendReady) {
+document.addEventListener("DOMContentLoaded", () => {
   renderAllProgressBars();
-  test++;
-}
-*/
-// renderAllProgressBars();
-
+});
 // --End of progress page code--
 
 // --Avatar customization code--
@@ -241,6 +226,126 @@ cardButtons.forEach((button, index) => {
     handleAccessoryClick(item);
   });
 });
+
+// Handle accessory click to update avatar state
+function handleAccessoryClick(item) {
+  const category = item.category;
+
+  if (state.avatar[category] === item.id) {
+    state.avatar[category] = null;
+  } else {
+    state.avatar[category] = item.id;
+  }
+
+  console.log("Clicked item:", item);
+  console.log("Updated avatar state:", state.avatar);
+
+  renderAvatarPreview();
+}
+
+// Render the avatar preview based on the current state
+function renderAvatarPreview() {
+  avatarPreviewEl.innerHTML = "";
+
+  const baseImg = document.createElement("img");
+    // Use different base image depending on whether a hat is selected to ensure proper layering of accessories
+    if (state.avatar.hat) {
+    baseImg.src = BASE_AVATAR_IMAGE_1;
+    } else {
+    baseImg.src = BASE_AVATAR_IMAGE_0;
+    }
+  
+  baseImg.alt = "Base avatar";
+  baseImg.className = "avatar-layer";
+  avatarPreviewEl.appendChild(baseImg);
+
+  LAYER_ORDER.forEach(category => {
+    const selectedItemId = state.avatar[category];
+    if (!selectedItemId) return;
+
+    const item = state.accessories.find(accessory => accessory.id === selectedItemId);
+    if (!item) return;
+
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.name;
+    img.className = "avatar-layer";
+
+    avatarPreviewEl.appendChild(img);
+
+    console.log("Selected category:", category);
+    console.log("Selected item id:", selectedItemId);
+    console.log("Matched item:", item);
+  });
+
+  console.log("Rendering avatar:", state.avatar);
+}
+
+// Reset avatar to default state
+function resetAvatar() {
+  state.avatar.hat = null;
+  state.avatar.glasses = null;
+
+  statusMessageEl.textContent = "Avatar reset.";
+  renderAvatarPreview();
+}
+
+// Save avatar state to backend
+async function saveAvatar() {
+  try {
+    statusMessageEl.textContent = "Saving...";
+    // Send the current avatar state to the backend API to save it for the user
+    const response = await fetch("/api/avatar/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(state.avatar)
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save avatar");
+    }
+
+    statusMessageEl.textContent = "Avatar saved successfully.";
+  } catch (error) {
+    statusMessageEl.textContent = "Error saving avatar.";
+    console.error(error);
+  }
+}
+
+// Load saved avatar state from backend when the page initializes
+async function loadSavedAvatar() {
+  try {
+    const response = await fetch("/api/avatar/me");
+    if (!response.ok) {
+      throw new Error("Failed to load avatar");
+    }
+
+    const savedAvatar = await response.json();
+
+    state.avatar = {
+      hat: savedAvatar.hat || null,
+      glasses: savedAvatar.glasses || null
+    };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Initialize the avatar page by loading saved avatar and setting up event listeners
+async function initAvatarPage() {
+  // await loadSavedAvatar(); // enable when backend is ready
+  renderAvatarPreview();
+
+  saveBtn.addEventListener("click", saveAvatar);
+  resetBtn.addEventListener("click", resetAvatar);
+}
+
+// Call the initialization function when the DOM is fully loaded
+initAvatarPage();
+
+// --End of avatar customization code--
 
 //Login and sign up form validation 
 const loginForm = document.querySelector('.login__form');
@@ -539,8 +644,8 @@ if (profileForm) {
     profileForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const fullName = document.getElementById('fullName').value.trim();
-        const username = document.getElementById('profileusername').value.trim();
+        const fullName = document.getElementById('profilefullname').value.trim();
+        const username = usernameInput.value.trim();
 
         if (!fullName || !username) {
             e.preventDefault();
@@ -1665,7 +1770,7 @@ function renderQuestion() {
     document.getElementById('question__feedback').className = 'quiz__feedback';
     document.getElementById('question__feedback').textContent = '';
 
-    const optionsContainer = document.getElementById('question__options');
+    const optionsContainer = document.getElementById('question-options');
     const template = document.getElementById('option__template');
     optionsContainer.innerHTML = '';
 
@@ -1755,4 +1860,44 @@ if (backBtn) {
         e.preventDefault();
         history.back();
     });
+}
+
+const contrastToggle = document.getElementById('contrastToggle');
+const HIGH_CONTRAST_KEY = 'highContrastEnabled';
+
+function applyHighContrast(enabled) {
+  document.body.classList.toggle('high-contrast', enabled);
+
+  if (contrastToggle) {
+    contrastToggle.checked = enabled;
+  }
+}
+
+function loadHighContrastSetting() {
+  const saved = localStorage.getItem(HIGH_CONTRAST_KEY);
+  return saved === 'true';
+}
+
+function saveHighContrastSetting(enabled) {
+  localStorage.setItem(HIGH_CONTRAST_KEY, String(enabled));
+}
+
+const initialContrast = loadHighContrastSetting();
+applyHighContrast(initialContrast);
+
+if (contrastToggle) {
+  contrastToggle.addEventListener('change', () => {
+    const enabled = contrastToggle.checked;
+    applyHighContrast(enabled);
+    saveHighContrastSetting(enabled);
+  });
+}
+
+const prefersMoreContrast = window.matchMedia('(prefers-contrast: more)').matches;
+
+function loadHighContrastSetting() {
+  const saved = localStorage.getItem(HIGH_CONTRAST_KEY);
+  if (saved !== null) return saved === 'true';
+
+  return window.matchMedia('(prefers-contrast: more)').matches;
 }
