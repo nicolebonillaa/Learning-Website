@@ -1756,3 +1756,44 @@ if (backBtn) {
         history.back();
     });
 }
+
+/*About page functionality for full screen*/
+const slidesEmbedded = document.getElementById('slidesembed');
+const fsOverlay = document.getElementById('fullscreenoverlay');
+const fsFrame = document.getElementById('slidesfullscreen');
+const expandBtn = document.getElementById('slidesexpandbtn');
+const closeBtn = document.getElementById('slidesclosebtn');
+
+if(slidesEmbedded && fsOverlay && fsFrame){
+    function openSlidesFullscreen(){
+        fsFrame.src = slidesEmbedded.src;
+        fsOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSlidesFullscreen(){
+        fsOverlay.classList.remove('active');
+        fsFrame.src = '';
+        document.body.style.overflow = '';
+    }
+
+    if(expandBtn){
+        expandBtn.addEventListener('click', openSlidesFullscreen);
+    }
+
+    if(closeBtn){
+        closeBtn.addEventListener('click', closeSlidesFullscreen);
+    }
+
+    // Close when clicking the dark backdrop
+    fsOverlay.addEventListener('click', (e) => {
+        if (e.target === fsOverlay) closeSlidesFullscreen();
+    });
+ 
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && fsOverlay.classList.contains('active')) {
+            closeSlidesFullscreen();
+        }
+    });
+}

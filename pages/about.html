@@ -1,0 +1,119 @@
+<!--Sorting algorithms course page-->
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+
+        <!-- Google fonts for website using indie flower -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/main/style.css">
+    </head>
+    <body>
+        <nav>
+            <div class="container nav__container">
+                <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Ailurus Learning</span></a>
+                <button class="nav__hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>                
+                <ul class="nav__menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/lessons">Lessons</a></li>
+                    <li><a href="/progress">Progress/habit tracker</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/settings">Settings</a></li>
+                </ul>
+            </div>    
+        </nav>
+    <header class="about__page">
+        <div class="container header__container">
+            <div class="header__left">
+                <h1>About Ailurus Learning</h1>
+                <p>Our mission is to help provide educational resources to help users learn and grow in the field of Computer Science, specifically lower division topics. To accomplish this we created brief and interactive lessons that make learning enjoyable and accessible to everyone. To promote consistent learning habits we have implemented habit tracking features and automated email notifications that remind users to study to complete their daily lesson so users do not lose their study streak.</p>
+            </div>
+            <div class="about__page__img  header__right">
+                <img src="/main/images/pandasmart.png" alt="Ailurus mascot">
+            </div>
+        </div>
+    </header>
+    <section class="about__slides">
+        <div class="container">
+            <h2>Our Project Presentation</h2>
+            <p class="section__sub">Navigate the slides right here, or open them full screen.</p>
+            <div class="slides__embedded">
+                <h3>Ailurus Learning - Project Slides</h3>
+                <div class="slides__iframe">
+                    <iframe
+                            id="slidesembed"
+                            src="https://docs.google.com/presentation/d/e/2PACX-1vQWe2jSJ4J22AF4wYLn8Ivf1mLygUp_BxFyepz-LoCEdnU9Pz8e_WZ-ddPG124ZEcIz4ARGFFRoRRFb/pubembed?start=false&loop=false&delayms=3000"
+                            frameborder="0"
+                            allowfullscreen
+                            mozallowfullscreen="true"
+                            webkitallowfullscreen="true"
+                            title="Ailurus Learning Project Presentation">
+                    </iframe>
+                </div>
+                <div class="slides__toolbar">
+                    <div class="slides__toolbar__left">
+                        <button id="slidesexpandbtn" class="slides__btn slides__btn__expand">
+                            ⛶ Full Screen
+                        </button>
+                        <a href="https://docs.google.com/presentation/d/17WLx4d_liGrEC0HtVnOeSMznLsatzlOQjRxFPm6Ua-Q/edit"
+                               target="_blank" rel="noopener"
+                               class="slides__btn slides__btn__link">
+                                ↗ Open in Slides
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="slides__fullscreen__overlay" id="fullscreenoverlay">
+        <button id="slidesclosebtn" class="slides__fullscreen__close" aria-label="Close fullscreen">✕</button>
+            <iframe
+                id="slidesfullscreen"
+                src=""
+                frameborder="0"
+                allowfullscreen
+                mozallowfullscreen="true"
+                webkitallowfullscreen="true"
+                title="Ailurus Learning Presentation – Full Screen">
+            </iframe>
+    </div>
+    <footer>
+        <div class="container footer__container">
+            <div class="footer__1">
+                <a href="/pages/about.html" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Ailurus Learning</span></a>
+                <p>Our mission is to provide educational resources to help individuals learn and grow in the field of computer science. We are committed to creating engaging and interactive lessons that make learning enjoyable and accessible to everyone.</p>
+            </div>
+            <div class="footer__2">
+                <h4>Pages</h4>
+                <ul class="permalinks">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/lessons">Lessons</a></li>
+                    <li><a href="/progress">Progress/habit tracker</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/settings">Settings</a></li>
+                </ul>
+            </div>
+            <div class="footer__3">
+                <h4>Subjects</h4>
+                <ul class="permalinks">
+                    <li><a href="/datastructures">Data Structures</a></li>
+                    <li><a href="/java">Java Programming</a></li>
+                    <li><a href="/sorting">Sorting Algorithms</a></li>
+                    <li><a href="/formallogic">Formal Logic</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="/main/main.js"></script>
+    </body>
+</html>
