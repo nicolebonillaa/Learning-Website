@@ -1797,3 +1797,43 @@ if(slidesEmbedded && fsOverlay && fsFrame){
         }
     });
 }
+
+const contrastToggle = document.getElementById('contrastToggle');
+const HIGH_CONTRAST_KEY = 'highContrastEnabled';
+
+function applyHighContrast(enabled) {
+  document.body.classList.toggle('high-contrast', enabled);
+
+  if (contrastToggle) {
+    contrastToggle.checked = enabled;
+  }
+}
+
+function loadHighContrastSetting() {
+  const saved = localStorage.getItem(HIGH_CONTRAST_KEY);
+  return saved === 'true';
+}
+
+function saveHighContrastSetting(enabled) {
+  localStorage.setItem(HIGH_CONTRAST_KEY, String(enabled));
+}
+
+const initialContrast = loadHighContrastSetting();
+applyHighContrast(initialContrast);
+
+if (contrastToggle) {
+  contrastToggle.addEventListener('change', () => {
+    const enabled = contrastToggle.checked;
+    applyHighContrast(enabled);
+    saveHighContrastSetting(enabled);
+  });
+}
+
+const prefersMoreContrast = window.matchMedia('(prefers-contrast: more)').matches;
+
+function loadHighContrastSetting() {
+  const saved = localStorage.getItem(HIGH_CONTRAST_KEY);
+  if (saved !== null) return saved === 'true';
+
+  return window.matchMedia('(prefers-contrast: more)').matches;
+}
