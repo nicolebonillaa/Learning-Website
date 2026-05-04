@@ -707,6 +707,43 @@ input::placeholder{
   background: black;
   color: white;
 }
+
+.setting-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.75rem;
+}
+
+.setting-row label {
+  font-size: 0.95rem;
+  color: #2C2C2A;
+  cursor: pointer;
+}
+
+.setting-row input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #cf6730;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0.3rem;
+}
+
+#accessibility h3 {
+  font-size: 1.3rem;
+  color: #2C2C2A;
+  margin-bottom: 0.2rem;
+}
+
+#accessibility p {
+  font-size: 0.95rem;
+  color: #2C2C2A;
+  margin-bottom: 0.5rem;
+}
 /*Lesson course card styling*/
 .lesson__course{
   justify-content: space-between;
@@ -2031,4 +2068,8 @@ body.high-contrast .settings__content > #account,
 body.high-contrast h2 {
     background: #000;
   color:white;
+}
+
+body.high-contrast #accessibility h1{
+  color: #ffffff;
 }

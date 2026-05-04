@@ -1958,6 +1958,16 @@ if(slidesEmbedded && fsOverlay && fsFrame){
             closeSlidesFullscreen();
         }
     });
+
+    //Fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            fsOverlay.classList.remove('active');
+            fsOverlay.style.display = 'none';
+            fsFrame.src = '';
+            document.body.style.overflow = '';
+        }
+    });
 }
 
 const contrastToggle = document.getElementById('contrastToggle');
