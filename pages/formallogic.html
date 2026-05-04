@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ailurus Learning</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Formal Logic - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
                 <a href="/" class="nav__logo"><img src="/main/images/redpanda.png" alt="Logo" class="logo"><span>Ailurus Learning</span></a>
                 <button class="nav__hamburger" aria-label="Toggle menu">
@@ -27,7 +27,7 @@
                     <span></span>
                     <span></span>
                 </button>                
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -36,8 +36,8 @@
                 </ul>
             </div>    
         </nav>
-        <header class="lessons__header">
-            <div class="container header__container">
+        <header class="lessons__header high-contrast">
+            <div class="container header__container high-contrast">
                 <div class="header__left">
                 <h1>Formal Logic</h1>
                 <p>Formal logic is a branch of mathematics and philosophy that studies the principles of valid reasoning and inference. It provides a systematic framework for analyzing arguments and determining their validity. Formal logic uses symbolic notation to represent logical statements and relationships, allowing for precise analysis and manipulation of logical expressions.</p>
@@ -84,6 +84,7 @@
                     <button class="quiz__retry__btn" id="question__retry">Retry</button>
                     <button class="quiz__next__btn" id="quiz__submit">Done</button>
                 </div>
+				<form class="quiz__form"></form>
             </div>
         </div>
     </section>

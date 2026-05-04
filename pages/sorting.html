@@ -4,18 +4,22 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ailurus Learning</title>
-        <link rel="icon" type="image/png" href="/main/images/redpanda.png">
+        <title>Sorting Algorithms - Ailurus Learning</title>
+        <link rel="icon" type="image/png" href="/main/images/website_icon.png">
 
         <!-- Google fonts for website using indie flower -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
+        <!-- Preload custom cursor images for faster loading -->
+        <link rel="preload" href="/main/images/cursor-assets/cursor-active.png" as="image">
+        <link rel="preload" href="/main/images/cursor-assets/cursor-passive.png" as="image">
+
         <link rel="stylesheet" href="/main/style.css">
     </head>
     <body>
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="container nav__container">
                 <a href="/" class="nav__logo"><img src="/main/images/pandasmart.png" alt="Logo" class="logo"><span>Ailurus Learning</span></a>
                 <button class="nav__hamburger" aria-label="Toggle menu">
@@ -23,7 +27,7 @@
                     <span></span>
                     <span></span>
                 </button>                
-                <ul class="nav__menu">
+                <ul class="nav__menu" id="main-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/lessons">Lessons</a></li>
                     <li><a href="/progress">Progress/habit tracker</a></li>
@@ -32,8 +36,8 @@
                 </ul>
             </div>    
         </nav>
-        <header class="lessons__header">
-            <div class="container header__container">
+        <header class="lessons__header high-contrast">
+            <div class="container header__container high-contrast">
                 <div class="header__left">
                 <h1>Sorting Algorithms</h1>
                 <p>Explore various sorting algorithms such as bubble sort, selection sort, insertion sort, merge sort, and quicksort. Learn how they work and when to use each one.</p>
@@ -79,6 +83,7 @@
                     <button class="quiz__retry__btn" id="question__retry">Retry</button>
                     <button class="quiz__next__btn" id="quiz__submit">Done</button>
                 </div>
+				<form class="quiz__form"></form>
             </div>
         </div>
     </section>

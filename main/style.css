@@ -905,6 +905,8 @@ input::placeholder{
 
 .quiz__option:hover .quiz__option__label{
   border-color: #cf6730;
+  background-color: #ea9b70;
+  color: white;
 }
 
 .quiz__option.quiz__option:active {

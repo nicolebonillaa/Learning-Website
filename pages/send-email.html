@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="[thymeleaf.org](http://www.thymeleaf.org)">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Email</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 450px;
+            margin: 40px auto;
+        }
+        label { display: block; margin-top: 15px; }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .reply {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Send Email</h2>
+
+<form th:action="@{/mail/send}" th:object="${emailDetails}" method="post">
+
+    <label>Recipient:</label>
+    <input type="email" th:field="*{recipient}" required>
+
+    <label>Subject:</label>
+    <input type="text" th:field="*{subject}" required>
+
+    <label>Message:</label>
+    <textarea th:field="*{msgBody}" rows="5" required></textarea>
+
+    <button type="submit">Send Email</button>
+</form>
+
+<p class="reply" th:text="${server_reply}"></p>
+
+</body>
+</html>
