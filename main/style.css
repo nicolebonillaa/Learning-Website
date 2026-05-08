@@ -1037,7 +1037,7 @@ input::placeholder{
   width: 100%;
   padding: 1rem 1.25rem;
   border-radius: 0.8rem;
-  border: 2px solid rgba(0,0,0,0.12);
+  border: 2px solid rgba(0,0,0,0.08);
   margin-bottom: 0.75rem;
   font-size: 1rem;
   font-family: 'Indie Flower', cursive;
@@ -1045,7 +1045,9 @@ input::placeholder{
   background: #EDE6E5;
   color: #171715;
   text-align: left;
-  transition: border-color 75ms;
+  transition: all 150ms ease;
+  box-shadow: 0 4px 0 #c4b8b7, 0 5px 10px rgba(0,0,0,0.08);
+  transform: translateY(0);
 }
 
 .quiz__option:hover .quiz__option__label{
@@ -1060,15 +1062,17 @@ input::placeholder{
 
 .quiz__option:hover {
   border: 2px solid #cf6730;
+  box-shadow: 0 2px 0 #c4b8b7, 0 3px 8px rgba(0,0,0,0.1);
+  transform: translateY(2px);
 }
 
 .quiz__option:active {
-  scale: 1.08;
-  color: #cf6730; 
+  box-shadow: 0 0px 0 #c4b8b7;
+  transform: translateY(4px);
+  color: #cf6730;
 }
 
 .quiz__option:active .quiz__option__label{
-  scale: 1.08;
   border-color: #cf6730;
   background-color: #ea9b70;
   color: white;
@@ -1093,6 +1097,8 @@ input::placeholder{
   background: #EAF3DE;
   border: 2px solid #639922;
   color: #27500A;
+  box-shadow: 0 2px 0 #4a7019, 0 3px 8px rgba(0,0,0,0.08);
+  transform: translateY(2px);
   
 }
 
@@ -1106,6 +1112,8 @@ input::placeholder{
   background: #FCEBEB;
   border: 2px solid #A32D2D;
   color: #501313;
+  box-shadow: 0 2px 0 #7a2020, 0 3px 8px rgba(0,0,0,0.08);
+  transform: translateY(2px);
 }
 
 .quiz__option__incorrect .quiz__option__label{
@@ -1220,20 +1228,31 @@ input::placeholder{
   justify-content: center;
 }
  
-.quiz__retry__btn{
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.2);
+.quiz__retry__btn {
+  background: #EDE6E5;
+  border: 2px solid rgba(0,0,0,0.12);
   color: #2C2C2A;
   padding: 0.5rem 1.4rem;
   border-radius: 0.5rem;
   font-size: 0.9rem;
   font-family: 'Indie Flower', cursive;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 200ms;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 0 #b8a8a7, 0 5px 10px rgba(0,0,0,0.08);
+  transform: translateY(0);
 }
- 
-.btn-quiz-retry:hover{ 
-  background: rgba(0,0,0,0.06); 
+
+.quiz__retry__btn:hover {
+  background: #D4CAC9;
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 2px 0 #b8a8a7, 0 3px 8px rgba(0,0,0,0.1);
+  transform: translateY(2px);
+}
+
+.quiz__retry__btn:active {
+  box-shadow: 0 0px 0 #b8a8a7;
+  transform: translateY(4px);
 }
 
 /*Progress&HabitTracker*/

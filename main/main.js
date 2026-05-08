@@ -1080,7 +1080,7 @@ const lessonData = {
             },
 
             {
-                question: 'Which is logical operator in Java?',
+                question: 'Which is a logical operator in Java?',
                 options: ['+', '&&', '=', '%'],
                 answer: '&&'
             },
@@ -1856,8 +1856,6 @@ function nextQuestion() {
 function showResult() {
    const totalQuestions = topic.questions.length;
    const percentage = Math.round((score / totalQuestions) * 100);
-   
-   
    
    document.getElementById('quiz__question__screen').style.display = 'none';
    document.getElementById('quiz__result__screen').style.display = 'block';
