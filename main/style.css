@@ -1679,3 +1679,8 @@ body.high-contrast h2 {
     background: #000;
   color:white;
 }
+
+body.high-contrast .settings__menu a {
+  color: #ffff00;
+  background-color: #000;
+}
