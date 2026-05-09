@@ -104,11 +104,11 @@
                         <form class="notifications__form" action="/settings/notifications" method="post">
                             <div class="form__control">
                                 <label for="emailupdates">Receive updates about new lessons and features</label>
-                                <input type="checkbox" id="emailupdates" ${emailUpdatesChecked}>
+                                <input type="checkbox" id="emailupdates" name="emailupdates" th:checked="${emailUpdatesChecked}">
                             </div>
                             <div class="form__control">
                                 <label for="emailreminders">Receive reminders about upcoming lessons and deadlines</label>
-                                <input type="checkbox" id="emailreminders" ${emailRemindersChecked}>
+                                <input type="checkbox" id="emailreminders" name="emailreminders" th:checked="${emailRemindersChecked}">
                             </div>
                             <button type="submit" class="notifications__btn">Save Preferences</button>
                         </form>
@@ -118,8 +118,9 @@
                     <h1>Accessibility</h1>
                     <p>Adjust accessibility settings high contrast and check out our keyboard shortcuts to enhance your learning experience.</p>
                     <div class="setting-row">
-                        <input type="checkbox" id="contrastToggle" />
-                        <label for="contrastToggle">Enable high contrast mode</label>
+                        <label for="contrastToggle">High contrast</label>
+                        <input type="checkbox" id="contrastToggle" aria-describedby="contrastHelp" />
+                        <p id="contrastHelp">Improves text and UI contrast for readability.</p>
                     </div>
                 </section>
             </div>

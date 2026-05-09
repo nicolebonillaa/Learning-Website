@@ -163,10 +163,10 @@ function renderAllProgressBars() {
     container.appendChild(img);
   });
 }
-
+/*
 document.addEventListener("DOMContentLoaded", () => {
   renderAllProgressBars();
-});
+});*/
 // --End of progress page code--
 
 // --Avatar customization code--
@@ -343,7 +343,7 @@ async function initAvatarPage() {
 }
 
 // Call the initialization function when the DOM is fully loaded
-initAvatarPage();
+//initAvatarPage();
 
 // --End of avatar customization code--
 
