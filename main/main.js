@@ -1080,7 +1080,7 @@ const lessonData = {
             },
 
             {
-                question: 'Which is logical operator in Java?',
+                question: 'Which is a logical operator in Java?',
                 options: ['+', '&&', '=', '%'],
                 answer: '&&'
             },
@@ -1857,8 +1857,6 @@ function showResult() {
    const totalQuestions = topic.questions.length;
    const percentage = Math.round((score / totalQuestions) * 100);
    
-   
-   
    document.getElementById('quiz__question__screen').style.display = 'none';
    document.getElementById('quiz__result__screen').style.display = 'block';
    document.getElementById('result__score').textContent = score + ' / ' + totalQuestions;
@@ -1956,6 +1954,16 @@ if(slidesEmbedded && fsOverlay && fsFrame){
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && fsOverlay.classList.contains('active')) {
             closeSlidesFullscreen();
+        }
+    });
+
+    //Fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            fsOverlay.classList.remove('active');
+            fsOverlay.style.display = 'none';
+            fsFrame.src = '';
+            document.body.style.overflow = '';
         }
     });
 }

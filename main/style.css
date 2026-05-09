@@ -26,9 +26,31 @@
     cursor: url('/main/images/cursor-assets/cursor-passive.png') 12 6, auto !important;
   }
 
-  a, button, .course, .lesson, .lesson__course, .card, .quiz__option, .quiz__next__btn, .quiz__retry__btn, .permalinks a, footer a, nav a, a *, a img, a span, .nav__logo, .nav__logo *, .course *, article, article *, a > article, a > div, [role="button"], input[type="submit"], input[type="button"], input[type="text"], input[type="email"], input[type="password"], label[for], select {
-    cursor: url('/main/images/cursor-assets/cursor-active.png') 12 6, pointer !important;
-  }
+ a, button,
+ button *, button img,
+.course, .lesson, .lesson__course, .card,
+.quiz__option, .quiz__next__btn, .quiz__retry__btn, .quiz__back__btn,
+.permalinks a, footer a, nav a, a *, a img, a span,
+.nav__logo, .nav__logo *,
+.course *, article, article *,
+a > article, a > div,
+[role="button"],
+input[type="submit"], input[type="button"], input[type="text"],
+input[type="email"], input[type="password"], input[type="checkbox"],
+label[for], select,
+.settings__menu a, .settings__menu a.active,
+.account__btn, .notifications__btn,
+.account__form input, .profile__form input, .notifications__form input,
+#signoutbtn,
+.tab, #saveBtn, #resetBtn,
+.slides__btn, .slides__btn__expand, .slides__btn__link,
+.slides__fullscreen__close,
+.btn__back, .btn, .btn-primary,
+.notifications__form label,
+.setting-row label,
+#contrastToggle {
+  cursor: url('/main/images/cursor-assets/cursor-active.png') 12 6, pointer !important;
+}
 
 /*how we want the website to look like on different screen sizes 38:11*/
 :root{
@@ -159,6 +181,17 @@ header{
   color: #000;
 }
 
+.header__features {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1rem;
+  color: #333;
+}
 /*Courses section styling*/
 .courses{
   background: #d1c5c4;
@@ -200,13 +233,33 @@ header{
   background: #DED2D1;
   padding: 2rem;
   border-radius: 2rem;
-  transition: all 400ms ease;
+  transition: all 300ms ease;
   height: 100%;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 0 #b8a8a7, 0 6px 12px rgba(0,0,0,0.1);
+  transform: translateY(0);
 }
 
 .course:hover{
-  box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 0 #b8a8a7, 0 4px 16px rgba(0,0,0,0.15);
+  transform: translateY(3px);
   z-index: 1;
+}
+
+.course__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #FAECE7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.course__icon img {
+  width: 24px;
+  height: 24px;
 }
 
 /*course styling for lessons page*/
@@ -251,10 +304,14 @@ header{
   display: grid;
   align-items: center;
   min-height: 32rem;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 0 #b8a8a7, 0 6px 12px rgba(0,0,0,0.1);
+  transform: translateY(0);
 }
 
 .lesson:hover{
-  box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 0 #b8a8a7, 0 4px 16px rgba(0,0,0,0.15);
+  transform: translateY(3px);
   z-index: 1;
 }
 
@@ -324,11 +381,24 @@ header{
 .login .btn.primary{
   background: #cf6730;
   color: white;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0 4px 0 #8f4520;
+  transform: translateY(0);
+  transition: all 200ms ease;
 }
 
 .login .btn:hover{
-  background: black;
+  background: #b85a28;
   color: white;
+  box-shadow: 0 2px 0 #8f4520;
+  transform: translateY(2px);
+}
+
+.login .btn:active {
+  box-shadow: 0 0px 0 #8f4520;
+  transform: translateY(4px);
 }
 
 .login__details{
@@ -371,21 +441,19 @@ label{
   color:#000;
 }
 
-.login__extras{
-  display: flex;
-  justify-content: space-between;
-}
-
-.login__extras div{
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
 .next__page{
   margin-top: 1rem;
   text-align: center;
   display: block;
+}
+
+.next__page a {
+  color: #000;
+  text-decoration: none;
+}
+
+.next__page a:hover {
+  text-decoration: underline;
 }
 
 .logo__header {
@@ -426,11 +494,14 @@ label{
   flex-direction: column;
   align-items: center;
   width: 100%;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 0 #b8a8a7, 0 6px 12px rgba(0,0,0,0.1);
+  transform: translateY(0);
 }
 
 .lesson__course:hover{
-  box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
-  z-index: 1;
+  box-shadow: 0 2px 0 #b8a8a7, 0 4px 16px rgba(0,0,0,0.15);
+  transform: translateY(3px);
  }
 
  .lesson__course h4{
@@ -603,6 +674,9 @@ footer ul li a:hover{
   border: none;
   display: inline-block;
   width: auto;
+  box-shadow: 0 4px 0 #8f4520;
+  transform: translateY(0);
+  transition: all 200ms ease;
 }
 
 #profile__save__btn {
@@ -610,8 +684,15 @@ footer ul li a:hover{
 }
 
 .account__btn:hover{
-  background: black;
   color: white;
+  background: #b85a28;
+  box-shadow: 0 2px 0 #8f4520;
+  transform: translateY(2px);
+}
+
+.account__btn:active {
+  box-shadow: 0 0px 0 #8f4520;
+  transform: translateY(4px);
 }
 
 .account h1{
@@ -691,7 +772,7 @@ input::placeholder{
 }
 
 .notifications__btn{
-  align-self:flex-start;
+  align-self: flex-start;
   background: #cf6730;
   color: white;
   padding: 0.6rem 1.4rem;
@@ -699,13 +780,59 @@ input::placeholder{
   font-family: 'Indie Flower', cursive;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 300ms ease;
+  transition: all 200ms ease;
   border: none;
+  box-shadow: 0 4px 0 #8f4520;
+  transform: translateY(0);
 }
 
 .notifications__btn:hover{
-  background: black;
+  background: #b85a28;
   color: white;
+  box-shadow: 0 2px 0 #8f4520;
+  transform: translateY(2px);
+}
+
+.notifications__btn:active {
+  box-shadow: 0 0px 0 #8f4520;
+  transform: translateY(4px);
+}
+
+.setting-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.75rem;
+}
+
+.setting-row label {
+  font-size: 0.95rem;
+  color: #2C2C2A;
+  cursor: pointer;
+}
+
+.setting-row input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #cf6730;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0.3rem;
+}
+
+#accessibility h3 {
+  font-size: 1.3rem;
+  color: #2C2C2A;
+  margin-bottom: 0.2rem;
+}
+
+#accessibility p {
+  font-size: 0.95rem;
+  color: #2C2C2A;
+  margin-bottom: 0.5rem;
 }
 /*Lesson course card styling*/
 .lesson__course{
@@ -760,10 +887,19 @@ input::placeholder{
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 300ms ease;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 0 #8f4520;
+  transform: translateY(0);
 }
 .quiz__open__btn:hover{
-  background: #a8521f;
+  background: #b85a28;
+  box-shadow: 0 2px 0 #8f4520;
+  transform: translateY(2px);
+}
+
+.quiz__open__btn:active {
+  box-shadow: 0 0px 0 #8f4520;
+  transform: translateY(4px);
 }
 
 .quiz__fullpage{
@@ -813,15 +949,24 @@ input::placeholder{
   font-family: 'Indie Flower', cursive;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background 200ms;
+  transition: all 200ms ease;
   width: fit-content;
   grid-column: 1;
   justify-self: start;
-  align-self:center;
+  align-self: center;
+  box-shadow: 0 4px 0 #8f4520;
+  transform: translateY(0);
 }
 
 .quiz__back__btn:hover{
-  background: #a8521f;
+  background: #b85a28;
+  box-shadow: 0 2px 0 #8f4520;
+  transform: translateY(2px);
+}
+
+.quiz__back__btn:active {
+  box-shadow: 0 0px 0 #8f4520;
+  transform: translateY(4px);
 }
 
 .quiz__fullpage__body{
@@ -892,7 +1037,7 @@ input::placeholder{
   width: 100%;
   padding: 1rem 1.25rem;
   border-radius: 0.8rem;
-  border: 2px solid rgba(0,0,0,0.12);
+  border: 2px solid rgba(0,0,0,0.08);
   margin-bottom: 0.75rem;
   font-size: 1rem;
   font-family: 'Indie Flower', cursive;
@@ -900,7 +1045,9 @@ input::placeholder{
   background: #EDE6E5;
   color: #171715;
   text-align: left;
-  transition: border-color 75ms;
+  transition: all 150ms ease;
+  box-shadow: 0 4px 0 #c4b8b7, 0 5px 10px rgba(0,0,0,0.08);
+  transform: translateY(0);
 }
 
 .quiz__option:hover .quiz__option__label{
@@ -915,15 +1062,17 @@ input::placeholder{
 
 .quiz__option:hover {
   border: 2px solid #cf6730;
+  box-shadow: 0 2px 0 #c4b8b7, 0 3px 8px rgba(0,0,0,0.1);
+  transform: translateY(2px);
 }
 
 .quiz__option:active {
-  scale: 1.08;
-  color: #cf6730; 
+  box-shadow: 0 0px 0 #c4b8b7;
+  transform: translateY(4px);
+  color: #cf6730;
 }
 
 .quiz__option:active .quiz__option__label{
-  scale: 1.08;
   border-color: #cf6730;
   background-color: #ea9b70;
   color: white;
@@ -948,6 +1097,8 @@ input::placeholder{
   background: #EAF3DE;
   border: 2px solid #639922;
   color: #27500A;
+  box-shadow: 0 2px 0 #4a7019, 0 3px 8px rgba(0,0,0,0.08);
+  transform: translateY(2px);
   
 }
 
@@ -961,6 +1112,8 @@ input::placeholder{
   background: #FCEBEB;
   border: 2px solid #A32D2D;
   color: #501313;
+  box-shadow: 0 2px 0 #7a2020, 0 3px 8px rgba(0,0,0,0.08);
+  transform: translateY(2px);
 }
 
 .quiz__option__incorrect .quiz__option__label{
@@ -1029,16 +1182,27 @@ input::placeholder{
   font-family: 'Indie Flower', cursive;
   font-weight: 600;
   cursor: pointer;
-  transition: background 300ms;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 0 #8f4520;
+  transform: translateY(0);
 }
 
 .quiz__next__btn:hover{
-  background: #a8521f;
+  background: #b85a28;
+  box-shadow: 0 2px 0 #8f4520;
+  transform: translateY(2px);
 }
 
-.quiz__next__btn:disabled{
+.quiz__next__btn:active {
+  box-shadow: 0 0px 0 #8f4520;
+  transform: translateY(4px);
+}
+
+.quiz__next__btn:disabled {
   opacity: 0.4;
   cursor: default;
+  box-shadow: none;
+  transform: none;
 }
 
 .quiz__score{
@@ -1064,29 +1228,40 @@ input::placeholder{
   justify-content: center;
 }
  
-.quiz__retry__btn{
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.2);
+.quiz__retry__btn {
+  background: #EDE6E5;
+  border: 2px solid rgba(0,0,0,0.12);
   color: #2C2C2A;
   padding: 0.5rem 1.4rem;
   border-radius: 0.5rem;
   font-size: 0.9rem;
   font-family: 'Indie Flower', cursive;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 200ms;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 0 #b8a8a7, 0 5px 10px rgba(0,0,0,0.08);
+  transform: translateY(0);
 }
- 
-.btn-quiz-retry:hover{ 
-  background: rgba(0,0,0,0.06); 
+
+.quiz__retry__btn:hover {
+  background: #D4CAC9;
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 2px 0 #b8a8a7, 0 3px 8px rgba(0,0,0,0.1);
+  transform: translateY(2px);
+}
+
+.quiz__retry__btn:active {
+  box-shadow: 0 0px 0 #b8a8a7;
+  transform: translateY(4px);
 }
 
 /*Progress&HabitTracker*/
 
 .progress-title{
-  font-size: 425%;
+  font-size: clamp(2rem, 8vw, 4.25rem);
   padding: 35px;
   border: 10px;
-  margin: 50px;
+  margin: clamp(16px, 4vw, 50px) auto;
   text-align: center;
 }
 
@@ -1103,12 +1278,12 @@ input::placeholder{
 }
 
 .board-upper img{
-    width: 40%;
-    height: auto;
-    padding: 2rem;
-    border: 30px;
-    margin: 0 auto;
-    }
+  width: clamp(120px, 40%, 300px);
+  height: auto;
+  padding: 0.5rem;
+  border: 30px;
+  margin: 0 auto;
+ }
 
 .board-upper {
   background-color: #DED2D1; 
@@ -1120,6 +1295,8 @@ input::placeholder{
   display: flex;
   align-items: center;     
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .grid-container-card {
@@ -1139,7 +1316,8 @@ input::placeholder{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--container-width-lg);
+  width: 100%;
+  max-width: var(--container-width-lg);
 }
 
 /* --Profile Start-- */
@@ -1173,13 +1351,14 @@ input::placeholder{
 .card:hover {
   border: 2px solid #cf6730;
   transform: scale(1.2);
-  cursor: pointer;
+  cursor: url('/main/images/cursor-assets/cursor-active.png') 12 6, pointer !important;
 }
 
 .card:active{
   background-color: #ea9b70;
-  cursor: pointer;
+  cursor: url('/main/images/cursor-assets/cursor-active.png') 12 6, pointer !important;
 }
+
 
 .grid-container-card {
   display: grid;
@@ -1208,8 +1387,8 @@ input::placeholder{
 
 .avatar-preview {
   position: relative;
-  width: 320px; 
-  height: 320px;
+  width: min(320px, 100%); 
+  height: min(320px, 80vw);
   overflow: hidden;
   padding: 5px;
   margin-right: 50px;
@@ -1515,6 +1694,42 @@ input::placeholder{
     width: 100%;
     justify-content: center;
   }
+
+  /*Profile Page*/
+  .page-board {
+    grid-template-columns: 1fr;
+  }
+ 
+  .avatar-preview {
+    margin-right: 0;
+    margin: 0 auto;
+  }
+ 
+  .card-board,
+  .view-board {
+    margin: 0;
+  }
+ 
+  /* Progress page */
+  .progress-board-upper,
+  .progress-sections-lower {
+    margin: 10px 0;
+  }
+ 
+  .board-upper {
+    width: 100%;
+    flex-direction: column;
+  }
+ 
+  .board-upper img {
+    width: clamp(100px, 35%, 200px);
+    padding: 0.5rem;
+  }
+ 
+  .progress-topic {
+    width: 100%;
+    padding: 1.2rem;
+  }
 }
 
 /*Additional media query for very small screens*/
@@ -1583,12 +1798,12 @@ input::placeholder{
 }
 /*Error page styling*/
 .error{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  width: 50%;
-  margin: 5rem auto;
-  align-items: center;
+  width: min(600px, 90%);
+  margin: 8rem auto 4rem;
+  align-items: flex-start;
 }
 
 .error__details{
@@ -2032,3 +2247,8 @@ body.high-contrast h2 {
     background: #000;
   color:white;
 }
+
+body.high-contrast #accessibility h1{
+  color: #ffffff;
+}
+
