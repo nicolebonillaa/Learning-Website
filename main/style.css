@@ -154,6 +154,11 @@ header{
   margin: 0 auto;
 }
 
+.header__left .btn,
+.courses__left .btn {
+  color: #000;
+}
+
 /*Courses section styling*/
 .courses{
   background: #d1c5c4;
@@ -486,8 +491,16 @@ footer{
   margin: 0 0 2rem;
 }
 
+.footer__1 .nav__logo {
+  color: #000;
+}
+
 footer ul li{
   margin-bottom: 0.7rem;
+}
+
+footer ul li a {
+  color: #000;
 }
 
 footer ul li a:hover{
@@ -892,6 +905,8 @@ input::placeholder{
 
 .quiz__option:hover .quiz__option__label{
   border-color: #cf6730;
+  background-color: #ea9b70;
+  color: white;
 }
 
 .quiz__option.quiz__option:active {
@@ -1474,6 +1489,32 @@ input::placeholder{
   section {
     padding: 3rem 0;
   }
+
+   header.about__page {
+    min-height: auto;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+
+  .about__page__img img{
+    max-width: 220px;
+    width: 60%;
+  }
+
+  .slides__fullscreen__overlay iframe {
+    width: 98vw;
+    height: 55vh;
+  }
+
+  .slides__toolbar__left {
+    flex-direction: column;
+    width: 100%;
+  }
+ 
+  .slides__btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /*Additional media query for very small screens*/
@@ -1527,6 +1568,17 @@ input::placeholder{
   .footer__container{
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+  }
+
+  header.about__page .header__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+ 
+  .about__page__img {
+    display: flex;
+    justify-content: center;
   }
 }
 /*Error page styling*/
@@ -1626,6 +1678,181 @@ input::placeholder{
   font-size: 0.5rem;
   margin-top: 0.5rem;
 }
+
+/*About page*/
+/*Header section*/
+header.about__page {
+  min-height: 60vh;
+  padding-top: 7rem;
+  padding-bottom: 3rem;
+  display: flex;
+  align-items: center;
+}
+ 
+.about__page__img img {
+  width: 80%;
+  max-width: 360px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/*Slides section*/
+.about__slides{
+  background: #d1c5c4;
+  padding: 5rem 0;
+}
+
+.about__slides h2{
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.section__sub {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 0.95rem;
+  color: #5F5E5A;
+}
+/*Slides embedded*/
+.slides__embedded{
+  background: #DED2D1;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+}
+
+.slides__embedded h3{
+  margin-bottom: 1.2rem;
+  padding-top: 0.4rem;
+  line-height: 1.4;
+}
+
+/*iframe*/
+.slides__iframe{
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #c9bab9;
+  margin-bottom: 1rem;
+}
+
+.slides__iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 1rem;
+}
+
+/* Toolbar row under iframe */
+.slides__toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+ 
+.slides__toolbar__left {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+ 
+/* Toolbar buttons */
+.slides__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 0.5rem;
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 280ms ease;
+  text-decoration: none;
+  border: none;
+}
+ 
+.slides__btn__expand {
+  background: #cf6730;
+  color: #fff;
+}
+ 
+.slides__btn__expand:hover {
+  background: #a04e22;
+  color: #fff;
+}
+ 
+.slides__btn__link {
+  background: transparent;
+  border: 2px solid #cf6730;
+  color: #cf6730;
+}
+ 
+.slides__btn__link:hover {
+  background: #cf6730;
+  color: #fff;
+}
+ 
+.slides__btn__pdf {
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  color: #2C2C2A;
+}
+ 
+.slides__btn__pdf:hover {
+  border-color: #cf6730;
+  color: #cf6730;
+}
+ 
+/* Fullscreen overlay */
+.slides__fullscreen__overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+ 
+.slides__fullscreen__overlay.active {
+  display: flex;
+}
+ 
+.slides__fullscreen__overlay iframe {
+  width: 90vw;
+  height: 80vh;
+  border: none;
+  border-radius: 0.75rem;
+}
+ 
+.slides__fullscreen__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  font-family: 'Indie Flower', cursive;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.4rem;
+  transition: background 200ms;
+  line-height: 1;
+}
+ 
+.slides__fullscreen__close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* --HIGH CONTRAST ACTIVATION-- */
 
 body.high-contrast {
