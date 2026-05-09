@@ -1258,10 +1258,10 @@ input::placeholder{
 /*Progress&HabitTracker*/
 
 .progress-title{
-  font-size: 425%;
+  font-size: clamp(2rem, 8vw, 4.25rem);
   padding: 35px;
   border: 10px;
-  margin: 50px;
+  margin: clamp(16px, 4vw, 50px) auto;
   text-align: center;
 }
 
@@ -1278,12 +1278,12 @@ input::placeholder{
 }
 
 .board-upper img{
-    width: 40%;
-    height: auto;
-    padding: 2rem;
-    border: 30px;
-    margin: 0 auto;
-    }
+  width: clamp(120px, 40%, 300px);
+  height: auto;
+  padding: 0.5rem;
+  border: 30px;
+  margin: 0 auto;
+ }
 
 .board-upper {
   background-color: #DED2D1; 
@@ -1295,6 +1295,8 @@ input::placeholder{
   display: flex;
   align-items: center;     
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .grid-container-card {
@@ -1314,7 +1316,8 @@ input::placeholder{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--container-width-lg);
+  width: 100%;
+  max-width: var(--container-width-lg);
 }
 
 /* --Profile Start-- */
@@ -1384,8 +1387,8 @@ input::placeholder{
 
 .avatar-preview {
   position: relative;
-  width: 320px; 
-  height: 320px;
+  width: min(320px, 100%); 
+  height: min(320px, 80vw);
   overflow: hidden;
   padding: 5px;
   margin-right: 50px;
@@ -1691,6 +1694,42 @@ input::placeholder{
     width: 100%;
     justify-content: center;
   }
+
+  /*Profile Page*/
+  .page-board {
+    grid-template-columns: 1fr;
+  }
+ 
+  .avatar-preview {
+    margin-right: 0;
+    margin: 0 auto;
+  }
+ 
+  .card-board,
+  .view-board {
+    margin: 0;
+  }
+ 
+  /* Progress page */
+  .progress-board-upper,
+  .progress-sections-lower {
+    margin: 10px 0;
+  }
+ 
+  .board-upper {
+    width: 100%;
+    flex-direction: column;
+  }
+ 
+  .board-upper img {
+    width: clamp(100px, 35%, 200px);
+    padding: 0.5rem;
+  }
+ 
+  .progress-topic {
+    width: 100%;
+    padding: 1.2rem;
+  }
 }
 
 /*Additional media query for very small screens*/
@@ -1759,12 +1798,12 @@ input::placeholder{
 }
 /*Error page styling*/
 .error{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  width: 50%;
-  margin: 5rem auto;
-  align-items: center;
+  width: min(600px, 90%);
+  margin: 8rem auto 4rem;
+  align-items: flex-start;
 }
 
 .error__details{
